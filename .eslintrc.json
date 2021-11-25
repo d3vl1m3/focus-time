@@ -1,3 +1,61 @@
 {
-  "extends": "next/core-web-vitals"
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "plugin:import/recommended",
+        "airbnb"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "camelcase": "error",
+        "curly":  ["error", "multi", "consistent"],
+        "jsx-no-multiline-js": 0,
+        "jsx-no-lambda": 0,
+        "jsx-boolean-value": ["error", "never"],
+        "max-line-length": ["error", 200],
+        "new-parens": 2,
+        "no-arg": "error",
+        "no-bitwise": 2,
+        "import/no-default-export": 0,
+        "import/prefer-default-export": 0,
+        "no-conditional-assignment": "error",
+        "no-consecutive-blank-lines": "error",
+        "no-var-requires": "error",
+        "no-console": 1,
+        "no-empty-interface": 0,
+        "no-submodule-imports": ["error", "next", "core-js", "regenerator-runtime", "styled-jsx"],
+        "no-implicit-dependencies": ["error", "dev", ["core-js", "regenerator-runtime", "micro", "history"]],
+        "object-literal-sort-keys": ["error", "asc", {"natural": true}],
+        "object-literal-key-quotes": ["error", "as-needed"],
+        "quotemark": ["error", "single", "jsx-double"],
+        "sort-vars": "error",
+        "trailing-comma": [
+            "error",
+            {
+            "multiline": {
+                "objects": "always",
+                "arrays": "always",
+                "typeLiterals": "ignore"
+            }
+            }
+        ],
+        "react/prop-types": 0,
+        "react/jsx-props-no-spreading": 0,
+        "react/function-component-definition": ["error", {
+            "namedComponents": "arrow-function",
+            "unnamedComponents": "arrow-function"
+          }]
+    }
 }
