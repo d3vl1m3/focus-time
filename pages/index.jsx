@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  getSession,
   signin as SignIn,
   signout as SignOut,
 } from 'next-auth/client';
@@ -18,16 +17,6 @@ export const Home = () => (
       }}
     >
       Fetch Data
-    </button>
-    <br />
-    <br />
-    <button
-      type="button"
-      onClick={() => {
-        getSession().then((res) => console.log(res));
-      }}
-    >
-      Log session
     </button>
   </>
 );
