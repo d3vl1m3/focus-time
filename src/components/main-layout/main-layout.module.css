@@ -1,0 +1,19 @@
+.pageContainer {
+    @apply
+    flex
+    flex-col
+    min-h-screen
+    mx-auto
+    px-8
+}
+
+.main {
+    @apply
+    container
+    mx-auto
+}
+
+.footer {
+    @apply
+    mt-auto
+}

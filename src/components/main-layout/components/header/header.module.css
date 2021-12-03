@@ -1,0 +1,26 @@
+.header {
+    @apply
+    container
+    flex
+    items-center
+    justify-between
+    mb-3
+    mx-auto
+    py-6
+}
+
+.siteTitle {
+    @apply
+    font-bold
+    uppercase
+}
+
+.settingsButton {
+    @apply
+    bg-blue-500
+    font-bold
+    px-4
+    py-2
+    rounded
+    text-white
+}

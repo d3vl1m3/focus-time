@@ -1,0 +1,10 @@
+.footer {
+    @apply
+    container
+    flex
+    items-center
+    justify-center
+    mt-3
+    mx-auto
+    py-6
+}

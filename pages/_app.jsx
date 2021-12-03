@@ -1,12 +1,13 @@
 import React from 'react';
 import '../styles/globals.css';
+import { MainLayout } from '../src/components/main-layout';
 
 const MyApp = ({
   Component,
   ...props
 }) => (
-  <div className="container mx-auto py-4">
+  <MainLayout>
     <Component {...props} />
-  </div>
+  </MainLayout>
 );
 export default MyApp;
