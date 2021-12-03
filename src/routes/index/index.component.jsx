@@ -1,3 +1,4 @@
 import React from 'react';
+import { StopWatch } from '../../components/stop-watch';
 
-export const Index = () => (<h1>Some content</h1>);
+export const Index = () => (<StopWatch />);

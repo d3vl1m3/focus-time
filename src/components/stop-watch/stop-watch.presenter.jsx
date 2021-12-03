@@ -14,7 +14,7 @@ export const StopWatchPresenter = ({
   <div className={styles.stopWatch}>
     <Counter time={time} />
     <Controls
-      active={isActive}
+      isActive={isActive}
       isPaused={isPaused}
       reset={reset}
       start={start}
