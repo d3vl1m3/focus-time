@@ -68,9 +68,6 @@
         "ignoreCase": false
       }
     ],
-    "sort-vars": "error",
-    "sort-keys": [
-      "error"
-    ]
+    "sort-vars": "error"
   }
 }

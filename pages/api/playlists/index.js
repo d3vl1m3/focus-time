@@ -4,8 +4,7 @@ const secret = process.env.NEXTAUTH_JWT_SECRET;
 
 async function PlaylistApi(req, res) {
   const {
-    offset = 0,
-    limit = 20,
+    playlistId = '37i9dQZF1DX7EF8wVxBVhG',
   } = req.query;
 
   const token = await jwt.getToken({
@@ -13,7 +12,7 @@ async function PlaylistApi(req, res) {
     secret,
   });
 
-  await fetch(`https://api.spotify.com/v1/me/playlists?offset=${offset}&limit=${limit}`, {
+  await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
     headers: {
       Authorization: `Bearer ${token.accessToken}`,
       'Content-Type': 'application/json',
