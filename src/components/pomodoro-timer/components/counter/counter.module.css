@@ -1,0 +1,6 @@
+.counter {
+    @apply
+    font-counter
+    text-6xl
+    my-12
+}

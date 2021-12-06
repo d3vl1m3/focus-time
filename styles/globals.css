@@ -3,5 +3,8 @@
 @tailwind utilities;
 
 body {
-    @apply min-h-screen
+    @apply
+    bg-gray-800
+    min-h-screen
+    text-white
 }

@@ -1,4 +1,4 @@
 import React from 'react';
-import { StopWatch } from '../../components/stop-watch';
+import { PomodoroTimerComponent } from '../../components/pomodoro-timer';
 
-export const Index = () => (<StopWatch />);
+export const Index = () => (<PomodoroTimerComponent />);

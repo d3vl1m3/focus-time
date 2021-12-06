@@ -6,7 +6,7 @@ import styles from './main-layout.module.css';
 
 export const MainLayout = ({ children }) => (
   <div className={styles.pageContainer}>
-    <Header />
+    <Header className={styles.header} />
     <main className={styles.main}>
       {children}
     </main>

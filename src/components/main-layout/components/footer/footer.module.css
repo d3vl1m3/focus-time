@@ -1,10 +1,8 @@
 .footer {
     @apply
-    container
-    flex
-    items-center
-    justify-center
+    bg-gray-900
     mt-3
-    mx-auto
     py-6
+    text-center
+    text-gray-500
 }

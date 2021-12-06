@@ -1,0 +1,26 @@
+.indicators {
+    @apply
+    flex
+}
+
+.indicator {
+    @apply
+    px-4
+    py-2
+    text-center
+    w-32
+}
+
+
+.indicator + * {
+    @apply ml-2
+}
+
+
+.indicatorActive {
+    @apply
+    border-2
+    border-white
+    bg-white
+    text-gray-800
+}

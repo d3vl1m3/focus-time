@@ -25,14 +25,18 @@
       "always-multiline"
     ],
     "curly": [
-      "error",
-      "multi",
-      "consistent"
+      "error"
     ],
     "import/no-default-export": 0,
     "import/prefer-default-export": 0,
     "jsx-no-lambda": 0,
     "jsx-no-multiline-js": 0,
+    "max-len": [
+      "error",
+      {
+        "code": 120
+      }
+    ],
     "new-parens": 2,
     "no-bitwise": 2,
     "no-console": 1,

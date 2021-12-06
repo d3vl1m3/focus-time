@@ -4,6 +4,12 @@
     flex-col
     min-h-screen
     mx-auto
+}
+
+.header,
+.main,
+.footer {
+    @apply
     px-8
 }
 

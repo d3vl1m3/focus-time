@@ -1,0 +1,21 @@
+.timerControl {
+    @apply
+    border-2
+    cursor-pointer
+    p-4
+    rounded
+    w-36
+}
+
+.timerControl + * {
+    @apply ml-4
+}
+
+.timerControlPrimary {
+    @apply bg-red-600
+    border-red-600
+}
+
+.timerControlSecondary {
+    @apply border-white;
+}
