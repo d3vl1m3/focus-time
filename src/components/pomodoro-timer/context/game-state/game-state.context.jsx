@@ -2,6 +2,7 @@ import React, {
   createContext,
   useContext,
   useMemo,
+  useState,
 } from 'react';
 
 const GameStateContext = createContext(undefined);
@@ -16,13 +17,21 @@ export const useGameStateContext = () => {
 };
 
 export const GameStateProvider = ({ children }) => {
+  const [pomodorosCompleted, setPomodorosCompleted] = useState(0);
+  const [isCompleted, setIsCompleted] = useState(false);
+
   const values = useMemo(() => ({
-    pomodoroLength: 3 * 1000 * 60,
-    shortBreakLength: 2 * 1000 * 60,
+    isCompleted,
+    longBreakGoal: 4,
+    longBreakLength: 3 * 1000 * 60,
+    pomodoroLength: 2 * 1000 * 60,
+    pomodorosCompleted,
+    setIsCompleted,
+    setPomodorosCompleted,
+    shortBreakLength: 4 * 1000 * 60,
     // isUseLongBreaks
-    // longBreakGoal
     // isUseTargetPomodoros
-    // targetPomodoros
+    targetPomodoros: 3,
   }));
 
   return (

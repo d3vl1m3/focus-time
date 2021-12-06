@@ -5,6 +5,7 @@ import React, {
 } from 'react';
 import { usePomodoroStateContext } from '../pomodoro-state/pomodoro-state.context';
 import { useTimerStateContext } from '../timer-state/timer-state.context';
+import { useGameStateContext } from '../game-state/game-state.context';
 
 const ControlActionsContext = createContext(undefined);
 
@@ -29,6 +30,11 @@ export const ControlActionsProvider = ({ children }) => {
     setPomodoroState,
   } = usePomodoroStateContext();
 
+  const {
+    setIsCompleted,
+    setPomodorosCompleted,
+  } = useGameStateContext();
+
   const controlActionReducer = (action) => {
     switch (action.type) {
       case ('START'):
@@ -47,7 +53,9 @@ export const ControlActionsProvider = ({ children }) => {
       case ('RESET'):
         setIsPaused(true);
         setIsActive(false);
+        setIsCompleted(false);
         setPomodoroState('POMODORO');
+        setPomodorosCompleted(0);
         setTime(0);
         break;
       default:
