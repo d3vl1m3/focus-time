@@ -1,5 +1,9 @@
 .pomodoroTimer {
-    @apply flex
+    @apply
+    flex
     flex-col
     items-center
+    max-w-lg
+    mx-auto
+    w-full
 }

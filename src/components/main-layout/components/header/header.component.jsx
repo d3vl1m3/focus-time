@@ -4,14 +4,14 @@ import styles from './header.module.css';
 import { useSettingsPanelContext } from '../../../settings-panel/contexts';
 
 export const Header = ({ className }) => {
-  const { setIsSettingsOpen } = useSettingsPanelContext();
+  const { openSettingsModal } = useSettingsPanelContext();
   return (
     <header className={`${styles.header} ${className}`}>
       <p className={styles.siteTitle}>pomodoro</p>
       <button
         className={styles.settingsButton}
         type="button"
-        onClick={() => setIsSettingsOpen(true)}
+        onClick={openSettingsModal}
       >
         Settings
       </button>

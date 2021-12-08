@@ -4,7 +4,6 @@
     cursor-pointer
     p-4
     rounded
-    w-36
 }
 
 .btn + * {
@@ -14,11 +13,17 @@
 
 .btn-primary {
     @apply
-    bg-red-600
-    border-red-600
+    bg-blue-600
+    border-blue-400
 }
 
 .btn-secondary {
     @apply
     border-white;
+}
+
+.btn-success {
+    @apply
+    bg-green-800
+    border-green-500
 }

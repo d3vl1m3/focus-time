@@ -1,0 +1,36 @@
+.switch {
+    @apply
+    bg-gray-300
+    h-6
+    inline-flex
+    items-center
+    relative
+    rounded-full
+    w-11
+}
+
+
+.switchEnabled {
+    @apply
+    bg-blue-600
+}
+
+.switchToggle {
+    @apply
+    bg-white
+    border
+    border-gray-400
+    h-4
+    inline-block
+    rounded-full
+    transform
+    translate-x-1
+    transition-transform
+    w-4
+}
+
+
+.switchToggleEnabled {
+    @apply
+    translate-x-6
+}

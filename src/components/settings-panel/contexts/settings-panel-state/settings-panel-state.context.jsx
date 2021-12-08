@@ -16,10 +16,15 @@ export const useSettingsPanelContext = () => {
 export const SettingsPanelProvider = ({ children }) => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
+  const closeSettingsModal = () => setIsSettingsOpen(false);
+  const openSettingsModal = () => setIsSettingsOpen(true);
+
   const values = useMemo(() => ({
     isSettingsOpen,
     setIsSettingsOpen,
-  }), [isSettingsOpen, setIsSettingsOpen]);
+    closeSettingsModal,
+    openSettingsModal,
+  }), [isSettingsOpen, setIsSettingsOpen, closeSettingsModal, openSettingsModal]);
 
   return (
     <SettingsPanelStateContext.Provider value={values}>

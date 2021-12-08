@@ -1,0 +1,51 @@
+.container {
+    @apply
+    mb-2
+}
+
+.label + .inputContainer {
+    @apply
+    mt-1
+}
+
+.inputContainerWithUnit {
+    @apply
+    flex
+    rounded-l
+}
+
+.input {
+    @apply
+    pl-4
+    py-2
+    text-gray-800
+}
+
+.inputWithoutUnit {
+    @apply
+    rounded
+}
+
+
+.inputWithUnit {
+    @apply
+    rounded-l
+}
+
+.unitContainer {
+    @apply
+    align-middle
+    bg-gray-200
+    border-l
+    border-gray-300
+    flex
+    justify-center
+    rounded-r
+}
+
+.unit {
+    @apply
+    my-auto
+    px-2
+    text-gray-900
+}
