@@ -2,10 +2,10 @@ import React, {
   createContext, useContext, useMemo, useState,
 } from 'react';
 
-const SettingsPanelContext = createContext(undefined);
+const SettingsPanelStateContext = createContext(undefined);
 
 export const useSettingsPanelContext = () => {
-  const context = useContext(SettingsPanelContext);
+  const context = useContext(SettingsPanelStateContext);
   if (context === undefined) {
     throw new Error('useSettingsPanelContext must be inside a SettingsPanelProvider');
   }
@@ -22,8 +22,8 @@ export const SettingsPanelProvider = ({ children }) => {
   }), [isSettingsOpen, setIsSettingsOpen]);
 
   return (
-    <SettingsPanelContext.Provider value={values}>
+    <SettingsPanelStateContext.Provider value={values}>
       {children}
-    </SettingsPanelContext.Provider>
+    </SettingsPanelStateContext.Provider>
   );
 };

@@ -16,6 +16,7 @@
 .main {
     @apply
     container
+    mb-6
     mx-auto
 }
 

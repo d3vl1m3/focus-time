@@ -1,1 +1,1 @@
-export { SettingsPanelProvider, useSettingsPanelContext } from './settings-panel/settings-panel.context';
+export { SettingsPanelProvider, useSettingsPanelContext } from './settings-panel-state/settings-panel-state.context';
