@@ -1,14 +1,14 @@
 import React from 'react';
-import { useGameStateContext } from '../../context/game-state/game-state.context';
-import { ActiveStateControlsComponent } from './components/active-state-controls/active-state-controls.component';
+import { useGameStateContext } from '../../contexts';
 import {
-  CompletedStateControlsComponent,
-} from './components/completed-state-controls/completed-state-controls.component';
+  ActiveStateControls,
+  CompletedStateControls,
+} from './components';
 
-export const ControlsComponent = () => {
+export const Controls = () => {
   const { isCompleted } = useGameStateContext();
 
   return isCompleted
-    ? <CompletedStateControlsComponent />
-    : <ActiveStateControlsComponent />;
+    ? <CompletedStateControls />
+    : <ActiveStateControls />;
 };

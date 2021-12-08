@@ -3,9 +3,9 @@ import React, {
   useContext,
   useMemo,
 } from 'react';
+import { useGameStateContext } from '../game-state/game-state.context';
 import { usePomodoroStateContext } from '../pomodoro-state/pomodoro-state.context';
 import { useTimerStateContext } from '../timer-state/timer-state.context';
-import { useGameStateContext } from '../game-state/game-state.context';
 
 const ControlActionsContext = createContext(undefined);
 
@@ -63,7 +63,7 @@ export const ControlActionsProvider = ({ children }) => {
     }
   };
 
-  const values = useMemo(() => ({ controlActionReducer }));
+  const values = useMemo(() => ({ controlActionReducer }), [controlActionReducer]);
 
   return (
     <ControlActionsContext.Provider value={values}>

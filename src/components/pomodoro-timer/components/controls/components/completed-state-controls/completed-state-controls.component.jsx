@@ -1,12 +1,11 @@
 import React from 'react';
-import styles from '../../controls.module.css';
-import { useControlActionsContext } from '../../../../context/control-actions/control-actions.context';
+import { useControlActionsContext } from '../../../../contexts';
 
-export const CompletedStateControlsComponent = () => {
+export const CompletedStateControls = () => {
   const { controlActionReducer } = useControlActionsContext();
   return (
     <button
-      className={`${styles.timerControl} ${styles.timerControlPrimary}`}
+      className="btn btn-primary"
       type="button"
       onClick={() => controlActionReducer({ type: 'RESET' })}
     >

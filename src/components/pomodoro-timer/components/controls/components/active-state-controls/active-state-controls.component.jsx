@@ -1,9 +1,7 @@
 import React from 'react';
-import styles from '../../controls.module.css';
-import { useTimerStateContext } from '../../../../context/timer-state/timer-state.context';
-import { useControlActionsContext } from '../../../../context/control-actions/control-actions.context';
+import { useTimerStateContext, useControlActionsContext } from '../../../../contexts';
 
-export const ActiveStateControlsComponent = () => {
+export const ActiveStateControls = () => {
   const {
     isActive,
     isPaused,
@@ -15,21 +13,21 @@ export const ActiveStateControlsComponent = () => {
     isActive ? (
       <div>
         <button
-          className={`${styles.timerControl} ${styles.timerControlSecondary}`}
+          className="btn btn-secondary"
           type="button"
           onClick={() => controlActionReducer({ type: 'RESET' })}
         >
           Reset
         </button>
         <button
-          className={`${styles.timerControl} ${styles.timerControlPrimary}`}
+          className="btn btn-primary"
           type="button"
           onClick={() => controlActionReducer({ type: isPaused ? 'START' : 'PAUSE' })}
         >
           {isPaused ? 'Resume' : 'Pause'}
         </button>
         <button
-          className={`${styles.timerControl} ${styles.timerControlSecondary}`}
+          className="btn btn-secondary"
           type="button"
           onClick={() => controlActionReducer({ type: 'SKIP' })}
         >
@@ -38,7 +36,7 @@ export const ActiveStateControlsComponent = () => {
       </div>
     ) : (
       <button
-        className={`${styles.timerControl} ${styles.timerControlPrimary}`}
+        className="btn btn-primary"
         type="button"
         onClick={() => controlActionReducer({ type: 'START' })}
       >

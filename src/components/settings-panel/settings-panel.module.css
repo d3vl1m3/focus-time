@@ -1,0 +1,38 @@
+.portal {
+    @apply
+    absolute
+    flex
+    h-full
+    left-0
+    top-0
+    w-full
+}
+
+.overlay {
+    @apply
+    absolute
+    bg-gray-900
+    h-full
+    left-0
+    top-0
+    w-full
+}
+
+.overlay {
+    --tw-bg-opacity: 0.8;
+}
+
+/* todo: responsive required for when the modal needs to scroll */
+.modal {
+    @apply
+    bg-gray-800
+    m-auto
+    px-8
+    py-4
+    relative
+    rounded-lg
+}
+
+.fieldset {
+
+}

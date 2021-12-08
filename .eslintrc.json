@@ -29,6 +29,12 @@
     ],
     "import/no-default-export": 0,
     "import/prefer-default-export": 0,
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "assert": "htmlFor"
+      }
+    ],
     "jsx-no-lambda": 0,
     "jsx-no-multiline-js": 0,
     "max-len": [

@@ -48,7 +48,16 @@ export const TimerStateProvider = ({ children }) => {
     setIsSkipping,
     setTime,
     time,
-  }));
+  }), [
+    isActive,
+    isPaused,
+    isSkipping,
+    setIsActive,
+    setIsPaused,
+    setIsSkipping,
+    setTime,
+    time,
+  ]);
 
   return (
     <TimerStateContext.Provider value={values}>
