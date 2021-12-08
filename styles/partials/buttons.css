@@ -1,0 +1,24 @@
+.btn {
+    @apply
+    border-2
+    cursor-pointer
+    p-4
+    rounded
+    w-36
+}
+
+.btn + * {
+    @apply
+    ml-4
+}
+
+.btn-primary {
+    @apply
+    bg-red-600
+    border-red-600
+}
+
+.btn-secondary {
+    @apply
+    border-white;
+}

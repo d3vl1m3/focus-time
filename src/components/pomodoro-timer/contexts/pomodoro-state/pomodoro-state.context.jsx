@@ -5,8 +5,9 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { useTimerStateContext } from '../timer-state/timer-state.context';
+
 import { useGameStateContext } from '../game-state/game-state.context';
+import { useTimerStateContext } from '../timer-state/timer-state.context';
 
 const PomodoroStateContext = createContext(undefined);
 
@@ -119,7 +120,7 @@ export const PomodoroStateProvider = ({ children }) => {
   const values = useMemo(() => ({
     pomodoroState,
     setPomodoroState,
-  }));
+  }), [pomodoroState, setPomodoroState]);
 
   return (
     <PomodoroStateContext.Provider value={values}>

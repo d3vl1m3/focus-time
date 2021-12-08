@@ -32,7 +32,7 @@ export const GameStateProvider = ({ children }) => {
     // isUseLongBreaks
     // isUseTargetPomodoros
     targetPomodoros: 3,
-  }));
+  }), [isCompleted, pomodorosCompleted, setIsCompleted, setPomodorosCompleted]);
 
   return (
     <GameStateContext.Provider value={values}>

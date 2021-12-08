@@ -1,10 +1,11 @@
 import React from 'react';
-
-import { useGameStateContext } from '../../context/game-state/game-state.context';
-import { useTimerStateContext } from '../../context/timer-state/timer-state.context';
+import {
+  useGameStateContext,
+  useTimerStateContext,
+} from '../../contexts';
 import { CounterPresenter } from './counter.presenter';
 
-export const CounterComponent = () => {
+export const Counter = () => {
   const { isCompleted } = useGameStateContext();
   const { time } = useTimerStateContext();
   return (

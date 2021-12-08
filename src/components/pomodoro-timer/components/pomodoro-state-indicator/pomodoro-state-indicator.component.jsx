@@ -1,8 +1,8 @@
 import React from 'react';
-import { usePomodoroStateContext } from '../../context/pomodoro-state/pomodoro-state.context';
+import { usePomodoroStateContext } from '../../contexts';
 import { PomodoroStateIndicatorPresenter } from './pomodoro-state-indicator.presenter';
 
-export const PomodoroStateIndicatorComponent = () => {
+export const PomodoroStateIndicator = () => {
   const { pomodoroState } = usePomodoroStateContext();
 
   return (<PomodoroStateIndicatorPresenter pomodoroState={pomodoroState} />);

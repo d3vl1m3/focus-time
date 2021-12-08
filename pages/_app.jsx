@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/globals.css';
-import { MainLayout } from '../src/components/main-layout';
+import { MainLayout } from '../src/components';
 
 const MyApp = ({
   Component,

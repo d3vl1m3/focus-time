@@ -1,5 +1,5 @@
 import React from 'react';
-import { Index } from '../src/routes/index/index.component';
+import { Index } from '../src/routes';
 
 export const IndexPage = () => (
   <Index />

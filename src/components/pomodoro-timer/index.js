@@ -1,1 +1,1 @@
-export { PomodoroTimerComponent } from './pomodoro-timer.component';
+export { PomodoroTimer } from './pomodoro-timer.component';
