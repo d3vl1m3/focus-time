@@ -4,6 +4,7 @@
     cursor-pointer
     p-4
     rounded
+    w-full
 }
 
 .btn + * {

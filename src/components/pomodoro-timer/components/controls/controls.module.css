@@ -1,0 +1,5 @@
+.container {
+    @apply
+    flex
+    w-full
+}
