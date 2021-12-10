@@ -7,12 +7,16 @@ import {
   PomodoroStateProvider,
 } from '../../components/pomodoro-timer/contexts';
 
+import { SettingsFormValuesProvider } from '../../components/settings-panel/contexts';
+
 export const Index = () => (
   <GameStateProvider>
     <TimerStateProvider>
       <PomodoroStateProvider>
         <ControlActionsProvider>
-          <SettingsPanel />
+          <SettingsFormValuesProvider>
+            <SettingsPanel />
+          </SettingsFormValuesProvider>
           <PomodoroTimer />
         </ControlActionsProvider>
       </PomodoroStateProvider>

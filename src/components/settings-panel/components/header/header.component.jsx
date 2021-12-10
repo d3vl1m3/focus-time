@@ -11,7 +11,7 @@ export const Header = ({ className }) => {
     <header className={className}>
       <Dialog.Title className={styles.modalTitle}>Settings</Dialog.Title>
       <Dialog.Description className="sr-only">
-        Here you can modify your interval lengths, add long breaks or add target goals for your total work intervals.
+        Here you can modify your interval lengths, add long breaks or add target goals for your total focus intervals.
       </Dialog.Description>
       <button
         aria-label="close modal"

@@ -32,7 +32,8 @@ export const ControlActionsProvider = ({ children }) => {
 
   const {
     setIsCompleted,
-    setPomodorosCompleted,
+    setIsFirstInterval,
+    setFocusIntervalsCompleted,
   } = useGameStateContext();
 
   const controlActionReducer = (action) => {
@@ -48,14 +49,14 @@ export const ControlActionsProvider = ({ children }) => {
       case ('SKIP'):
         setIsActive(true);
         setIsSkipping(true);
-        setTime(0);
         break;
       case ('RESET'):
-        setIsPaused(true);
+        setFocusIntervalsCompleted(0);
         setIsActive(false);
         setIsCompleted(false);
-        setPomodoroState('POMODORO');
-        setPomodorosCompleted(0);
+        setIsFirstInterval(true);
+        setIsPaused(true);
+        setPomodoroState('FOCUS');
         setTime(0);
         break;
       default:
@@ -63,7 +64,9 @@ export const ControlActionsProvider = ({ children }) => {
     }
   };
 
-  const values = useMemo(() => ({ controlActionReducer }), [controlActionReducer]);
+  const values = useMemo(() => ({
+    controlActionReducer,
+  }), [controlActionReducer]);
 
   return (
     <ControlActionsContext.Provider value={values}>

@@ -5,8 +5,20 @@ import styles from './switch.module.css';
 export const Switch = ({
   children,
   className = '',
+  defaultValue = false,
+  onChange,
 }) => {
-  const [enabled, setEnabled] = useState(false);
+  const [enabled, setEnabled] = useState(defaultValue);
+
+  /**
+   * Need to update the value locally but may need to be updated elsewhere too (form submission etc.)
+   * @param checked
+   */
+  const updateValue = (checked) => {
+    setEnabled(checked);
+    onChange(checked);
+  };
+
   return (
     <HuiSwitch.Group
       as="div"
@@ -16,7 +28,7 @@ export const Switch = ({
       <HuiSwitch
         checked={enabled}
         className={`${styles.switch} ${enabled ? styles.switchEnabled : ''}`}
-        onChange={setEnabled}
+        onChange={updateValue}
       >
         <span
           className={`${styles.switchToggle} ${enabled ? styles.switchToggleEnabled : ''}`}
