@@ -21,37 +21,30 @@ export const usePomodoroStateContext = () => {
 };
 
 export const PomodoroStateProvider = ({ children }) => {
-  const [pomodoroState, setPomodoroState] = useState('POMODORO');
+  const [pomodoroState, setPomodoroState] = useState('FOCUS');
   const {
-    longBreakGoal,
-    longBreakLength,
-    pomodoroLength,
-    pomodorosCompleted,
-    setPomodorosCompleted,
-    shortBreakLength,
-    targetPomodoros,
+    longBreakGap,
+    longBreakDuration,
+    focusDuration,
+    focusIntervalsCompleted,
+    isFirstInterval,
+    isUseLongBreaks,
+    isUseTargetFocusIntervals,
+    setFocusIntervalsCompleted,
+    setIsFirstInterval,
+    shortBreakDuration,
+    targetFocusIntervals,
     setIsCompleted,
   } = useGameStateContext();
 
   const {
-    setIsPaused,
+    isActive,
     isSkipping,
+    setIsPaused,
     setIsSkipping,
     setTime,
     time,
   } = useTimerStateContext();
-
-  const statePairings = {
-    POMODORO: {
-      time: pomodoroLength,
-    },
-    SHORT_BREAK: {
-      time: shortBreakLength,
-    },
-    LONG_BREAK: {
-      time: longBreakLength,
-    },
-  };
 
   /*
    * The below `is*()` methods are excessive but worth the trade-off as they help with readability in the
@@ -60,20 +53,19 @@ export const PomodoroStateProvider = ({ children }) => {
   const endOfInterval = (state = '', allowSkip = true) => (
     pomodoroState === state
     && (
-      time >= statePairings[state].time
+      time <= 0
       || (allowSkip && isSkipping)
     )
   );
 
-  const isBreakFinished = (allowSkip = true) => (
-    endOfInterval('SHORT_BREAK', allowSkip)
-    || endOfInterval('LONG_BREAK', allowSkip)
+  const isAnyBreakFinished = () => (
+    endOfInterval('SHORT_BREAK')
+    || endOfInterval('LONG_BREAK')
   );
 
-  const isPomodoroFinished = (allowSkip = true) => endOfInterval('POMODORO', allowSkip);
-  const isIntervalFinished = () => isPomodoroFinished() || isBreakFinished();
+  const isWorkIntervalFinished = (allowSkip = true) => endOfInterval('FOCUS', allowSkip);
 
-  const isLongBreakGoalMet = () => pomodorosCompleted % longBreakGoal !== (longBreakGoal - 1);
+  const isLongBreakGoalMet = () => isUseLongBreaks && focusIntervalsCompleted % longBreakGap === (longBreakGap - 1);
 
   /**
    * Trigger pomodoroState updates based on thew current state of the app. Specifically
@@ -81,46 +73,49 @@ export const PomodoroStateProvider = ({ children }) => {
    * state of the app is.
    */
   useEffect(() => {
-    // End of a pomodoro that isn't skipped, increase the counter and reset the timer
-    if (isPomodoroFinished(false)) {
-      setPomodorosCompleted((p) => p + 1);
-    }
+    // starting a new or reset timer
+    if (isActive && isFirstInterval) {
+      setTime(focusDuration);
+      setIsFirstInterval(false);
+    } else if (isActive) {
+      // End of a pomodoro that isn't skipped, increase the counter and reset the timer
+      if (isWorkIntervalFinished()) {
+        setFocusIntervalsCompleted((p) => p + 1);
+      }
 
-    // Contextually Update the PomodoroState
-    if (isBreakFinished()) {
-      setPomodoroState('POMODORO');
-    } else if (isPomodoroFinished() && isLongBreakGoalMet()) {
-      setPomodoroState('SHORT_BREAK');
-    } else if (isPomodoroFinished() && !isLongBreakGoalMet()) {
-      setPomodoroState('LONG_BREAK');
-    }
+      // Contextually Update the PomodoroState
+      if (isAnyBreakFinished()) {
+        setPomodoroState('FOCUS');
+        setTime(focusDuration);
+      } else if (isWorkIntervalFinished() && !isLongBreakGoalMet()) {
+        setPomodoroState('SHORT_BREAK');
+        setTime(shortBreakDuration);
+      } else if (isWorkIntervalFinished() && isLongBreakGoalMet()) {
+        setPomodoroState('LONG_BREAK');
+        setTime(longBreakDuration);
+      }
 
-    // Reset the timer to zero at the end of any interval
-    if (isIntervalFinished()) {
-      setTime(0);
+      if (isSkipping) {
+        setIsSkipping(false);
+      }
     }
-
-    // Reset `isSkipping` if required
-    if (isSkipping) {
-      setIsSkipping(false);
-    }
-  }, [time, isSkipping]);
+  }, [time, isActive, isSkipping]);
 
   /**
    * Checks to see if the user has reached their pomodoro goal
    */
   useEffect(() => {
-    if (pomodorosCompleted === targetPomodoros) {
+    if (isUseTargetFocusIntervals && focusIntervalsCompleted >= targetFocusIntervals) {
       setPomodoroState('COMPLETED');
       setIsPaused(true);
       setIsCompleted(true);
     }
-  }, [pomodorosCompleted]);
+  }, [focusIntervalsCompleted]);
 
   const values = useMemo(() => ({
     pomodoroState,
     setPomodoroState,
-  }), [pomodoroState, setPomodoroState]);
+  }), [pomodoroState]);
 
   return (
     <PomodoroStateContext.Provider value={values}>

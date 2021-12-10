@@ -16,6 +16,8 @@ export const useTimerStateContext = () => {
   return context;
 };
 
+const intervalLength = 500;
+
 export const TimerStateProvider = ({ children }) => {
   const [isPaused, setIsPaused] = useState(true);
   const [isActive, setIsActive] = useState(false);
@@ -25,11 +27,10 @@ export const TimerStateProvider = ({ children }) => {
   useEffect(() => {
     let interval = null;
 
-    if (isActive && !isPaused) {
+    if (isActive && !isPaused && !isSkipping) {
       interval = setInterval(() => {
-        // todo: set this up to use time stamps and pause/resume interval stamps
-        setTime((t) => t + 500);
-      }, 500);
+        setTime((t) => t - intervalLength);
+      }, intervalLength);
     } else {
       // set a new pause period and minus this from the interval time.
       clearInterval(interval);
@@ -37,7 +38,7 @@ export const TimerStateProvider = ({ children }) => {
     return () => {
       clearInterval(interval);
     };
-  }, [isActive, isPaused]);
+  }, [isActive, isPaused, isSkipping]);
 
   const values = useMemo(() => ({
     isActive,
@@ -52,10 +53,6 @@ export const TimerStateProvider = ({ children }) => {
     isActive,
     isPaused,
     isSkipping,
-    setIsActive,
-    setIsPaused,
-    setIsSkipping,
-    setTime,
     time,
   ]);
 

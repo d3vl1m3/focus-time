@@ -17,22 +17,76 @@ export const useGameStateContext = () => {
 };
 
 export const GameStateProvider = ({ children }) => {
-  const [pomodorosCompleted, setPomodorosCompleted] = useState(0);
+  const [focusDuration, setFocusDuration] = useState(25 * 1000 * 60);
+  const [shortBreakDuration, setShortBreakDuration] = useState(5 * 1000 * 60);
+
+  const [isUseLongBreaks, setIsUseLongBreaks] = useState(false);
+  const [longBreakDuration, setLongBreakDuration] = useState(10 * 1000 * 60);
+  const [longBreakGap, setLongBreakGap] = useState(4);
+
+  const [isUseTargetFocusIntervals, setIsUseTargetFocusIntervals] = useState(false);
+  const [targetFocusIntervals, setTargetFocusIntervals] = useState(8);
+
+  const [focusIntervalsCompleted, setFocusIntervalsCompleted] = useState(0);
+
+  const [isFirstInterval, setIsFirstInterval] = useState(true);
   const [isCompleted, setIsCompleted] = useState(false);
 
+  const durationInMs = (minutes) => minutes * 60 * 1000;
+  const durationInMinutes = (ms) => ms / 60 / 1000;
+
   const values = useMemo(() => ({
+    // utility
+    durationInMs,
+    durationInMinutes,
+
+    // Focus
+    focusDuration,
+    setFocusDuration,
+    isUseTargetFocusIntervals,
+    setIsUseTargetFocusIntervals,
+    setTargetFocusIntervals,
+    targetFocusIntervals,
+
+    // Game logic
     isCompleted,
-    longBreakGoal: 4,
-    longBreakLength: 3 * 1000 * 60,
-    pomodoroLength: 2 * 1000 * 60,
-    pomodorosCompleted,
     setIsCompleted,
-    setPomodorosCompleted,
-    shortBreakLength: 4 * 1000 * 60,
-    // isUseLongBreaks
-    // isUseTargetPomodoros
-    targetPomodoros: 3,
-  }), [isCompleted, pomodorosCompleted, setIsCompleted, setPomodorosCompleted]);
+    isFirstInterval,
+    setIsFirstInterval,
+    focusIntervalsCompleted,
+    setFocusIntervalsCompleted,
+
+    // Long breaks
+    isUseLongBreaks,
+    setIsUseLongBreaks,
+    longBreakDuration,
+    setLongBreakGap,
+    longBreakGap,
+    setLongBreakDuration,
+
+    // Short breaks
+    setShortBreakDuration,
+    shortBreakDuration,
+  }), [
+    // Focus
+    focusDuration,
+    isUseTargetFocusIntervals,
+    targetFocusIntervals,
+
+    // Game logic
+    isCompleted,
+    isFirstInterval,
+    focusIntervalsCompleted,
+
+    // Long breaks
+    isUseLongBreaks,
+    longBreakDuration,
+    longBreakGap,
+
+    // Short breaks
+    setShortBreakDuration,
+    shortBreakDuration,
+  ]);
 
   return (
     <GameStateContext.Provider value={values}>
