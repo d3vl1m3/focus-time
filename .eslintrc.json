@@ -78,6 +78,11 @@
         "ignoreCase": false
       }
     ],
-    "sort-vars": "error"
+    "sort-vars": [
+      "error",
+      {
+        "ignoreCase": false
+      }
+    ]
   }
 }
