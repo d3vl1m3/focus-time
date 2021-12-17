@@ -1,12 +1,16 @@
 .indicators {
     @apply
     flex
+    mb-12
 }
 
 .indicator {
     @apply
-    border-2
+    border-b-2
+    border-t-2
     border-transparent
+    hidden
+    mt-4
     px-4
     py-2
     text-center
@@ -14,14 +18,15 @@
 }
 
 
-.indicator + * {
-    @apply ml-2
-}
-
-
 .indicatorActive {
     @apply
     border-white
-    bg-white
-    text-gray-800
+    block
+}
+
+@screen sm {
+    .indicator {
+        @apply
+        block
+    }
 }
