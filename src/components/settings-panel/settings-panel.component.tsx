@@ -99,8 +99,9 @@ export const SettingsPanel: VoidFunctionComponent = () => {
 
       <section className={styles.modal}>
 
-        <Header className={styles.header}/>
-        <main>
+        <Header/>
+
+        <main className={styles.main}>
           <form
             id={settingsFormId}
             onSubmit={(e) => saveSettings(e)}

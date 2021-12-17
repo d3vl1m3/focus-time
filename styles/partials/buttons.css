@@ -7,11 +7,6 @@
     w-full
 }
 
-.btn + * {
-    @apply
-    ml-4
-}
-
 .btn-primary {
     @apply
     bg-blue-600
@@ -27,4 +22,10 @@
     @apply
     bg-green-800
     border-green-500
+}
+
+.btn-danger {
+    @apply
+    bg-red-800
+    border-red-500
 }

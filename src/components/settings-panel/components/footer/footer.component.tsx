@@ -7,24 +7,25 @@ interface FooterProps extends HTMLAttributes<HTMLElement> {
   formId: string
 }
 
-export const Footer: VoidFunctionComponent<FooterProps> = ({
-  className = '',
-  formId,
-  ...props
-}) => {
+export const Footer: VoidFunctionComponent<FooterProps> = (
+  {
+    className = '',
+    formId,
+    ...props
+  }) => {
   const {closeSettingsModal} = useSettingsPanelContext();
 
   return (
-    <footer className={className} {...props}>
+    <footer className={`${styles.footer} ${className}`} {...props}>
       <button
-        className={`btn ${styles.button} `}
+        className="btn"
         type="button"
         onClick={closeSettingsModal}
       >
         Cancel
       </button>
       <button
-        className={`btn btn-success ${styles.button}`}
+        className={`btn btn-success ${styles.saveButton}`}
         form={formId}
         type="submit"
       >

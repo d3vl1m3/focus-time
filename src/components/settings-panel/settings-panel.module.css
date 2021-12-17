@@ -3,74 +3,65 @@
     absolute
     flex
     h-full
-    left-0
     overflow-y-auto
+    py-8
     top-0
     w-full
 }
 
 .overlay {
     @apply
-    absolute
     bg-gray-900
-    h-full
-    left-0
+    bottom-0
+    fixed
     top-0
-    w-full;
+    w-full
+}
 
+.overlay {
     --tw-bg-opacity: 0.8;
 }
 
 .modal {
     @apply
     bg-gray-800
-    h-auto
-    max-w-xl
+    max-w-md
     mx-auto
     mb-auto
     px-6
     py-4
     relative
     rounded-lg
-    top-16
+    top-0
     w-full
 }
 
-.modal > * + * {
+.main {
     @apply
     mt-6
 }
 
-.header,
 .footer {
+    @apply
+    mt-8
+}
+
+.fieldset + .fieldset {
+    @apply
+    border-t
+    mt-6
+    pt-6
+}
+
+.fieldsetTop {
     @apply
     flex
     justify-between
 }
 
-.modalTitle {
-    @apply
-    text-2xl
-    font-bold
-}
-
-.fieldset {
-    @apply mb-4
-}
-
-.fieldset + .fieldset {
-    @apply border-t
-    pt-4
-}
-
-.fieldsetTop {
-    @apply flex
-    justify-between
-}
-
-
 .legend {
-    @apply text-lg
+    @apply
     font-bold
     mb-2
+    text-lg
 }

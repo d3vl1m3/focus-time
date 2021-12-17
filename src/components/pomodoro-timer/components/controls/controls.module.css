@@ -1,5 +1,19 @@
 .container {
     @apply
     flex
+    flex-col
+    max-w-sm
     w-full
+}
+
+.controls {
+    @apply
+    max-w-sm
+    mx-auto
+    w-full
+}
+
+.controls + * {
+    @apply
+    mt-4
 }
