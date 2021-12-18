@@ -1,7 +1,6 @@
 import styles from './footer.module.css';
-import {VoidFunctionComponent} from 'react';
+import {HTMLAttributes, VoidFunctionComponent} from 'react';
 import {useSettingsPanelContext} from '../../contexts';
-import {HTMLAttributes} from 'react';
 
 interface FooterProps extends HTMLAttributes<HTMLElement> {
   formId: string

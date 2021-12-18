@@ -6,10 +6,11 @@ interface MyAppProps {
   Component: VoidFunctionComponent
 }
 
-const MyApp: VoidFunctionComponent<MyAppProps> = ({
-  Component,
-  ...props
-}) => (
+const MyApp: VoidFunctionComponent<MyAppProps> = (
+  {
+    Component,
+    ...props
+  }) => (
   <MainLayout>
     <Component {...props} />
   </MainLayout>

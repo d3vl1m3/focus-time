@@ -1,15 +1,10 @@
-import {
-  createContext,
-  FunctionComponent,
-  useContext,
-  useMemo,
-} from 'react';
+import {createContext, FunctionComponent, useContext, useMemo,} from 'react';
 
 import {useGameStateContext} from '../game-state/game-state.context';
 import {usePomodoroStateContext} from '../pomodoro-state/pomodoro-state.context';
 import {useTimerStateContext} from '../timer-state/timer-state.context';
 
-import {ControlActionsType} from "../../../../types/control-actions/control-actions.type";
+import {ControlActionsType} from '../../../../types/control-actions/control-actions.type';
 
 type ControlActionsContextValues = {
   controlActionReducer: (action: Action) => void
