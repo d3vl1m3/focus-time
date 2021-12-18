@@ -1,7 +1,5 @@
-import React, {
-  createContext, FunctionComponent, useContext, useMemo, useState,
-} from 'react';
-import {SetStateType} from "../../../../types/set-state/set-state.type";
+import React, {createContext, FunctionComponent, useContext, useMemo, useState,} from 'react';
+import {SetStateType} from '../../../../types/set-state/set-state.type';
 
 type SettingsPanelStateContextValues = {
   isSettingsOpen: boolean,

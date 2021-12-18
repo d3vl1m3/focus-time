@@ -1,4 +1,4 @@
-import {PomodoroStateType} from "../../../../types/pomodoro-state/pomodoro-state.type";
+import {PomodoroStateType} from '../../../../types/pomodoro-state/pomodoro-state.type';
 import styles from './pomodoro-state-indicator.module.css';
 import {useGameStateContext} from '../../contexts';
 import {VoidFunctionComponent} from 'react';

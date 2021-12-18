@@ -1,12 +1,5 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-  FunctionComponent,
-} from 'react';
-import {SetStateType} from "../../../../types/set-state/set-state.type";
+import {createContext, FunctionComponent, useContext, useEffect, useMemo, useState,} from 'react';
+import {SetStateType} from '../../../../types/set-state/set-state.type';
 
 import {useGameStateContext} from '../game-state/game-state.context';
 import {useTimerStateContext} from '../timer-state/timer-state.context';
@@ -32,25 +25,31 @@ export const usePomodoroStateContext = () => {
 export const PomodoroStateProvider: FunctionComponent = ({children}) => {
   const [pomodoroState, setPomodoroState] = useState<PomodoroStateType>('FOCUS');
   const {
-    longBreakGap,
-    longBreakDuration,
     focusDuration,
-    focusIntervalsCompleted,
-    isFirstInterval,
-    isUseLongBreaks,
-    isUseTargetFocusIntervals,
-    setFocusIntervalsCompleted,
-    setIsFirstInterval,
     shortBreakDuration,
+
+    isUseLongBreaks,
+    longBreakDuration,
+    longBreakGap,
+
+    isUseTargetFocusIntervals,
     targetFocusIntervals,
+    setFocusIntervalsCompleted,
+    focusIntervalsCompleted,
+
+    setIsFirstInterval,
+    isFirstInterval,
     setIsCompleted,
   } = useGameStateContext();
 
   const {
     isActive,
-    isSkipping,
-    setIsPaused,
+
     setIsSkipping,
+    isSkipping,
+
+    setIsPaused,
+
     setTimeInMs,
     timeInMs,
   } = useTimerStateContext();

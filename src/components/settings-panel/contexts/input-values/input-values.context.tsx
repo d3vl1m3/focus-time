@@ -1,11 +1,5 @@
-import React, {
-  createContext,
-  FunctionComponent,
-  useContext,
-  useMemo,
-  useState,
-} from 'react';
-import {SetStateType} from "../../../../types/set-state/set-state.type";
+import React, {createContext, FunctionComponent, useContext, useMemo, useState,} from 'react';
+import {SetStateType} from '../../../../types/set-state/set-state.type';
 import {useGameStateContext} from '../../../pomodoro-timer/contexts';
 
 type SettingsFormValuesContextValues = {
@@ -26,7 +20,7 @@ type SettingsFormValuesContextValues = {
 
   focusIntervalTargetFormValue: number,
   setFocusIntervalTargetFormValue: SetStateType<number>,
-  
+
   isUseFocusIntervalTargetFormValue: boolean,
   setIsUseFocusIntervalTargetFormValue: SetStateType<boolean>,
 }

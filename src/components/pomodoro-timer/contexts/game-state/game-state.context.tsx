@@ -1,12 +1,6 @@
-import React, {
-  createContext,
-  FunctionComponent,
-  useContext,
-  useMemo,
-  useState,
-} from 'react';
+import React, {createContext, FunctionComponent, useContext, useMemo, useState,} from 'react';
 
-import {SetStateType} from "../../../../types/set-state/set-state.type";
+import {SetStateType} from '../../../../types/set-state/set-state.type';
 
 type GameStateContextValues = {
   // utility
