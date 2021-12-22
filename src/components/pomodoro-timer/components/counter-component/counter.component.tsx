@@ -1,13 +1,13 @@
-import {VoidFunctionComponent} from 'react';
+import { VoidFunctionComponent } from 'react';
 import {
   useGameStateContext,
   useTimerStateContext,
 } from '../../contexts';
-import {CounterPresenter} from './counter.presenter';
+import { CounterPresenter } from './counter.presenter';
 
 export const Counter: VoidFunctionComponent = () => {
-  const {isCompleted} = useGameStateContext();
-  const {timeInMs} = useTimerStateContext();
+  const { isCompleted } = useGameStateContext();
+  const { timeInMs } = useTimerStateContext();
   return (
     <CounterPresenter
       isCompleted={isCompleted}

@@ -1,4 +1,4 @@
-import React, {createContext, FunctionComponent, useContext, useEffect, useMemo, useState,} from 'react';
+import {createContext, FunctionComponent, useContext, useEffect, useMemo, useState} from 'react';
 import {SetStateType} from '../../../../types/set-state/set-state.type';
 
 type TimerStateContextValues = {
@@ -14,7 +14,7 @@ type TimerStateContextValues = {
   isSkipping: boolean,
   setIsSkipping: SetStateType<boolean>,
 
-}
+};
 
 const TimerStateContext = createContext<TimerStateContextValues | undefined>(undefined);
 
@@ -29,14 +29,16 @@ export const useTimerStateContext = () => {
 
 const intervalLength = 500;
 
-export const TimerStateProvider: FunctionComponent = ({children}) => {
+export const TimerStateProvider: FunctionComponent = ({
+  children,
+}) => {
   const [isPaused, setIsPaused] = useState(true);
   const [isActive, setIsActive] = useState(false);
   const [isSkipping, setIsSkipping] = useState(false);
   const [timeInMs, setTimeInMs] = useState(0);
 
   useEffect(() => {
-    let interval: number = 0;
+    let interval = 0;
 
     if (isActive && !isPaused && !isSkipping) {
 
@@ -55,13 +57,16 @@ export const TimerStateProvider: FunctionComponent = ({children}) => {
 
   const values = useMemo(() => ({
     isActive,
-    isPaused,
-    isSkipping,
     setIsActive,
+
+    isPaused,
     setIsPaused,
+
+    isSkipping,
     setIsSkipping,
-    setTimeInMs,
+
     timeInMs,
+    setTimeInMs,
   }), [
     isActive,
     isPaused,

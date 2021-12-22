@@ -1,11 +1,17 @@
-import styles from './header.module.css';
-import {useSettingsPanelContext} from '../../../settings-panel/contexts';
 import {HTMLAttributes, VoidFunctionComponent} from 'react';
+import {useSettingsPanelContext} from '../../../settings-panel/contexts';
+import styles from './header.module.css';
 
-export const Header: VoidFunctionComponent<HTMLAttributes<HTMLDivElement>> = ({className = '', ...props}) => {
+export const Header: VoidFunctionComponent<HTMLAttributes<HTMLDivElement>> = ({
+  className = '',
+  ...props
+}) => {
   const {openSettingsModal} = useSettingsPanelContext();
   return (
-    <header className={`${styles.header} ${className}`} {...props}>
+    <header
+      className={`${styles.header} ${className}`}
+      {...props}
+    >
       <p className={styles.siteTitle}>pomodoro</p>
       <button
         className={styles.settingsButton}

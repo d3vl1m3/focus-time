@@ -1,11 +1,11 @@
 import {Dialog, Switch as HuiSwitch} from '@headlessui/react';
-import styles from './settings-panel.module.css';
-import {useSettingsPanelContext, useSettingsFormValuesContext} from './contexts';
-import {Header, Footer} from './components';
-import {Switch} from '../form-elements/switch/switch.component';
-import {NumberInput} from '../form-elements/number-input/number-input.component';
-import {useGameStateContext} from '../pomodoro-timer/contexts';
 import {FormEvent, VoidFunctionComponent} from 'react';
+import {NumberInput} from '../form-elements/number-input/number-input.component';
+import {Switch} from '../form-elements/switch/switch.component';
+import {useGameStateContext} from '../pomodoro-timer/contexts';
+import {Footer, Header} from './components';
+import {useSettingsFormValuesContext, useSettingsPanelContext} from './contexts';
+import styles from './settings-panel.module.css';
 
 const settingsFormId = 'settings_form';
 

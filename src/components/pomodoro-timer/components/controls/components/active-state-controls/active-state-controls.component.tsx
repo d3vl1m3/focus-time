@@ -1,13 +1,12 @@
 import {VoidFunctionComponent} from 'react';
-import {useTimerStateContext, useControlActionsContext} from '../../../../contexts';
+import {useControlActionsContext, useTimerStateContext} from '../../../../contexts';
+import {ActionButtonComponentProps} from '../../controls.component';
 
-import styles from './active-state-controls.module.css'
+import styles from './active-state-controls.module.css';
 
-interface ActiveStateControlsProps {
-  btnClasses?: string
-}
-
-export const ActiveStateControls: VoidFunctionComponent<ActiveStateControlsProps> = ({btnClasses = ''}) => {
+export const ActiveStateControls: VoidFunctionComponent<ActionButtonComponentProps> = ({
+  btnClasses = '',
+}) => {
   const {isPaused} = useTimerStateContext();
   const {controlActionReducer} = useControlActionsContext();
 
@@ -21,7 +20,8 @@ export const ActiveStateControls: VoidFunctionComponent<ActiveStateControlsProps
         {isPaused ? 'Resume' : 'Pause'}
       </button>
       <button
-        className={`btn btn-secondary ${btnClasses}`} type="button"
+        className={`btn btn-secondary ${btnClasses}`}
+        type="button"
         onClick={() => controlActionReducer({type: 'SKIP'})}
       >
         Skip

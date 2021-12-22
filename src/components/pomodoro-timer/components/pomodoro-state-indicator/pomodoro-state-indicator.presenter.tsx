@@ -1,13 +1,17 @@
-import {PomodoroStateType} from '../../../../types/pomodoro-state/pomodoro-state.type';
-import styles from './pomodoro-state-indicator.module.css';
-import {useGameStateContext} from '../../contexts';
 import {VoidFunctionComponent} from 'react';
+import {PomodoroStateType} from '../../../../types/pomodoro-state/pomodoro-state.type';
+import {useGameStateContext} from '../../contexts';
+import styles from './pomodoro-state-indicator.module.css';
 
 type PomodoroStateIndicatorPresenterProps = {
   pomodoroState: PomodoroStateType
-}
+};
 
-export const PomodoroStateIndicatorPresenter: VoidFunctionComponent<PomodoroStateIndicatorPresenterProps> = ({pomodoroState}) => {
+type PomodoroStateIndicatorType = VoidFunctionComponent<PomodoroStateIndicatorPresenterProps>
+
+export const PomodoroStateIndicatorPresenter: PomodoroStateIndicatorType = ({
+  pomodoroState,
+}) => {
   const {isUseLongBreaks} = useGameStateContext();
 
   return (

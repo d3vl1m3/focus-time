@@ -4,11 +4,16 @@
     "es2021": true
   },
   "extends": [
+    "plugin:@next/next/recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    "plugin:import/recommended",
-    "airbnb"
+    "plugin:react-hooks/recommended"
   ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
+    "project": [
+      "tsconfig.json"
+    ],
     "ecmaFeatures": {
       "jsx": true
     },
@@ -16,9 +21,12 @@
     "sourceType": "module"
   },
   "plugins": [
-    "react"
+    "react",
+    "@typescript-eslint"
   ],
+  "root": true,
   "rules": {
+    "brace-style": "error",
     "camelcase": "error",
     "comma-dangle": [
       "error",
@@ -29,10 +37,11 @@
     ],
     "import/no-default-export": 0,
     "import/prefer-default-export": 0,
-    "jsx-a11y/label-has-associated-control": [
+    "indent": [
       "error",
+      2,
       {
-        "assert": "htmlFor"
+        "ObjectExpression": 1
       }
     ],
     "jsx-no-lambda": 0,
@@ -55,6 +64,7 @@
         "maxBOF": 0
       }
     ],
+    "react/react-in-jsx-scope": 0,
     "react/function-component-definition": [
       "error",
       {
@@ -84,5 +94,10 @@
         "ignoreCase": false
       }
     ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

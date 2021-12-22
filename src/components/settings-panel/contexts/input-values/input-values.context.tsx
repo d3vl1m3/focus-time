@@ -1,4 +1,4 @@
-import React, {createContext, FunctionComponent, useContext, useMemo, useState,} from 'react';
+import {createContext, FunctionComponent, useContext, useMemo, useState} from 'react';
 import {SetStateType} from '../../../../types/set-state/set-state.type';
 import {useGameStateContext} from '../../../pomodoro-timer/contexts';
 
@@ -23,7 +23,7 @@ type SettingsFormValuesContextValues = {
 
   isUseFocusIntervalTargetFormValue: boolean,
   setIsUseFocusIntervalTargetFormValue: SetStateType<boolean>,
-}
+};
 
 const SettingsFormValuesContext = createContext<SettingsFormValuesContextValues | undefined>(undefined);
 
@@ -36,7 +36,10 @@ export const useSettingsFormValuesContext = () => {
   return context;
 };
 
-export const SettingsFormValuesProvider: FunctionComponent = ({children}) => {
+export const SettingsFormValuesProvider: FunctionComponent = ({
+  children,
+}) => {
+
   const {
     // Interval durations settings
     focusDuration,

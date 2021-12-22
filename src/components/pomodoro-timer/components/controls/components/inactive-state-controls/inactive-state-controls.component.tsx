@@ -1,12 +1,12 @@
 import {VoidFunctionComponent} from 'react';
 import {useControlActionsContext} from '../../../../contexts';
+import {ActionButtonComponentProps} from '../../controls.component';
 
-interface InactiveStateControlProps {
-  btnClasses?: string
-}
-
-export const InactiveStateControl: VoidFunctionComponent<InactiveStateControlProps> = ({btnClasses = ''}) => {
+export const InactiveStateControl: VoidFunctionComponent<ActionButtonComponentProps> = ({
+  btnClasses = '',
+}) => {
   const {controlActionReducer} = useControlActionsContext();
+
   return (
     <button
       className={`btn btn-primary ${btnClasses}`}

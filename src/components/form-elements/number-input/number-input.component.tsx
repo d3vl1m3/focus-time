@@ -1,9 +1,10 @@
-import styles from './number-input.module.css';
 import {FunctionComponent, InputHTMLAttributes} from 'react';
-
+import styles from './number-input.module.css';
 
 interface NumberInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  unit?: string
+  unit?: string;
+  id: HTMLInputElement['id'];
+  children: HTMLInputElement['children'] | string;
 }
 
 export const NumberInput: FunctionComponent<NumberInputProps> = ({
@@ -43,5 +44,4 @@ export const NumberInput: FunctionComponent<NumberInputProps> = ({
       )}
     </div>
   </div>
-)
-
+);
