@@ -1,4 +1,4 @@
-import {NextApiRequest, NextApiResponse} from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'next-auth/jwt';
 
 const secret = process.env.NEXTAUTH_JWT_SECRET;
@@ -14,7 +14,7 @@ async function PlaylistApi(req: NextApiRequest, res: NextApiResponse) {
   });
 
   if (token === null) {
-    await res.json({error: 'token was null'})
+    await res.json({ error: 'token was null' });
   } else {
     await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
       headers: {

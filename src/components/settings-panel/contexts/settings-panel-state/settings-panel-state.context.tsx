@@ -1,4 +1,4 @@
-import React, {createContext, FunctionComponent, useContext, useMemo, useState,} from 'react';
+import {createContext, FunctionComponent, useContext, useMemo, useState} from 'react';
 import {SetStateType} from '../../../../types/set-state/set-state.type';
 
 type SettingsPanelStateContextValues = {
@@ -6,7 +6,7 @@ type SettingsPanelStateContextValues = {
   setIsSettingsOpen: SetStateType<boolean>,
   closeSettingsModal: () => void,
   openSettingsModal: () => void,
-}
+};
 
 const SettingsPanelStateContext = createContext<SettingsPanelStateContextValues | undefined>(undefined);
 
@@ -19,18 +19,22 @@ export const useSettingsPanelContext = () => {
   return context;
 };
 
-export const SettingsPanelProvider: FunctionComponent = ({children}) => {
+export const SettingsPanelProvider: FunctionComponent = ({
+  children,
+}) => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
-  const closeSettingsModal = () => setIsSettingsOpen(false);
-  const openSettingsModal = () => setIsSettingsOpen(true);
+  const values = useMemo(() => {
+    const closeSettingsModal = () => setIsSettingsOpen(false);
+    const openSettingsModal = () => setIsSettingsOpen(true);
 
-  const values = useMemo(() => ({
-    isSettingsOpen,
-    setIsSettingsOpen,
-    closeSettingsModal,
-    openSettingsModal,
-  }), [isSettingsOpen, setIsSettingsOpen, closeSettingsModal, openSettingsModal]);
+    return {
+      isSettingsOpen,
+      setIsSettingsOpen,
+      closeSettingsModal,
+      openSettingsModal,
+    };
+  }, [isSettingsOpen, setIsSettingsOpen]);
 
   return (
     <SettingsPanelStateContext.Provider value={values}>

@@ -1,6 +1,6 @@
-import React, {createContext, FunctionComponent, useContext, useMemo, useState,} from 'react';
+import { createContext, FunctionComponent, useContext, useMemo, useState } from 'react';
 
-import {SetStateType} from '../../../../types/set-state/set-state.type';
+import { SetStateType } from '../../../../types/set-state/set-state.type';
 
 type GameStateContextValues = {
   // utility
@@ -34,8 +34,7 @@ type GameStateContextValues = {
   // Short breaks
   setShortBreakDuration: SetStateType<number>,
   shortBreakDuration: number,
-}
-
+};
 
 const GameStateContext = createContext<GameStateContextValues | undefined>(undefined);
 
@@ -48,7 +47,7 @@ export const useGameStateContext = () => {
   return context;
 };
 
-export const GameStateProvider: FunctionComponent = ({children}) => {
+export const GameStateProvider: FunctionComponent = ({ children }) => {
   const [focusDuration, setFocusDuration] = useState(25 * 1000 * 60);
   const [shortBreakDuration, setShortBreakDuration] = useState(5 * 1000 * 60);
 

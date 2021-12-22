@@ -5,7 +5,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint --fix",
+    "test": "jest",
+    "test-w-coverage": "jest --coverage"
   },
   "dependencies": {
     "@emotion/react": "^11.7.0",
@@ -20,19 +22,25 @@
     "next": "12.0.4",
     "next-auth": "^3.29.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "typescript": "^4.5.3"
+    "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@typescript-eslint/eslint-plugin": "^5.8.0",
+    "@typescript-eslint/parser": "^5.8.0",
     "autoprefixer": "^10.4.0",
+    "babel-jest": "^27.4.5",
     "eslint": "^7.32.0",
-    "eslint-config-airbnb": "^19.0.1",
     "eslint-config-next": "12.0.4",
     "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.4.5",
     "postcss": "^8.4.4",
-    "tailwindcss": "^2.2.19"
+    "react-test-renderer": "^17.0.2",
+    "tailwindcss": "^2.2.19",
+    "typescript": "^4.5.4"
   }
 }

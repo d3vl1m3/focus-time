@@ -5,7 +5,9 @@ export default NextAuth({
   callbacks: {
     async jwt(token, _user, account) {
       // eslint-disable-next-line no-param-reassign
-      if (account?.accessToken) token.accessToken = account.accessToken;
+      if (account?.accessToken) {
+        token.accessToken = account.accessToken;
+      }
 
       return token;
     },
