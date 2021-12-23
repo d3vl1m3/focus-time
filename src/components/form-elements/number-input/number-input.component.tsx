@@ -1,4 +1,5 @@
-import {FunctionComponent, InputHTMLAttributes} from 'react';
+import { FunctionComponent, InputHTMLAttributes } from 'react';
+
 import styles from './number-input.module.css';
 
 interface NumberInputProps extends InputHTMLAttributes<HTMLInputElement> {

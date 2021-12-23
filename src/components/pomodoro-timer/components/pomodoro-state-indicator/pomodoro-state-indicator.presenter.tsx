@@ -1,6 +1,8 @@
-import {VoidFunctionComponent} from 'react';
-import {PomodoroStateType} from '../../../../types/pomodoro-state/pomodoro-state.type';
-import {useGameStateContext} from '../../contexts';
+import { VoidFunctionComponent } from 'react';
+
+import { PomodoroStateType } from '../../../../types/pomodoro-state/pomodoro-state.type';
+import { useGameStateContext } from '../../contexts';
+
 import styles from './pomodoro-state-indicator.module.css';
 
 type PomodoroStateIndicatorPresenterProps = {
@@ -12,7 +14,7 @@ type PomodoroStateIndicatorType = VoidFunctionComponent<PomodoroStateIndicatorPr
 export const PomodoroStateIndicatorPresenter: PomodoroStateIndicatorType = ({
   pomodoroState,
 }) => {
-  const {isUseLongBreaks} = useGameStateContext();
+  const { isUseLongBreaks } = useGameStateContext();
 
   return (
     <ul className={styles.indicators}>

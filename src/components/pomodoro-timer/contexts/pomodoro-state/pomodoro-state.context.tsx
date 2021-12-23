@@ -1,10 +1,9 @@
-import {createContext, FunctionComponent, useContext, useEffect, useMemo, useState} from 'react';
+import { createContext, FunctionComponent, useContext, useEffect, useMemo, useState } from 'react';
 
-import {PomodoroStateType} from '../../../../types/pomodoro-state/pomodoro-state.type';
-import {SetStateType} from '../../../../types/set-state/set-state.type';
-
-import {useGameStateContext} from '../game-state/game-state.context';
-import {useTimerStateContext} from '../timer-state/timer-state.context';
+import { PomodoroStateType } from '../../../../types/pomodoro-state/pomodoro-state.type';
+import { SetStateType } from '../../../../types/set-state/set-state.type';
+import { useGameStateContext } from '../game-state/game-state.context';
+import { useTimerStateContext } from '../timer-state/timer-state.context';
 
 type PomodoroStateContextValues = {
   pomodoroState: PomodoroStateType,
@@ -22,7 +21,7 @@ export const usePomodoroStateContext = () => {
   return context;
 };
 
-export const PomodoroStateProvider: FunctionComponent = ({children}) => {
+export const PomodoroStateProvider: FunctionComponent = ({ children }) => {
   const [pomodoroState, setPomodoroState] = useState<PomodoroStateType>('FOCUS');
   const {
     focusDuration,

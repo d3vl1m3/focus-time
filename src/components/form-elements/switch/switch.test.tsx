@@ -1,4 +1,5 @@
 import { fireEvent, render } from '@testing-library/react';
+
 import { Switch } from './switch.component';
 
 describe('When the user toggles the switch', () => {

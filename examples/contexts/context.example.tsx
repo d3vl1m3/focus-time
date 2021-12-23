@@ -2,7 +2,7 @@
  * EXAMPLE FILE. COPY AND PASTE IN TO OTHER FILES THEN MODIFY AS REQUIRED.
  * DO NOT REMOVE FROM PROJECT OR INCLUDE IN PRODUCTION BUILD
  */
-import {createContext, FunctionComponent, useContext, useMemo} from 'react';
+import { createContext, FunctionComponent, useContext, useMemo } from 'react';
 
 type FooContextValues = {
   foo: string
@@ -22,7 +22,7 @@ export const useFooContext = () => {
 export const FooProvider: FunctionComponent = ({
   children,
 }) => {
-  const values = useMemo(() => ({foo: 'bar'}), []);
+  const values = useMemo(() => ({ foo: 'bar' }), []);
 
   return (
     <FooContext.Provider value={values}>

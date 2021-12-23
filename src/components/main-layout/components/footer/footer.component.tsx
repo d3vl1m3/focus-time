@@ -1,8 +1,9 @@
-import {VoidFunctionComponent} from 'react';
+import { VoidFunctionComponent } from 'react';
+
 import styles from './footer.module.css';
 
 interface FooterProps {
-  className: string;
+  className?: string;
 }
 
 export const Footer: VoidFunctionComponent<FooterProps> = ({

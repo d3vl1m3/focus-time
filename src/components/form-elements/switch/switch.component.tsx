@@ -1,6 +1,6 @@
-import {Switch as HuiSwitch} from '@headlessui/react';
+import { Switch as HuiSwitch } from '@headlessui/react';
+import { FunctionComponent, HTMLAttributes, useState } from 'react';
 
-import {FunctionComponent, HTMLAttributes, useState} from 'react';
 import styles from './switch.module.css';
 
 export interface SwitchProps {

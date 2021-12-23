@@ -1,6 +1,7 @@
 import '../styles/globals.css';
-import { MainLayout } from '../src/components';
 import { VoidFunctionComponent } from 'react';
+
+import { MainLayout } from '../src/components';
 
 interface MyAppProps {
   Component: VoidFunctionComponent

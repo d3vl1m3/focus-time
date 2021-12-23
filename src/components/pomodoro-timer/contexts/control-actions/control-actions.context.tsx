@@ -1,10 +1,9 @@
-import {createContext, FunctionComponent, useContext, useMemo} from 'react';
+import { createContext, FunctionComponent, useContext, useMemo } from 'react';
 
-import {ControlActionsType} from '../../../../types/control-actions/control-actions.type';
-
-import {useGameStateContext} from '../game-state/game-state.context';
-import {usePomodoroStateContext} from '../pomodoro-state/pomodoro-state.context';
-import {useTimerStateContext} from '../timer-state/timer-state.context';
+import { ControlActionsType } from '../../../../types/control-actions/control-actions.type';
+import { useGameStateContext } from '../game-state/game-state.context';
+import { usePomodoroStateContext } from '../pomodoro-state/pomodoro-state.context';
+import { useTimerStateContext } from '../timer-state/timer-state.context';
 
 export type ControlActionsContextValues = {
   controlActionReducer: (action: Action) => void
@@ -25,7 +24,7 @@ export const useControlActionsContext = () => {
   return context;
 };
 
-export const ControlActionsProvider: FunctionComponent = ({children}) => {
+export const ControlActionsProvider: FunctionComponent = ({ children }) => {
   const {
     setIsActive,
     setIsPaused,

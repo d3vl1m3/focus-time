@@ -1,6 +1,7 @@
-import {createContext, FunctionComponent, useContext, useMemo, useState} from 'react';
-import {SetStateType} from '../../../../types/set-state/set-state.type';
-import {useGameStateContext} from '../../../pomodoro-timer/contexts';
+import { createContext, FunctionComponent, useContext, useMemo, useState } from 'react';
+
+import { SetStateType } from '../../../../types/set-state/set-state.type';
+import { useGameStateContext } from '../../../pomodoro-timer/contexts';
 
 type SettingsFormValuesContextValues = {
   focusDurationFormValue: number,

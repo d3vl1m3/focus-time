@@ -7,7 +7,8 @@
     "plugin:@next/next/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -22,7 +23,9 @@
   },
   "plugins": [
     "react",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "import",
+    "jsx-a11y"
   ],
   "root": true,
   "rules": {
@@ -35,7 +38,29 @@
     "curly": [
       "error"
     ],
+    "import/export": "warn",
     "import/no-default-export": 0,
+    "import/no-unresolved": "off",
+    "import/named": "warn",
+    "import/namespace": "warn",
+    "import/no-named-as-default": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
     "import/prefer-default-export": 0,
     "indent": [
       "error",
@@ -63,6 +88,11 @@
         "maxEOF": 0,
         "maxBOF": 0
       }
+    ],
+    "no-multi-spaces": "error",
+    "object-curly-spacing": [
+      "error",
+      "always"
     ],
     "react/react-in-jsx-scope": 0,
     "react/function-component-definition": [

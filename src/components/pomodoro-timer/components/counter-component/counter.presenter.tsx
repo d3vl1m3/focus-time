@@ -1,5 +1,7 @@
-import {VoidFunctionComponent} from 'react';
-import {msToTimer} from '../../../../utility/functions/ms-to-timer/ms-to-timer';
+import { VoidFunctionComponent } from 'react';
+
+import { msToTimer } from '../../../../utility/functions/ms-to-timer/ms-to-timer';
+
 import styles from './counter.module.css';
 
 interface CounterPresenterProps {

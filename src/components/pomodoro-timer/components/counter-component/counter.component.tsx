@@ -1,8 +1,10 @@
 import { VoidFunctionComponent } from 'react';
+
 import {
   useGameStateContext,
   useTimerStateContext,
 } from '../../contexts';
+
 import { CounterPresenter } from './counter.presenter';
 
 export const Counter: VoidFunctionComponent = () => {
