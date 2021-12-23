@@ -1,4 +1,5 @@
 import { useGameStateContext, useTimerStateContext } from '../../contexts';
+
 import { ActiveStateControls, CompletedStateControls } from './components';
 import { InactiveStateControl } from './components/inactive-state-controls/inactive-state-controls.component';
 import styles from './controls.module.css';

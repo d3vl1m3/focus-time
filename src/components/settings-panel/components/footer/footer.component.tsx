@@ -1,5 +1,7 @@
-import {HTMLAttributes, VoidFunctionComponent} from 'react';
-import {useSettingsPanelContext} from '../../contexts';
+import { HTMLAttributes, VoidFunctionComponent } from 'react';
+
+import { useSettingsPanelContext } from '../../contexts';
+
 import styles from './footer.module.css';
 
 interface FooterProps extends HTMLAttributes<HTMLElement> {
@@ -11,7 +13,7 @@ export const Footer: VoidFunctionComponent<FooterProps> = ({
   formId,
   ...props
 }) => {
-  const {closeSettingsModal} = useSettingsPanelContext();
+  const { closeSettingsModal } = useSettingsPanelContext();
 
   return (
     <footer className={`${styles.footer} ${className}`}

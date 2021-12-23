@@ -1,5 +1,6 @@
-import {createContext, FunctionComponent, useContext, useEffect, useMemo, useState} from 'react';
-import {SetStateType} from '../../../../types/set-state/set-state.type';
+import { createContext, FunctionComponent, useContext, useEffect, useMemo, useState } from 'react';
+
+import { SetStateType } from '../../../../types/set-state/set-state.type';
 
 type TimerStateContextValues = {
   timeInMs: number,

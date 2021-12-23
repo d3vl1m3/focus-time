@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+
 import { NumberInput } from './number-input.component';
 
 describe('When the prop', () => {
