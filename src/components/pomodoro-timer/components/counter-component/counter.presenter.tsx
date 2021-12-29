@@ -1,6 +1,6 @@
 import { VoidFunctionComponent } from 'react';
 
-import { msToTimer } from '../../../../utility/functions/ms-to-timer/ms-to-timer';
+import { msToTimer } from '../../../../utility/functions';
 
 import styles from './counter.module.css';
 

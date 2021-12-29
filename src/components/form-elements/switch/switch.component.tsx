@@ -7,8 +7,9 @@ export interface SwitchProps {
   as?: keyof JSX.IntrinsicElements,
   className?: string,
   defaultValue?: boolean,
-  onChange?: (checked: boolean) => void
+  id: string,
   labelProps?: HTMLAttributes<HTMLLabelElement>
+  onChange?: (checked: boolean) => void
 }
 
 export const Switch: FunctionComponent<SwitchProps> = ({
@@ -16,6 +17,7 @@ export const Switch: FunctionComponent<SwitchProps> = ({
   children,
   className = '',
   defaultValue = false,
+  id,
   labelProps,
   onChange = null,
 }) => {
@@ -34,20 +36,17 @@ export const Switch: FunctionComponent<SwitchProps> = ({
   };
 
   return (
-    <HuiSwitch.Group
-      as={as}
-      className={className}
-    >
+    <HuiSwitch.Group{...{ as, className, id }}>
+      <HuiSwitch.Label {...labelProps}>
+        {children}
+      </HuiSwitch.Label>
 
-      <HuiSwitch.Label {...labelProps}>{children}</HuiSwitch.Label>
       <HuiSwitch
         checked={enabled}
         className={`${styles.switch} ${enabled ? styles.switchEnabled : ''}`}
         onChange={updateValue}
       >
-        <span
-          className={`${styles.switchToggle} ${enabled ? styles.switchToggleEnabled : ''}`}
-        />
+        <span className={`${styles.switchToggle} ${enabled ? styles.switchToggleEnabled : ''}`} />
       </HuiSwitch>
     </HuiSwitch.Group>
   );
