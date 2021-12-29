@@ -26,31 +26,32 @@ export const PomodoroStateProvider: FunctionComponent = ({ children }) => {
   const {
     focusDuration,
     shortBreakDuration,
+    longBreakDuration,
 
     isUseLongBreaks,
-    longBreakDuration,
     longBreakGap,
 
-    isUseTargetFocusIntervals,
-    targetFocusIntervals,
-    setFocusIntervalsCompleted,
-    focusIntervalsCompleted,
+    isUseFocusIntervalsTarget,
+    focusIntervalsTarget,
 
-    setIsFirstInterval,
+    focusIntervalsCompleted,
+    setFocusIntervalsCompleted,
+
     isFirstInterval,
+    setIsFirstInterval,
     setIsCompleted,
   } = useGameStateContext();
 
   const {
     isActive,
 
-    setIsSkipping,
     isSkipping,
+    setIsSkipping,
 
     setIsPaused,
 
-    setTimeInMs,
     timeInMs,
+    setTimeInMs,
   } = useTimerStateContext();
 
   /**
@@ -132,17 +133,17 @@ export const PomodoroStateProvider: FunctionComponent = ({ children }) => {
    * Checks to see if the user has reached their pomodoro goal
    */
   useEffect(() => {
-    if (isUseTargetFocusIntervals && focusIntervalsCompleted >= targetFocusIntervals) {
+    if (isUseFocusIntervalsTarget && focusIntervalsCompleted >= focusIntervalsTarget) {
       setPomodoroState('COMPLETED');
       setIsPaused(true);
       setIsCompleted(true);
     }
   }, [
     focusIntervalsCompleted,
-    isUseTargetFocusIntervals,
+    isUseFocusIntervalsTarget,
     setIsCompleted,
     setIsPaused,
-    targetFocusIntervals,
+    focusIntervalsTarget,
   ]);
 
   const values = useMemo(() => ({

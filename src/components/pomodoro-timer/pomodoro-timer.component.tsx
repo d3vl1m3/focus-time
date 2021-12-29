@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { VoidFunctionComponent } from 'react';
 
-import { msToTimer } from '../../utility/functions/ms-to-timer/ms-to-timer';
+import { msToTimer } from '../../utility/functions';
 import { useGetPomodoroStateObj } from '../../utility/hooks/get-pomodoro-state-obj/get-pomodoro-state-obj.utility';
 
 import { Controls, Counter, PomodoroStateIndicator } from './components';

@@ -28,6 +28,7 @@ export const NumberInput: FunctionComponent<NumberInputProps> = ({
       <input
         className={`${styles.input} ${unit ? styles.inputWithUnit : styles.inputWithoutUnit}`}
         id={id}
+        name={id}
         {...props}
         aria-describedby={`${id}_description`}
         type="number"

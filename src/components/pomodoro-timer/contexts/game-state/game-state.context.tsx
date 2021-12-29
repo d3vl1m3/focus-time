@@ -3,17 +3,13 @@ import { createContext, FunctionComponent, useContext, useMemo, useState } from 
 import { SetStateType } from '../../../../types/set-state/set-state.type';
 
 type GameStateContextValues = {
-  // utility
-  durationInMs: (duration: number) => number,
-  durationInMinutes: (duration: number) => number,
-
   // Focus
   focusDuration: number,
   setFocusDuration: SetStateType<number>,
-  isUseTargetFocusIntervals: boolean,
-  setIsUseTargetFocusIntervals: SetStateType<boolean>,
-  setTargetFocusIntervals: SetStateType<number>,
-  targetFocusIntervals: number,
+  isUseFocusIntervalsTarget: boolean,
+  setIsUseFocusIntervalsTarget: SetStateType<boolean>,
+  setFocusIntervalsTarget: SetStateType<number>,
+  focusIntervalsTarget: number,
 
   // Game logic
   isCompleted: boolean,
@@ -55,68 +51,54 @@ export const GameStateProvider: FunctionComponent = ({ children }) => {
   const [longBreakDuration, setLongBreakDuration] = useState(10 * 1000 * 60);
   const [longBreakGap, setLongBreakGap] = useState(4);
 
-  const [isUseTargetFocusIntervals, setIsUseTargetFocusIntervals] = useState(false);
-  const [targetFocusIntervals, setTargetFocusIntervals] = useState(8);
+  const [isUseFocusIntervalsTarget, setIsUseFocusIntervalsTarget] = useState(false);
+  const [focusIntervalsTarget, setFocusIntervalsTarget] = useState(8);
 
   const [focusIntervalsCompleted, setFocusIntervalsCompleted] = useState(0);
 
   const [isFirstInterval, setIsFirstInterval] = useState(true);
   const [isCompleted, setIsCompleted] = useState(false);
 
-  const durationInMs = (minutes: number) => minutes * 60 * 1000;
-  const durationInMinutes = (ms: number) => ms / 60 / 1000;
-
   const values = useMemo(() => ({
-    // utility
-    durationInMs,
-    durationInMinutes,
-
-    // Focus
     focusDuration,
     setFocusDuration,
-    isUseTargetFocusIntervals,
-    setIsUseTargetFocusIntervals,
-    setTargetFocusIntervals,
-    targetFocusIntervals,
+    shortBreakDuration,
+    setShortBreakDuration,
+    longBreakDuration,
+    setLongBreakDuration,
 
-    // Game logic
+    isUseLongBreaks,
+    setIsUseLongBreaks,
+    longBreakGap,
+    setLongBreakGap,
+
+    isUseFocusIntervalsTarget,
+    setIsUseFocusIntervalsTarget,
+
+    focusIntervalsTarget,
+    setFocusIntervalsTarget,
+    focusIntervalsCompleted,
+    setFocusIntervalsCompleted,
     isCompleted,
     setIsCompleted,
     isFirstInterval,
     setIsFirstInterval,
-    focusIntervalsCompleted,
-    setFocusIntervalsCompleted,
 
     // Long breaks
-    isUseLongBreaks,
-    setIsUseLongBreaks,
-    longBreakDuration,
-    setLongBreakGap,
-    longBreakGap,
-    setLongBreakDuration,
-
-    // Short breaks
-    setShortBreakDuration,
-    shortBreakDuration,
   }), [
-    // Focus
     focusDuration,
-    isUseTargetFocusIntervals,
-    targetFocusIntervals,
+    shortBreakDuration,
+    longBreakDuration,
 
-    // Game logic
+    isUseLongBreaks,
+    longBreakGap,
+
+    isUseFocusIntervalsTarget,
+
+    focusIntervalsTarget,
+    focusIntervalsCompleted,
     isCompleted,
     isFirstInterval,
-    focusIntervalsCompleted,
-
-    // Long breaks
-    isUseLongBreaks,
-    longBreakDuration,
-    longBreakGap,
-
-    // Short breaks
-    setShortBreakDuration,
-    shortBreakDuration,
   ]);
 
   return (
