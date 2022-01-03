@@ -1,7 +1,10 @@
+import {
+  useControlActionsContext,
+  useTimerStateContext,
+} from '@contexts';
 import { VoidFunctionComponent } from 'react';
 
-import { useControlActionsContext, useTimerStateContext } from '../../../../contexts';
-import { ActionButtonComponentProps } from '../../controls.component';
+import type { ActionButtonComponentProps } from '../../controls.component';
 
 import styles from './active-state-controls.module.css';
 

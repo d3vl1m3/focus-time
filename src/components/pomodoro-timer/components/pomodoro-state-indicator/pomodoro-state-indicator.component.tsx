@@ -1,6 +1,5 @@
+import { usePomodoroStateContext } from '@contexts';
 import { VoidFunctionComponent } from 'react';
-
-import { usePomodoroStateContext } from '../../contexts';
 
 import { PomodoroStateIndicatorPresenter } from './pomodoro-state-indicator.presenter';
 

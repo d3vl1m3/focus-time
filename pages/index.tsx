@@ -1,4 +1,4 @@
-import { Index } from '../src/routes';
+import { Index } from '@components/pages';
 
 export const IndexPage = () => (
   <Index/>

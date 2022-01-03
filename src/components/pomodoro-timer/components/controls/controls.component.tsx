@@ -1,7 +1,13 @@
-import { useGameStateContext, useTimerStateContext } from '../../contexts';
+import {
+  useGameStateContext,
+  useTimerStateContext,
+} from '@contexts';
 
-import { ActiveStateControls, CompletedStateControls } from './components';
-import { InactiveStateControl } from './components/inactive-state-controls/inactive-state-controls.component';
+import {
+  ActiveStateControls,
+  CompletedStateControls,
+  InactiveStateControls,
+} from './components';
 import styles from './controls.module.css';
 
 export interface ActionButtonComponentProps {
@@ -13,9 +19,13 @@ export const Controls = () => {
   const { isActive } = useTimerStateContext();
 
   return (
-    <div className={styles.container}>
+    <div
+      aria-controls="timer"
+      className={styles.container}
+      role="group"
+    >
       {!isCompleted && !isActive &&
-          <InactiveStateControl btnClasses={styles.controls}/>}
+          <InactiveStateControls btnClasses={styles.controls}/>}
       {!isCompleted && isActive &&
           <ActiveStateControls btnClasses={styles.controls}/>}
       {isCompleted &&

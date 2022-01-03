@@ -8,9 +8,4 @@ describe('On initial load', () => {
     render(<Footer/>);
     expect(spyError).not.toHaveBeenCalled();
   });
-
-  test('should see the footer text', () => {
-    const { queryByText } = render(<Footer/>);
-    expect(queryByText('A D3VL1M3 project')).toBeInTheDocument();
-  });
 });

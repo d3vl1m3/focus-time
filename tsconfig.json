@@ -2,6 +2,7 @@
   "compilerOptions": {
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
     "declaration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -21,6 +22,17 @@
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@contexts": ["src/contexts"],
+      "@contexts/*": ["src/contexts/*"],
+      "@data": ["src/data"],
+      "@hooks": ["src/hooks"],
+      "@mocks/*": ["__mocks__/*"],
+      "@test-utils/*": ["test-utils/*"],
+      "@types": ["src/types"],
+      "@utils": ["src/utils"]
+    },
     "resolveJsonModule": true,
     "skipLibCheck": false,
     "sourceMap": true,

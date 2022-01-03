@@ -14,6 +14,16 @@ module.exports = {
     /* Handle image imports
                                 https://jestjs.io/docs/webpack#handling-static-assets */
     '\\.(jpg|jpeg|png|gif|svg)$': '<rootDir>/__mocks__/fileMock.js',
+
+    /* Jest aliases to match once in TS config */
+    "^@components(.*)$": "<rootDir>/src/components$1",
+    "^@contexts(.*)$": "<rootDir>/src/contexts$1",
+    "^@data(.*)$": "<rootDir>/src/data$1",
+    "^@hooks(.*)$": "<rootDir>/src/hooks$1",
+    "^@mocks(.*)$": "<rootDir>/__mocks__$1",
+    "^@test-utils(.*)$": "<rootDir>/test-utils$1",
+    "^@types(.*)$": "<rootDir>/src/types$1",
+    "^@utils(.*)$": "<rootDir>/src/utils$1",
   },
   setupFilesAfterEnv: [
     './jest.setup.js',
