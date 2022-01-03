@@ -8,8 +8,13 @@ describe('When the prop', () => {
     expect(queryByLabelText('Foo')).toBeInTheDocument();
   });
   it('`unit` is passed in the unit label should be visible', () => {
-    const { queryByLabelText } = render(<NumberInput id="test"
-      unit="cm">Foo</NumberInput>);
+    const { queryByLabelText } = render(
+      <NumberInput
+        id="test"
+        unit="cm"
+      >
+        Foo
+      </NumberInput>);
     expect(queryByLabelText('cm')).toBeInTheDocument();
   });
 });

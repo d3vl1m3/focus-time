@@ -1,26 +1,25 @@
+import { msToTimer } from '@utils';
 import { VoidFunctionComponent } from 'react';
-
-import { msToTimer } from '../../../../utility/functions';
 
 import styles from './counter.module.css';
 
-interface CounterPresenterProps {
-  isCompleted: boolean,
-  timeInMs: number
+export interface CounterPresenterProps {
+  isCompleted?: boolean,
+  timeInMs?: number
 }
 
 export const CounterPresenter: VoidFunctionComponent<CounterPresenterProps> = ({
-  isCompleted,
-  timeInMs,
+  isCompleted= false,
+  timeInMs= 0,
 }) => (
   <div className={styles.counter}>
     {
       isCompleted
-        ? <p>Fin.</p>
+        ? <p role="status">Completed</p>
         : (
-          <>
+          <span role="timer">
             {msToTimer(timeInMs)}
-          </>
+          </span>
         )
     }
   </div>

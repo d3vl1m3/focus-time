@@ -1,9 +1,9 @@
+import { useControlActionsContext } from '@contexts';
 import { VoidFunctionComponent } from 'react';
 
-import { useControlActionsContext } from '../../../../contexts';
-import { ActionButtonComponentProps } from '../../controls.component';
+import type { ActionButtonComponentProps } from '../../controls.component';
 
-export const InactiveStateControl: VoidFunctionComponent<ActionButtonComponentProps> = ({
+export const InactiveStateControls: VoidFunctionComponent<ActionButtonComponentProps> = ({
   btnClasses = '',
 }) => {
   const { controlActionReducer } = useControlActionsContext();

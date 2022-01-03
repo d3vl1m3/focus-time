@@ -1,6 +1,8 @@
-import { HTMLAttributes, VoidFunctionComponent } from 'react';
-
-import { useSettingsPanelContext } from '../../../settings-panel/contexts';
+import { useSettingsPanelContext } from '@contexts';
+import {
+  HTMLAttributes,
+  VoidFunctionComponent,
+} from 'react';
 
 import styles from './header.module.css';
 

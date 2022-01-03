@@ -1,8 +1,10 @@
+import { useSettingsPanelContext } from '@contexts';
 import { Dialog } from '@headlessui/react';
 import CloseIcon from '@mui/icons-material/Close';
-import { HTMLAttributes, VoidFunctionComponent } from 'react';
-
-import { useSettingsPanelContext } from '../../contexts';
+import {
+  HTMLAttributes,
+  VoidFunctionComponent,
+} from 'react';
 
 import styles from './header.module.css';
 

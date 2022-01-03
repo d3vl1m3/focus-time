@@ -1,6 +1,8 @@
-import { HTMLAttributes, VoidFunctionComponent } from 'react';
-
-import { useSettingsPanelContext } from '../../contexts';
+import { useSettingsPanelContext } from '@contexts';
+import {
+  HTMLAttributes,
+  VoidFunctionComponent,
+} from 'react';
 
 import styles from './footer.module.css';
 

@@ -1,4 +1,4 @@
-import {PomodoroStateType} from '../pomodoro-state/pomodoro-state.type';
+import { PomodoroStateType } from '@types';
 
 export type PomodoroStateObjectType = {
   state: PomodoroStateType,

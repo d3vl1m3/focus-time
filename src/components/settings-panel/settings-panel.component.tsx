@@ -1,13 +1,27 @@
-import { Dialog, Switch as HuiSwitch } from '@headlessui/react';
-import { FormEvent, VoidFunctionComponent } from 'react';
+import { NumberInput } from '@components/form-elements/number-input/number-input.component';
+import { Switch } from '@components/form-elements/switch/switch.component';
+import {
+  useGameStateContext,
+  useSettingsFormValuesContext,
+  useSettingsPanelContext,
+} from '@contexts';
+import {
+  Dialog,
+  Switch as HuiSwitch,
+} from '@headlessui/react';
+import {
+  minutesToMs,
+  msToMinutes,
+} from '@utils';
+import {
+  FormEvent,
+  VoidFunctionComponent,
+} from 'react';
 
-import { minutesToMs } from '../../utility/functions';
-import { NumberInput } from '../form-elements/number-input/number-input.component';
-import { Switch } from '../form-elements/switch/switch.component';
-import { useGameStateContext } from '../pomodoro-timer/contexts';
-
-import { Footer, Header } from './components';
-import { useSettingsFormValuesContext, useSettingsPanelContext } from './contexts';
+import {
+  Footer,
+  Header, 
+} from './components';
 import styles from './settings-panel.module.css';
 
 const settingsFormId = 'settings_form';
@@ -19,20 +33,30 @@ export const SettingsPanel: VoidFunctionComponent = () => {
   } = useSettingsPanelContext();
 
   const {
+    // Interval durations settings
+    focusDuration,
     setFocusDuration,
+    shortBreakDuration,
     setShortBreakDuration,
-    setLongBreakDuration,
 
+    // Long break settings
+    isUseLongBreaks,
     setIsUseLongBreaks,
+    longBreakDuration,
+    setLongBreakDuration,
+    longBreakGap,
     setLongBreakGap,
 
+    // Focus interval target settings
+    isUseFocusIntervalsTarget,
     setIsUseFocusIntervalsTarget,
+    focusIntervalsTarget,
     setFocusIntervalsTarget,
   } = useGameStateContext();
 
   const {
-    settingsFormValues,
     updateSettingsFormValue,
+    settingsFormValues,
   } = useSettingsFormValuesContext();
 
   const saveSettings = (e: FormEvent<HTMLFormElement>) => {
@@ -42,33 +66,25 @@ export const SettingsPanel: VoidFunctionComponent = () => {
     const form = e.target as HTMLFormElement;
 
     if (form.checkValidity()) {
-      setFocusDuration(
-        minutesToMs(settingsFormValues['focus_duration']),
-      );
+      const {
+        focusDuration,
+        shortBreakDuration,
+        isUseLongBreaks,
+        longBreakDuration,
+        longBreakGap,
+        isUseFocusIntervalsTarget,
+        focusIntervalsTarget,
+      } = settingsFormValues;
 
-      setShortBreakDuration(
-        minutesToMs(settingsFormValues['short_break_duration']),
-      );
+      setFocusDuration(minutesToMs(focusDuration));
+      setShortBreakDuration(minutesToMs(shortBreakDuration));
 
-      setIsUseLongBreaks(
-        settingsFormValues['is_use_long_breaks'],
-      );
+      setIsUseLongBreaks(isUseLongBreaks);
+      setLongBreakDuration(minutesToMs(longBreakDuration));
+      setLongBreakGap(longBreakGap);
 
-      setLongBreakDuration(
-        minutesToMs(settingsFormValues['long_break_duration']),
-      );
-
-      setLongBreakGap(
-        settingsFormValues['long_break_gap'],
-      );
-
-      setIsUseFocusIntervalsTarget(
-        settingsFormValues['is_use_focus_intervals_target'],
-      );
-
-      setFocusIntervalsTarget(
-        settingsFormValues['focus_intervals_target'],
-      );
+      setIsUseFocusIntervalsTarget(isUseFocusIntervalsTarget);
+      setFocusIntervalsTarget(focusIntervalsTarget);
 
       closeSettingsModal();
     }
@@ -97,25 +113,29 @@ export const SettingsPanel: VoidFunctionComponent = () => {
               </div>
 
               <NumberInput
-                defaultValue={settingsFormValues['focus_duration']}
-                id="focus_duration"
+                defaultValue={msToMinutes(focusDuration)}
+                id="focusDuration"
                 max="99"
                 min="1"
                 placeholder="25"
+                required={true}
                 unit="minutes"
-                onChange={(e) => updateSettingsFormValue('focus_duration', parseInt(e.target.value))}
+                onChange={(e) => updateSettingsFormValue('focusDuration', parseInt(e.target.value))
+                }
               >
                 Focus duration
               </NumberInput>
 
               <NumberInput
-                defaultValue={settingsFormValues['short_break_duration']}
-                id="short_break_duration"
+                defaultValue={msToMinutes(shortBreakDuration)}
+                id="shortBreakDuration"
                 max="99"
                 min="1"
                 placeholder="5"
+                required={true}
                 unit="minutes"
-                onChange={(e) => updateSettingsFormValue('short_break_duration', parseInt(e.target.value))}
+                onChange={(e) => updateSettingsFormValue('shortBreakDuration', parseInt(e.target.value))
+                }
               >
                 Short break duration
               </NumberInput>
@@ -127,33 +147,41 @@ export const SettingsPanel: VoidFunctionComponent = () => {
               <Switch
                 as="fieldset"
                 className={styles.fieldsetTop}
-                defaultValue={settingsFormValues['is_use_long_breaks']}
-                id="is_use_long_break"
-                onChange={(checked) => updateSettingsFormValue('is_use_long_breaks', checked)}
+                defaultValue={isUseLongBreaks}
+                id="isUseLongBreaks"
+                onChange={(checked) => updateSettingsFormValue('isUseLongBreaks', checked)}
               >
                 <HuiSwitch.Label className={styles.legend}>Use long breaks</HuiSwitch.Label>
               </Switch>
 
               <NumberInput
-                defaultValue={settingsFormValues['long_break_duration']}
-                id="long_break_duration"
+                defaultValue={msToMinutes(longBreakDuration)}
+                id="longBreakDuration"
                 max="99"
                 min="1"
                 placeholder="10"
+                required={true}
                 unit="minutes"
-                onChange={(e) => updateSettingsFormValue('long_break_duration', parseInt(e.target.value))}
+                onChange={(e) => e.target.checkValidity()
+                  ? updateSettingsFormValue('longBreakDuration', parseInt(e.target.value))
+                  : false
+                }
               >
                 Long break duration
               </NumberInput>
 
               <NumberInput
-                defaultValue={settingsFormValues['long_break_gap']}
-                id="long_break_gap"
+                defaultValue={longBreakGap}
+                id="longBreakGap"
                 max="99"
                 min="1"
-                placeholder="10"
+                placeholder="4"
+                required={true}
                 unit="focus intervals"
-                onChange={(e) => updateSettingsFormValue('long_break_gap', parseInt(e.target.value))}
+                onChange={(e) => e.target.checkValidity()
+                  ? updateSettingsFormValue('longBreakGap', parseInt(e.target.value))
+                  : false
+                }
               >
                 Gap between long breaks
               </NumberInput>
@@ -164,21 +192,25 @@ export const SettingsPanel: VoidFunctionComponent = () => {
 
               <Switch
                 className={styles.fieldsetTop}
-                defaultValue={settingsFormValues['is_use_focus_intervals_target']}
-                id="is_use_focus_intervals_target"
-                onChange={(checked) => updateSettingsFormValue('is_use_focus_intervals_target', checked)}
+                defaultValue={isUseFocusIntervalsTarget}
+                id="isUseFocusIntervalsTarget"
+                onChange={(checked) => updateSettingsFormValue('isUseFocusIntervalsTarget', checked)}
               >
                 <HuiSwitch.Label className={styles.legend}>Use a focus intervals target</HuiSwitch.Label>
               </Switch>
 
               <NumberInput
-                defaultValue={settingsFormValues['focus_intervals_target']}
-                id="focus_intervals_target"
+                defaultValue={focusIntervalsTarget}
+                id="focusIntervalsTarget"
                 max="99"
                 min="1"
                 placeholder="8"
+                required={true}
                 unit="intervals"
-                onChange={(e) => updateSettingsFormValue('focus_intervals_target', parseInt(e.target.value))}
+                onChange={(e) => e.target.checkValidity()
+                  ? updateSettingsFormValue('focusIntervalsTarget', parseInt(e.target.value))
+                  : false
+                }
               >
                 Focus interval target
               </NumberInput>

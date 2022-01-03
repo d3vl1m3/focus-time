@@ -1,9 +1,8 @@
-import { VoidFunctionComponent } from 'react';
-
 import {
   useGameStateContext,
   useTimerStateContext,
-} from '../../contexts';
+} from '@contexts';
+import { VoidFunctionComponent } from 'react';
 
 import { CounterPresenter } from './counter.presenter';
 
