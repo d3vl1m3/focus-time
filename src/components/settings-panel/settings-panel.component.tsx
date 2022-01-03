@@ -47,7 +47,7 @@ export const SettingsPanel: VoidFunctionComponent = () => {
     longBreakGap,
     setLongBreakGap,
 
-    // Focus interval target settings
+    // Focus intervals target settings
     isUseFocusIntervalsTarget,
     setIsUseFocusIntervalsTarget,
     focusIntervalsTarget,
@@ -212,7 +212,7 @@ export const SettingsPanel: VoidFunctionComponent = () => {
                   : false
                 }
               >
-                Focus interval target
+                Focus intervals target
               </NumberInput>
             </fieldset>
           </form>
