@@ -1,7 +1,7 @@
 import { Index } from '@components/pages';
 import { pomodoroStateObjectsData } from '@data';
 import { setupIntersectionObserverMock } from '@mocks/intersection-observer.mock';
-import { triggerMockTimeSkip } from '@test-utils/jest/triggers.test-utils';
+import { triggerMockTimeSkip } from '@test-utils/jest';
 import {
   triggerPauseTimerControl,
   triggerResetTimerControl,
@@ -13,7 +13,7 @@ import {
   testTimer,
 } from '@test-utils/pomodoro-timer';
 import { triggerResumeTimerControl } from "@test-utils/pomodoro-timer/triggers/triggers.test-utils";
-import { triggerCompletedState } from '@test-utils/settings/trigger/trigger.test-utils';
+import { triggerCompletedState } from '@test-utils/settings/triggers/triggers.test-utils';
 import {
   render,
   screen,
@@ -235,10 +235,11 @@ describe('When the user completes their session', () => {
   });
 
   test('should remove the timer from the page', () => {
-    const { getByText, queryByRole } = screen;
+    const { queryByRole, getByRole } = screen;
 
     expect(queryByRole('timer')).not.toBeInTheDocument();
-    expect(getByText('Fin.')).toBeInTheDocument();
+
+    expect(getByRole('status').textContent).toBe('Completed');
   });
 
   test('should have active, un-paused state controls only', () => {

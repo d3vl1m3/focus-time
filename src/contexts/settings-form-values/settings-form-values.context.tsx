@@ -49,7 +49,7 @@ export const SettingsFormValuesProvider: FunctionComponent = ({
     isUseLongBreaks,
     longBreakGap,
 
-    // Focus interval target settings
+    // Focus intervals target settings
     isUseFocusIntervalsTarget,
     focusIntervalsTarget,
   } = useGameStateContext();

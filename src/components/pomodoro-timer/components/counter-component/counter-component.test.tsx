@@ -73,7 +73,7 @@ describe('When in a completed state', () => {
 
   test('should render completed text', () => {
     const { getByText } = screen;
-    expect(getByText('Fin.')).toBeInTheDocument();
+    expect(getByText('Completed')).toBeInTheDocument();
   });
 
   test('should remove the timer', () => {

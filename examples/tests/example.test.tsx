@@ -4,6 +4,10 @@
  */
 import { render } from '@testing-library/react';
 
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
 describe('On initial load', () => {
   test('should render without errors', () => {
     const spyError = jest.spyOn(console, 'error');
