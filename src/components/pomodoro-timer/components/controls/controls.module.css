@@ -17,3 +17,9 @@
     @apply
     mt-4
 }
+
+.resetControl {
+    @apply
+    mt-8;
+}
+

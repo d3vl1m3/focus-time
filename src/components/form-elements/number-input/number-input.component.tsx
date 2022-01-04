@@ -6,9 +6,9 @@ import {
 import styles from './number-input.module.css';
 
 interface NumberInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  unit?: string;
-  id: HTMLInputElement['id'];
   children: HTMLInputElement['children'] | string;
+  id: HTMLInputElement['id'];
+  unit?: string;
 }
 
 export const NumberInput: FunctionComponent<NumberInputProps> = ({

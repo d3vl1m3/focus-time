@@ -1,11 +1,11 @@
 import {
-  ControlActionsProvider,
   GameStateProvider,
   PomodoroStateProvider,
-  SettingsPanelProvider,
+  SettingsPanelStateProvider,
   TimerStateProvider,
 } from '@contexts';
-import { SettingsFormValuesProvider } from '@contexts';
+import { SettingsFormStateProvider } from '@contexts';
+import { SettingsStateProvider } from '@contexts/settings-state/settings-state.context';
 import { VoidFunctionComponent } from 'react';
 
 import {
@@ -17,18 +17,18 @@ import {
 export const Index: VoidFunctionComponent = () => (
   <GameStateProvider>
     <TimerStateProvider>
-      <PomodoroStateProvider>
-        <ControlActionsProvider>
-          <SettingsPanelProvider>
+      <SettingsStateProvider>
+        <PomodoroStateProvider>
+          <SettingsPanelStateProvider>
             <MainLayout>
               <PomodoroTimer/>
             </MainLayout>
-            <SettingsFormValuesProvider>
+            <SettingsFormStateProvider>
               <SettingsPanel/>
-            </SettingsFormValuesProvider>
-          </SettingsPanelProvider>
-        </ControlActionsProvider>
-      </PomodoroStateProvider>
+            </SettingsFormStateProvider>
+          </SettingsPanelStateProvider>
+        </PomodoroStateProvider>
+      </SettingsStateProvider>
     </TimerStateProvider>
   </GameStateProvider>
 );

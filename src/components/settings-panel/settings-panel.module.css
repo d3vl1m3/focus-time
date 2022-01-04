@@ -36,14 +36,22 @@
     w-full
 }
 
+
+.header {
+    @apply
+    flex
+    justify-between
+}
+
+.modalTitle {
+    @apply
+    text-2xl
+    font-bold
+}
+
 .main {
     @apply
     mt-6
-}
-
-.footer {
-    @apply
-    mt-8
 }
 
 .fieldset + .fieldset {
@@ -65,3 +73,29 @@
     mb-2
     text-lg
 }
+
+
+.footer {
+    @apply
+    mt-8
+}
+
+.saveButton {
+    @apply
+    mt-4
+}
+
+@screen sm {
+    .footer {
+        @apply
+        flex
+        justify-between
+    }
+
+    .saveButton {
+        @apply
+        mt-0
+        ml-4
+    }
+}
+

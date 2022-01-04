@@ -3,8 +3,8 @@ import {
   useTimerStateContext,
 } from '@contexts';
 import {
-  useGetCurrentPomodoroStateObj,
-  useCompletedStateCheckHook,
+  useCurrentPomodoroStateObj,
+  useCompletedStateCheck,
 } from '@hooks';
 import { msToTimer } from '@utils';
 import Head from 'next/head';
@@ -21,12 +21,11 @@ import {
 import styles from './pomodoro-timer.module.css';
 
 export const PomodoroTimer: VoidFunctionComponent = () => {
-
   const { timeInMs } = useTimerStateContext();
-  const { label } = useGetCurrentPomodoroStateObj();
+  const { label } = useCurrentPomodoroStateObj();
   const { isCompleted } = useGameStateContext();
 
-  useCompletedStateCheckHook();
+  useCompletedStateCheck();
 
   const title = useMemo(() => {
     let title = 'FocusTime';
@@ -44,7 +43,7 @@ export const PomodoroTimer: VoidFunctionComponent = () => {
     isCompleted,
     label,
     timeInMs,
-  ])
+  ]);
 
   return (
     <>

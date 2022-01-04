@@ -6,8 +6,8 @@
   "extends": [
     "plugin:@next/next/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
     "plugin:react-hooks/recommended",
+    "plugin:react/recommended",
     "plugin:jsx-a11y/recommended"
   ],
   "parser": "@typescript-eslint/parser",
@@ -108,6 +108,7 @@
         }
       }
     ],
+    "react/button-has-type":  "error",
     "react/react-in-jsx-scope": 0,
     "react/function-component-definition": [
       "error",
@@ -117,6 +118,8 @@
       }
     ],
     "react/prop-types": 0,
+    "react/jsx-closing-bracket-location": [1, "line-aligned"],
+    "react/jsx-first-prop-new-line": ["error", "multiline"],
     "react/jsx-max-props-per-line": [
       "error",
       {
@@ -126,13 +129,31 @@
     "react/jsx-one-expression-per-line": ["error", { "allow": "literal" }],
     "react/jsx-props-no-spreading": 0,
     "react/jsx-sort-props": [
-      1,
+      "error",
       {
         "callbacksLast": true,
         "shorthandFirst": true,
-        "ignoreCase": false
+        "ignoreCase": false,
+        "reservedFirst": ["key"]
       }
     ],
+    "react/no-adjacent-inline-elements": "error",
+    "react/no-unescaped-entities": "error",
+    "react/no-unknown-property": "error",
+    "react/no-unstable-nested-components": ["error", {"allowAsProps":  false}],
+    "react/no-unused-prop-types": "error",
+    "react/no-unused-state": "error",
+    "react/prefer-es6-class": [1, "never"],
+    "react/prefer-exact-props": "error",
+    "react/prefer-stateless-function": "error",
+    "react/self-closing-comp": "error",
+    "react/sort-prop-types": ["error", {
+      "callbacksLast": true,
+      "requiredFirst": true,
+      "sortShapeProp": true
+    }],
+    "react/void-dom-elements-no-children": "error",
+    "semi": ["error", "always"],
     "sort-vars": [
       "error",
       {

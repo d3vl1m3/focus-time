@@ -1,2 +1,3 @@
-export { useCompletedStateCheckHook } from "./completed-state-check/completed-state-check.hook";
-export { useGetCurrentPomodoroStateObj } from "./get-current-pomodoro-state-obj/get-current-pomodoro-state-obj.hook";
+export { useCompletedStateCheck } from "./completed-state-check/completed-state-check.hook";
+export { useCurrentPomodoroStateObj } from "./current-pomodoro-state-obj/current-pomodoro-state-obj.hook";
+export { useControlActions } from '../hooks/control-actions/control-actions.hook';

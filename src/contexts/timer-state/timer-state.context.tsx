@@ -11,6 +11,7 @@ import {
 export type TimerStateContextValues = {
   timeInMs: number,
   setTimeInMs: SetStateType<number>,
+  setTimeInMinutes: (minutes: number) => void,
 
   isActive: boolean,
   setIsActive: SetStateType<boolean>,
@@ -64,16 +65,14 @@ export const TimerStateProvider: FunctionComponent = ({
 
   const values = useMemo(() => ({
     isActive,
-    setIsActive,
-
     isPaused,
-    setIsPaused,
-
     isSkipping,
+    setIsActive,
+    setIsPaused,
     setIsSkipping,
-
-    timeInMs,
     setTimeInMs,
+    setTimeInMinutes: (minutes: number) => setTimeInMs(minutes * 60 * 1000),
+    timeInMs,
   }), [
     isActive,
     isPaused,

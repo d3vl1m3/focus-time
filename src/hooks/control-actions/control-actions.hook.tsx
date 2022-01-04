@@ -1,14 +1,8 @@
+import { useGameStateContext } from '@contexts/game-state/game-state.context';
+import { usePomodoroStateContext } from '@contexts/pomodoro-state/pomodoro-state.context';
+import { useTimerStateContext } from '@contexts/timer-state/timer-state.context';
 import { ControlActionsType } from '@types';
-import {
-  createContext,
-  FunctionComponent,
-  useContext,
-  useMemo,
-} from 'react';
-
-import { useGameStateContext } from '../game-state/game-state.context';
-import { usePomodoroStateContext } from '../pomodoro-state/pomodoro-state.context';
-import { useTimerStateContext } from '../timer-state/timer-state.context';
+import { useMemo } from 'react';
 
 export type ControlActionsContextValues = {
   controlActionReducer: (action: Action) => void
@@ -18,18 +12,7 @@ type Action = {
   type: ControlActionsType
 };
 
-const ControlActionsContext = createContext<ControlActionsContextValues | undefined>(undefined);
-
-export const useControlActionsContext = () => {
-  const context = useContext(ControlActionsContext);
-  if (context === undefined) {
-    throw new Error('useControlActionsContext must be inside a ControlActionsProvider');
-  }
-
-  return context;
-};
-
-export const ControlActionsProvider: FunctionComponent = ({ children }) => {
+export const useControlActions = () => {
   const {
     setIsActive,
     setIsPaused,
@@ -42,12 +25,12 @@ export const ControlActionsProvider: FunctionComponent = ({ children }) => {
   } = usePomodoroStateContext();
 
   const {
+    setFocusIntervalsCompleted,
     setIsCompleted,
     setIsFirstInterval,
-    setFocusIntervalsCompleted,
   } = useGameStateContext();
 
-  const values = useMemo(() => ({
+  return useMemo(() => ({
     controlActionReducer: (action: Action) => {
       switch (action.type) {
         case ('START'):
@@ -71,8 +54,6 @@ export const ControlActionsProvider: FunctionComponent = ({ children }) => {
           setPomodoroState('RESET');
           setTimeInMs(0);
           break;
-        default:
-          break;
       }
     },
   }), [
@@ -85,10 +66,4 @@ export const ControlActionsProvider: FunctionComponent = ({ children }) => {
     setPomodoroState,
     setTimeInMs,
   ]);
-
-  return (
-    <ControlActionsContext.Provider value={values}>
-      {children}
-    </ControlActionsContext.Provider>
-  );
 };

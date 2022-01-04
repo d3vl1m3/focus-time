@@ -1,5 +1,5 @@
 import * as ContextModules from '@contexts';
-import type { GameStateContextValues, TimerStateContextValues } from "@contexts";
+import type { TimerStateContextValues, GameStateContextValues } from '@contexts';
 import { render } from '@testing-library/react';
 import React from 'react';
 
@@ -14,20 +14,20 @@ const spyTimerStateContext = jest.spyOn(ContextModules, 'useTimerStateContext');
 
 jest.mock('@contexts');
 jest.mock('./components', () => ({
-  InactiveStateControls: () => mockInactiveStateControls(),
   ActiveStateControls: () => mockActiveStateControls(),
   CompletedStateControls: () => mockCompletedStateControls(),
+  InactiveStateControls: () => mockInactiveStateControls(),
 }));
 
 const setState = (isCompleted = false, isActive = false) => {
   spyGameStateContext.mockImplementationOnce(() => ({
     isCompleted,
-  }) as GameStateContextValues)
+  }) as GameStateContextValues);
 
   spyTimerStateContext.mockImplementationOnce(() => ({
     isActive,
-  }) as TimerStateContextValues)
-}
+  }) as TimerStateContextValues);
+};
 
 const renderTestComponent = () => render(<Controls />);
 

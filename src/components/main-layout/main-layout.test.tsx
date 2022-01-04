@@ -1,8 +1,7 @@
 import { Index } from '@components/pages';
 import { setupIntersectionObserverMock } from '@mocks/intersection-observer.mock';
+import { triggerSwitchToggle } from '@test-utils/settings';
 import {
-  act,
-  fireEvent,
   render,
   screen,
   within,
@@ -44,16 +43,16 @@ describe('When looking at the page', () => {
     const { queryByText } = screen;
     expect(queryByText('A D3VL1M3 project')).toBeInTheDocument();
   });
-})
+});
 
 describe('When I click the settings button', () => {
   beforeEach(() => {
     renderTestComponent();
-    let portalRoot = document.getElementById("portal")
+    let portalRoot = document.getElementById("portal");
     if (!portalRoot) {
-      portalRoot = document.createElement('div')
-      portalRoot.setAttribute('id', 'headlessui-portal-root')
-      document.body.appendChild(portalRoot)
+      portalRoot = document.createElement('div');
+      portalRoot.setAttribute('id', 'headlessui-portal-root');
+      document.body.appendChild(portalRoot);
     }
     setupIntersectionObserverMock();
   });
@@ -63,10 +62,8 @@ describe('When I click the settings button', () => {
 
     expect(queryByRole('dialog')).not.toBeInTheDocument();
 
-    act(() => {
-      fireEvent.click(settingsButton);
-    });
+    triggerSwitchToggle(settingsButton);
 
     expect(getByRole('dialog')).toBeInTheDocument();
-  })
-})
+  });
+});

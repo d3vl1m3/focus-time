@@ -1,4 +1,4 @@
-import { useSettingsPanelContext } from '@contexts';
+import { useSettingsPanelStateContext } from '@contexts';
 import { Dialog } from '@headlessui/react';
 import CloseIcon from '@mui/icons-material/Close';
 import {
@@ -6,10 +6,10 @@ import {
   VoidFunctionComponent,
 } from 'react';
 
-import styles from './header.module.css';
+import styles from '../../settings-panel.module.css';
 
 export const Header: VoidFunctionComponent<HTMLAttributes<HTMLElement>> = () => {
-  const { closeSettingsModal } = useSettingsPanelContext();
+  const { closeSettingsModal } = useSettingsPanelStateContext();
 
   return (
     <header className={styles.header}>

@@ -16,7 +16,7 @@ export type SettingsPanelStateContextValues = {
 
 const SettingsPanelStateContext = createContext<SettingsPanelStateContextValues | undefined>(undefined);
 
-export const useSettingsPanelContext = () => {
+export const useSettingsPanelStateContext = () => {
   const context = useContext(SettingsPanelStateContext);
   if (context === undefined) {
     throw new Error('useSettingsPanelContext must be inside a SettingsPanelProvider');
@@ -25,7 +25,7 @@ export const useSettingsPanelContext = () => {
   return context;
 };
 
-export const SettingsPanelProvider: FunctionComponent = ({
+export const SettingsPanelStateProvider: FunctionComponent = ({
   children,
 }) => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);

@@ -1,20 +1,22 @@
 import {
-  useGameStateContext, usePomodoroStateContext, useTimerStateContext, 
+  useGameStateContext, usePomodoroStateContext, useSettingsStateContext, useTimerStateContext,
 } from '@contexts';
 import { useEffect } from "react";
 
-export const useCompletedStateCheckHook = () => {
+export const useCompletedStateCheck = () => {
   const {
-    isUseFocusIntervalsTarget,
-    focusIntervalsTarget,
-
     focusIntervalsCompleted,
     setIsCompleted,
   } = useGameStateContext();
 
-  const { setPomodoroState } = usePomodoroStateContext();
+  const {
+    isUseFocusIntervalsTarget,
+    focusIntervalsTarget,
+  } = useSettingsStateContext();
 
+  const { setPomodoroState } = usePomodoroStateContext();
   const { setIsPaused } = useTimerStateContext();
+
   /**
    * Checks to see if the user has reached their pomodoro goal
    */
@@ -32,4 +34,4 @@ export const useCompletedStateCheckHook = () => {
     setIsPaused,
     setPomodoroState,
   ]);
-}
+};

@@ -1,18 +1,14 @@
 import { NumberInput } from '@components/form-elements/number-input/number-input.component';
 import { Switch } from '@components/form-elements/switch/switch.component';
 import {
-  useGameStateContext,
-  useSettingsFormValuesContext,
-  useSettingsPanelContext,
+  useSettingsFormStateContext,
+  useSettingsPanelStateContext,
 } from '@contexts';
+import { useSettingsStateContext } from '@contexts';
 import {
   Dialog,
   Switch as HuiSwitch,
 } from '@headlessui/react';
-import {
-  minutesToMs,
-  msToMinutes,
-} from '@utils';
 import {
   FormEvent,
   VoidFunctionComponent,
@@ -28,36 +24,36 @@ const settingsFormId = 'settings_form';
 
 export const SettingsPanel: VoidFunctionComponent = () => {
   const {
-    isSettingsOpen,
     closeSettingsModal,
-  } = useSettingsPanelContext();
+    isSettingsOpen,
+  } = useSettingsPanelStateContext();
 
   const {
     // Interval durations settings
     focusDuration,
-    setFocusDuration,
-    shortBreakDuration,
-    setShortBreakDuration,
+    focusIntervalsTarget,
+    isUseFocusIntervalsTarget,
+    isUseLongBreaks,
 
     // Long break settings
-    isUseLongBreaks,
-    setIsUseLongBreaks,
     longBreakDuration,
-    setLongBreakDuration,
     longBreakGap,
-    setLongBreakGap,
+    setFocusDuration,
+    setFocusIntervalsTarget,
+    setIsUseFocusIntervalsTarget,
+    setIsUseLongBreaks,
 
     // Focus intervals target settings
-    isUseFocusIntervalsTarget,
-    setIsUseFocusIntervalsTarget,
-    focusIntervalsTarget,
-    setFocusIntervalsTarget,
-  } = useGameStateContext();
+    setLongBreakDuration,
+    setLongBreakGap,
+    setShortBreakDuration,
+    shortBreakDuration,
+  } = useSettingsStateContext();
 
   const {
-    updateSettingsFormValue,
     settingsFormValues,
-  } = useSettingsFormValuesContext();
+    updateSettingsFormValue,
+  } = useSettingsFormStateContext();
 
   const saveSettings = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -68,19 +64,19 @@ export const SettingsPanel: VoidFunctionComponent = () => {
     if (form.checkValidity()) {
       const {
         focusDuration,
-        shortBreakDuration,
+        focusIntervalsTarget,
+        isUseFocusIntervalsTarget,
         isUseLongBreaks,
         longBreakDuration,
         longBreakGap,
-        isUseFocusIntervalsTarget,
-        focusIntervalsTarget,
+        shortBreakDuration,
       } = settingsFormValues;
 
-      setFocusDuration(minutesToMs(focusDuration));
-      setShortBreakDuration(minutesToMs(shortBreakDuration));
+      setFocusDuration(focusDuration);
+      setShortBreakDuration(shortBreakDuration);
 
       setIsUseLongBreaks(isUseLongBreaks);
-      setLongBreakDuration(minutesToMs(longBreakDuration));
+      setLongBreakDuration(longBreakDuration);
       setLongBreakGap(longBreakGap);
 
       setIsUseFocusIntervalsTarget(isUseFocusIntervalsTarget);
@@ -113,7 +109,7 @@ export const SettingsPanel: VoidFunctionComponent = () => {
               </div>
 
               <NumberInput
-                defaultValue={msToMinutes(focusDuration)}
+                defaultValue={focusDuration}
                 id="focusDuration"
                 max="99"
                 min="1"
@@ -127,7 +123,7 @@ export const SettingsPanel: VoidFunctionComponent = () => {
               </NumberInput>
 
               <NumberInput
-                defaultValue={msToMinutes(shortBreakDuration)}
+                defaultValue={shortBreakDuration}
                 id="shortBreakDuration"
                 max="99"
                 min="1"
@@ -155,7 +151,7 @@ export const SettingsPanel: VoidFunctionComponent = () => {
               </Switch>
 
               <NumberInput
-                defaultValue={msToMinutes(longBreakDuration)}
+                defaultValue={longBreakDuration}
                 id="longBreakDuration"
                 max="99"
                 min="1"
@@ -217,10 +213,7 @@ export const SettingsPanel: VoidFunctionComponent = () => {
             </fieldset>
           </form>
         </main>
-        <Footer
-          className={styles.footer}
-          formId={settingsFormId}
-        />
+        <Footer formId={settingsFormId} />
       </section>
 
     </Dialog>
