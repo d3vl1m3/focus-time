@@ -27,7 +27,7 @@ test('should render component without errors', () => {
     </TimerStateProvider>,
   );
   expect(spyError).not.toHaveBeenCalled();
-})
+});
 
 describe('On initial load', () => {
   beforeEach(() => {

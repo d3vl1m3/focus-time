@@ -1,10 +1,4 @@
 export {
-  ControlActionsProvider,
-  useControlActionsContext,
-} from './control-actions/control-actions.context';
-export type { ControlActionsContextValues } from './control-actions/control-actions.context';
-
-export {
   GameStateProvider,
   useGameStateContext,
 } from './game-state/game-state.context';
@@ -17,14 +11,20 @@ export {
 export type { PomodoroStateContextValues } from './pomodoro-state/pomodoro-state.context';
 
 export {
-  SettingsFormValuesProvider,
-  useSettingsFormValuesContext,
-} from "./settings-form-values/settings-form-values.context";
-export type { SettingsFormValuesContextValues } from "./settings-form-values/settings-form-values.context";
+  SettingsStateProvider,
+  useSettingsStateContext,
+} from "./settings-state/settings-state.context";
+export type { SettingsStateContextValues } from "./settings-state/settings-state.context";
 
 export {
-  SettingsPanelProvider,
-  useSettingsPanelContext, 
+  SettingsFormStateProvider,
+  useSettingsFormStateContext,
+} from "./settings-form-state/settings-form-state.context";
+export type { SettingsFormStateContextValues } from "./settings-form-state/settings-form-state.context";
+
+export {
+  SettingsPanelStateProvider,
+  useSettingsPanelStateContext,
 } from "./settings-panel-state/settings-panel-state.context";
 export type { SettingsPanelStateContextValues } from "./settings-panel-state/settings-panel-state.context";
 

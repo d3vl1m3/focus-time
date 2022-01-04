@@ -1,4 +1,4 @@
-import { useSettingsPanelContext } from '@contexts';
+import { useSettingsPanelStateContext } from '@contexts';
 import {
   HTMLAttributes,
   VoidFunctionComponent,
@@ -10,7 +10,7 @@ export const Header: VoidFunctionComponent<HTMLAttributes<HTMLDivElement>> = ({
   className = '',
   ...props
 }) => {
-  const { openSettingsModal } = useSettingsPanelContext();
+  const { openSettingsModal } = useSettingsPanelStateContext();
   return (
     <header
       className={`${styles.header} ${className}`}

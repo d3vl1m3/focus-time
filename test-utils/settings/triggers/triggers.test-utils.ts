@@ -13,8 +13,8 @@ export const triggerCloseSettingsPanel = () => {
 
   act(() => {
     fireEvent.click(closeModalButton);
-  })
-}
+  });
+};
 
 export const triggerCompletedState = () => {
   const { getByRole } = screen;
@@ -34,7 +34,7 @@ export const triggerCompletedState = () => {
   expect(focusIntervalsTargetInput).toHaveValue(1);
 
   triggerSaveSettingsPanel();
-}
+};
 
 export const triggerOpenSettingsPanel = () => {
   const { getByRole } = screen;
@@ -43,8 +43,8 @@ export const triggerOpenSettingsPanel = () => {
 
   act(() => {
     fireEvent.click(settingsButton);
-  })
-}
+  });
+};
 
 export const triggerSaveSettingsPanel = () => {
   const { getByRole } = screen;
@@ -53,11 +53,11 @@ export const triggerSaveSettingsPanel = () => {
 
   act(() => {
     fireEvent.click(saveSettingsButton);
-  })
-}
+  });
+};
 
 export const triggerSwitchToggle = (element: HTMLElement) => {
   act(() => {
     fireEvent.click(element);
-  })
+  });
 };

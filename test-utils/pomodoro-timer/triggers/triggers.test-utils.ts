@@ -12,7 +12,7 @@ export const triggerPauseTimerControl = () => {
   act(() => {
     fireEvent.click(resetButton);
   });
-}
+};
 
 export const triggerStartTimerControl = () => {
   const { getByRole } = screen;
@@ -22,7 +22,7 @@ export const triggerStartTimerControl = () => {
   act(() => {
     fireEvent.click(startButton);
   });
-}
+};
 
 export const triggerResumeTimerControl = () => {
   const { getByRole } = screen;
@@ -32,7 +32,7 @@ export const triggerResumeTimerControl = () => {
   act(() => {
     fireEvent.click(startButton);
   });
-}
+};
 
 export const triggerSkipIntervalControl = () => {
   const { getByRole } = screen;
@@ -42,7 +42,7 @@ export const triggerSkipIntervalControl = () => {
   act(() => {
     fireEvent.click(skipButton);
   });
-}
+};
 
 export const triggerResetTimerControl = () => {
   const { getByRole } = screen;
@@ -52,4 +52,4 @@ export const triggerResetTimerControl = () => {
   act(() => {
     fireEvent.click(resetButton);
   });
-}
+};

@@ -1,5 +1,4 @@
-import { useGameStateContext } from '@contexts/game-state/game-state.context';
-import { msToMinutes } from '@utils';
+import { useSettingsStateContext } from '@contexts';
 import {
   createContext,
   FunctionComponent,
@@ -8,15 +7,15 @@ import {
   useState,
 } from 'react';
 
-export type SettingsFormValuesContextValues = {
+export type SettingsFormStateContextValues = {
   settingsFormValues: SettingsFormInputs,
   updateSettingsFormValue: (name: keyof SettingsFormInputs, value: number|boolean) => void
 }
 
-const SettingsFormValuesContext = createContext<SettingsFormValuesContextValues | undefined>(undefined);
+const SettingsFormStateContext = createContext<SettingsFormStateContextValues | undefined>(undefined);
 
-export const useSettingsFormValuesContext = () => {
-  const context = useContext(SettingsFormValuesContext);
+export const useSettingsFormStateContext = () => {
+  const context = useContext(SettingsFormStateContext);
   if (context === undefined) {
     throw new Error('useSettingsFormValuesContext must be inside a SettingsFormValuesProvider');
   }
@@ -24,7 +23,7 @@ export const useSettingsFormValuesContext = () => {
   return context;
 };
 
-interface SettingsFormInputs {
+export interface SettingsFormInputs {
   focusDuration: number,
   shortBreakDuration: number,
   longBreakDuration: number,
@@ -36,48 +35,45 @@ interface SettingsFormInputs {
   focusIntervalsTarget: number,
 }
 
-export const SettingsFormValuesProvider: FunctionComponent = ({
+export const SettingsFormStateProvider: FunctionComponent = ({
   children,
 }) => {
   const {
     // Interval durations settings
-    focusDuration: focusDuration,
-    shortBreakDuration,
-    longBreakDuration,
+    focusDuration,
+    focusIntervalsTarget,
+    isUseFocusIntervalsTarget,
 
     // Long break settings
     isUseLongBreaks,
-    longBreakGap,
+    longBreakDuration,
 
     // Focus intervals target settings
-    isUseFocusIntervalsTarget,
-    focusIntervalsTarget,
-  } = useGameStateContext();
+    longBreakGap,
+    shortBreakDuration,
+  } = useSettingsStateContext();
 
   // Interval durations fieldset
   const [settingsFormValues, setSettingsFormValues] = useState<SettingsFormInputs>({
-    focusDuration: msToMinutes(focusDuration),
-    shortBreakDuration: msToMinutes(shortBreakDuration),
-    longBreakDuration: msToMinutes(longBreakDuration),
-    isUseLongBreaks,
-    longBreakGap,
-    isUseFocusIntervalsTarget,
+    focusDuration,
     focusIntervalsTarget,
-
+    isUseFocusIntervalsTarget,
+    isUseLongBreaks,
+    longBreakDuration,
+    longBreakGap,
+    shortBreakDuration,
   });
 
   const values = useMemo(() => ({
     settingsFormValues,
     updateSettingsFormValue: (name: keyof SettingsFormInputs, value: number|boolean) => {
-      setSettingsFormValues({ ...settingsFormValues, [name]: value })
+      setSettingsFormValues({ ...settingsFormValues, [name]: value });
     },
-  }), [
-    settingsFormValues,
-  ]);
+  }), [settingsFormValues]);
 
   return (
-    <SettingsFormValuesContext.Provider value={values}>
+    <SettingsFormStateContext.Provider value={values}>
       {children}
-    </SettingsFormValuesContext.Provider>
+    </SettingsFormStateContext.Provider>
   );
 };

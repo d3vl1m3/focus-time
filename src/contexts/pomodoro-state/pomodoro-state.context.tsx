@@ -1,3 +1,4 @@
+import { useSettingsStateContext } from '@contexts';
 import {
   PomodoroStateType,
   SetStateType, 
@@ -33,11 +34,6 @@ export const usePomodoroStateContext = () => {
 export const PomodoroStateProvider: FunctionComponent = ({ children }) => {
   const [pomodoroState, setPomodoroState] = useState<PomodoroStateType>('RESET');
   const {
-    focusDuration,
-    shortBreakDuration,
-    longBreakDuration,
-    isUseLongBreaks,
-    longBreakGap,
     focusIntervalsCompleted,
     setFocusIntervalsCompleted,
     isFirstInterval,
@@ -45,11 +41,19 @@ export const PomodoroStateProvider: FunctionComponent = ({ children }) => {
   } = useGameStateContext();
 
   const {
+    focusDuration,
+    isUseLongBreaks,
+    longBreakDuration,
+    longBreakGap,
+    shortBreakDuration,
+  } = useSettingsStateContext();
+
+  const {
     isActive,
     isSkipping,
     setIsSkipping,
+    setTimeInMinutes,
     timeInMs,
-    setTimeInMs,
   } = useTimerStateContext();
 
   /**
@@ -62,7 +66,7 @@ export const PomodoroStateProvider: FunctionComponent = ({ children }) => {
      * The below `is*()` methods are excessive but worth the trade-off as they help with readability in the
      * meat of the logic
      */
-    const endOfInterval = (state = '') => (
+    const endOfInterval = (state: PomodoroStateType) => (
       pomodoroState === state
       && (
         timeInMs <= 0
@@ -82,7 +86,7 @@ export const PomodoroStateProvider: FunctionComponent = ({ children }) => {
     // starting a new or reset timer
     if (isActive && isFirstInterval) {
       setPomodoroState('FOCUS');
-      setTimeInMs(focusDuration);
+      setTimeInMinutes(focusDuration);
       setIsFirstInterval(false);
 
     } else if (isActive) {
@@ -94,16 +98,15 @@ export const PomodoroStateProvider: FunctionComponent = ({ children }) => {
       // Contextually Update the PomodoroState
       if (isAnyBreakFinished()) {
         setPomodoroState('FOCUS');
-        setTimeInMs(focusDuration);
+        setTimeInMinutes(focusDuration);
 
       } else if (isWorkIntervalFinished() && !isLongBreakGoalMet()) {
         setPomodoroState('SHORT_BREAK');
-        setTimeInMs(shortBreakDuration);
+        setTimeInMinutes(shortBreakDuration);
 
       } else if (isWorkIntervalFinished() && isLongBreakGoalMet()) {
         setPomodoroState('LONG_BREAK');
-        setTimeInMs(longBreakDuration);
-
+        setTimeInMinutes(longBreakDuration);
       }
 
       if (isSkipping) {
@@ -111,21 +114,21 @@ export const PomodoroStateProvider: FunctionComponent = ({ children }) => {
       }
     }
   }, [
-    timeInMs,
-    isActive,
-    isSkipping,
-    isFirstInterval,
-    setTimeInMs,
     focusDuration,
-    setIsFirstInterval,
-    setFocusIntervalsCompleted,
-    shortBreakDuration,
-    longBreakDuration,
-    setIsSkipping,
-    isUseLongBreaks,
     focusIntervalsCompleted,
+    isActive,
+    isFirstInterval,
+    isSkipping,
+    isUseLongBreaks,
+    longBreakDuration,
     longBreakGap,
     pomodoroState,
+    setFocusIntervalsCompleted,
+    setIsFirstInterval,
+    setIsSkipping,
+    setTimeInMinutes,
+    shortBreakDuration,
+    timeInMs,
   ]);
 
   const values = useMemo(() => ({

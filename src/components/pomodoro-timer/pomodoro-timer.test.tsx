@@ -13,7 +13,11 @@ import {
   testTimer,
 } from '@test-utils/pomodoro-timer';
 import { triggerResumeTimerControl } from "@test-utils/pomodoro-timer/triggers/triggers.test-utils";
-import { triggerCompletedState } from '@test-utils/settings/triggers/triggers.test-utils';
+import {
+  getNumberField,
+  getSwitchToggle, setInputFieldValue, triggerSaveSettingsPanel, triggerSwitchToggle,
+} from '@test-utils/settings';
+import { triggerCompletedState, triggerOpenSettingsPanel } from '@test-utils/settings/triggers/triggers.test-utils';
 import {
   render,
   screen,
@@ -35,7 +39,7 @@ describe('On initial load', () => {
 
 describe('When looking at the initial page layout', () => {
   beforeEach(() => {
-    renderTestComponent()
+    renderTestComponent();
   });
 
   test('should be using the default page title', () => {
@@ -73,14 +77,14 @@ describe('When a user stars a new timer', () => {
   beforeEach(() => {
     renderTestComponent();
     triggerStartTimerControl();
-  })
+  });
 
   test('should update the time and state in the page title', () => {
     testPageTitle('25:00 - Focus');
   });
 
   test('should update the state indicator to `Focus`', () => {
-    testStateIndicator('FOCUS')
+    testStateIndicator('FOCUS');
   });
 
   test('should update timer', () => {
@@ -97,14 +101,14 @@ describe('When a user has an active timer ', () => {
     renderTestComponent();
     triggerStartTimerControl();
     triggerMockTimeSkip(5000);
-  })
+  });
 
   test('should update the time and state in the page title', () => {
     testPageTitle('24:55 - Focus');
   });
 
   test('should update the state indicator to `Focus`', () => {
-    testStateIndicator('FOCUS')
+    testStateIndicator('FOCUS');
   });
 
   test('should update the timer accordingly', () => {
@@ -129,11 +133,36 @@ describe('When the users skips an interval', () => {
   });
 
   test('should update the state indicator to `Focus`', () => {
-    testStateIndicator('SHORT_BREAK')
+    testStateIndicator('SHORT_BREAK');
   });
 
   test('should start the timer', () => {
     testTimer('05:00');
+  });
+
+  test('should have the controls for an active, un-paused state only', () => {
+    testOnlySpecificTimerControlsRendered(['Pause', 'Skip', 'Reset']);
+  });
+});
+
+describe('When the users finishes a break', () => {
+  beforeEach(() => {
+    renderTestComponent();
+    triggerStartTimerControl();
+
+    triggerMockTimeSkip(30 * 60 * 1000);
+  });
+
+  test('should update the time and state in the page title', () => {
+    testPageTitle('25:00 - Focus');
+  });
+
+  test('should update the state indicator to `Focus`', () => {
+    testStateIndicator('FOCUS');
+  });
+
+  test('should start the timer', () => {
+    testTimer('25:00');
   });
 
   test('should have the controls for an active, un-paused state only', () => {
@@ -153,7 +182,7 @@ describe('When the users resets the timer', () => {
   });
 
   test('should update the state indicator to `Reset`', () => {
-    testStateIndicator('RESET')
+    testStateIndicator('RESET');
   });
 
   test('should show an inactive timer that does not update as time passes', () => {
@@ -183,7 +212,7 @@ describe('When the user pauses the timer', () => {
   });
 
   test('should have the same state it started with', () => {
-    testStateIndicator('FOCUS')
+    testStateIndicator('FOCUS');
   });
 
   test('should not change the timer as time passes', () => {
@@ -223,6 +252,48 @@ describe('When the user starts a paused timer', () => {
   });
 });
 
+describe('When the user has long breaks activated', () => {
+  beforeEach(() => {
+    setupIntersectionObserverMock();
+
+    renderTestComponent();
+
+    triggerOpenSettingsPanel();
+
+    const isUseLongBreaksToggle = getSwitchToggle('Use long breaks');
+    const longBreaksGapInput = getNumberField('Gap between long breaks focus intervals');
+
+    triggerSwitchToggle(isUseLongBreaksToggle);
+
+    setInputFieldValue(longBreaksGapInput, 1);
+
+    triggerSaveSettingsPanel();
+
+    triggerStartTimerControl();
+    triggerMockTimeSkip(25 * 60 * 1000);
+  });
+
+  test('should contain additional indicator for long breaks', () => {
+    testPageTitle('10:00 - Long break');
+  });
+
+  test('should update indicator to long break', () => {
+    testStateIndicator('LONG_BREAK');
+  });
+
+  test('should update timer in the page head', () => {
+    testPageTitle('10:00 - Long break');
+  });
+
+  test('should update the timer on the page', () => {
+    testTimer('10:00');
+  });
+
+  test('should have active expected controls only', () => {
+    testOnlySpecificTimerControlsRendered(['Pause', 'Skip', 'Reset']);
+  });
+});
+
 describe('When the user completes their session', () => {
   beforeEach(() => {
     setupIntersectionObserverMock();
@@ -235,14 +306,14 @@ describe('When the user completes their session', () => {
   });
 
   test('should remove the timer from the page', () => {
-    const { queryByRole, getByRole } = screen;
+    const { getByRole, queryByRole } = screen;
 
     expect(queryByRole('timer')).not.toBeInTheDocument();
 
     expect(getByRole('status').textContent).toBe('Completed');
   });
 
-  test('should have active, un-paused state controls only', () => {
+  test('should have active expected controls only', () => {
     testOnlySpecificTimerControlsRendered(['Reset']);
   });
 

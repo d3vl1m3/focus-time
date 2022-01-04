@@ -8,7 +8,7 @@ export const testOnlySpecificTimerControlsRendered = (names: ValidControlName[])
   const { getByRole } = screen;
 
   const controlContainer = getByRole('group');
-  const renderedControls = within(controlContainer).getAllByRole('button')
+  const renderedControls = within(controlContainer).getAllByRole('button');
 
   expect(controlContainer).toBeInTheDocument();
   expect(renderedControls.length).toBe(names.length);
@@ -21,31 +21,35 @@ export const testOnlySpecificTimerControlsRendered = (names: ValidControlName[])
     } else {
       expect(within(controlContainer).queryByRole('button', { name })).not.toBeInTheDocument();
     }
-  })
-}
+  });
+};
 
 export const testPageTitle = (title: string) => {
   const { getByTestId } = screen;
   const mockHead = within(getByTestId('next-head-mock'));
 
   expect(mockHead.getByText(title)).toBeInTheDocument();
-}
+};
 
-export const testStateIndicator = (state: PomodoroStateType) => {
+export const testStateIndicator = (state?: PomodoroStateType) => {
   const { queryByRole, getByRole } = screen;
 
   switch(state) {
-    case 'RESET':
-      expect(queryByRole('status')).not.toBeInTheDocument()
-      break;
-    default:
-      const statusIndicator = getByRole('status')
+    case 'FOCUS':
+    case 'SHORT_BREAK':
+    case 'LONG_BREAK':
+    case 'COMPLETED':
+      const statusIndicator = getByRole('status');
       const { label } = pomodoroStateObjectsData[state];
 
-      expect(statusIndicator).toBeInTheDocument()
-      expect(statusIndicator.textContent).toBe(label)
+      expect(statusIndicator).toBeInTheDocument();
+      expect(statusIndicator.textContent).toBe(label);
+      break;
+    default:
+      expect(queryByRole('status')).not.toBeInTheDocument();
+      break;
   }
-}
+};
 
 export const testTimer = (time: string) => {
   const { getByRole } = screen;
@@ -54,4 +58,4 @@ export const testTimer = (time: string) => {
 
   expect(timer).toBeInTheDocument();
   expect(timer.textContent).toBe(time);
-}
+};

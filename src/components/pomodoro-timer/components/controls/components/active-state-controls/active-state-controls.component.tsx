@@ -1,37 +1,32 @@
-import {
-  useControlActionsContext,
-  useTimerStateContext,
-} from '@contexts';
+import { useTimerStateContext } from '@contexts';
+import { useControlActions } from '@hooks';
 import { VoidFunctionComponent } from 'react';
 
 import type { ActionButtonComponentProps } from '../../controls.component';
+import styles from '../../controls.module.css';
 
-import styles from './active-state-controls.module.css';
-
-export const ActiveStateControls: VoidFunctionComponent<ActionButtonComponentProps> = ({
-  btnClasses = '',
-}) => {
+export const ActiveStateControls: VoidFunctionComponent<ActionButtonComponentProps> = () => {
   const { isPaused } = useTimerStateContext();
-  const { controlActionReducer } = useControlActionsContext();
+  const { controlActionReducer } = useControlActions();
 
   return (
     <>
       <button
-        className={`btn btn-primary ${btnClasses}`}
+        className={`btn btn-primary ${styles.controls}`}
         type="button"
         onClick={() => controlActionReducer({ type: isPaused ? 'START' : 'PAUSE' })}
       >
         {isPaused ? 'Resume' : 'Pause'}
       </button>
       <button
-        className={`btn btn-secondary ${btnClasses}`}
+        className={`btn btn-secondary ${styles.controls}`}
         type="button"
         onClick={() => controlActionReducer({ type: 'SKIP' })}
       >
         Skip
       </button>
       <button
-        className={`btn btn-danger ${btnClasses} ${styles.resetControl}`}
+        className={`btn btn-danger ${styles.controls} ${styles.resetControl}`}
         type="button"
         onClick={() => controlActionReducer({ type: 'RESET' })}
       >

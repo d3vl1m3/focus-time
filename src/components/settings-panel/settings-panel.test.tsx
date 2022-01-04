@@ -11,7 +11,7 @@ const renderTestComponent = () => render(<Index />);
 
 beforeEach(() => {
   setupIntersectionObserverMock();
-})
+});
 
 afterEach(() => {
   jest.clearAllMocks();
