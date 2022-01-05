@@ -4,8 +4,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "export": "next export",
     "lint": "next lint --fix",
+    "start": "next start",
     "test": "jest",
     "test-w-coverage": "jest --coverage"
   },
@@ -28,6 +29,7 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/react-hooks": "^7.0.2",
+    "@types/nodemailer": "^6.4.4",
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
     "autoprefixer": "^10.4.0",

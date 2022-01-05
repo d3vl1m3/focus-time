@@ -1,0 +1,51 @@
+# This file is a template, and might need editing before it works on your project.
+# To contribute improvements to CI/CD templates, please follow the Development guide at:
+# https://docs.gitlab.com/ee/development/cicd/templates.html
+# This specific template is located at:
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Nodejs.gitlab-ci.yml
+
+# Official framework image. Look for the different tagged releases at:
+# https://hub.docker.com/r/library/node/tags/
+image: node:latest
+
+stages:
+  - build
+  - test
+  - deploy
+
+# This folder is cached between builds
+# https://docs.gitlab.com/ee/ci/yaml/index.html#cache
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - .next/cache/
+
+npm_install:
+  stage: build
+  script:
+    - npm install
+  artifacts:
+    expire_in: 1 days
+    when: on_success
+    paths:
+      - node_modules/
+
+jest_test:
+  stage: test
+  needs: [npm_install]
+  script:
+    - npm run test
+
+pages:
+  stage: deploy
+  needs: [jest_test]
+  script:
+    - npm run-script build && npm run-script export
+    - rm -rf public/*
+    - mv out/* public
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
