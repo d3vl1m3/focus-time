@@ -1,34 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Focus time!
+
+The app is a simple [pomodoro timer](https://en.wikipedia.org/wiki/Pomodoro_Technique) that lets the user set up time intervals for focusing that are followed by short breaks.
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the project to your computer
+2. Install the dependencies: `npm install` or `yarn install`
+3. Run the development server: `npm run dev` or `yarn dev`
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to use the app
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Why do these timers help?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The idea being that the user sets a timer and while it is in focus mode, they avoid anything that doesn't directly relate to what task they are currently working on.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+After the 'focus interval' is complete, it is followed by a break (usually 3 to 5 minutes for a short breaks and maybe up to 10 minutes for a long break).
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/login.js`.
+Tools like this are great for everyone needing some accountability for how their time is spent but these tools are especially useful for those of us who are neurodivergent and struggle with things like being easily distracted, [time blindness](https://add.org/adhd-time-blindness/), [hyperfocus](https://en.wikipedia.org/wiki/Hyperfocus) or [perfectionism](https://en.wikipedia.org/wiki/Perfectionism_(psychology)).
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+The breaks act as great stopping points to take a breather and quickly evaluate if what is being worked on is in fact what is the top priority right now.
 
-## Learn More
+## Roadmap
+- [x] create basic Pomodoro timer
+- [ ] add sound indicators when intervals change (started, breaks, completed etc.)
+- [ ] integrate Spotify OAuth so instead of audio cues, the interval changes play/pause the users spotify service on any device
+- [ ] allow users to select playlists for each interval type (focus, breaks)
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
