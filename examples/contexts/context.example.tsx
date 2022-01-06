@@ -6,7 +6,7 @@ import {
   createContext, FunctionComponent, useContext, useMemo, 
 } from 'react';
 
-type FooContextValues = {
+export type FooContextValues = {
   foo: string
 };
 

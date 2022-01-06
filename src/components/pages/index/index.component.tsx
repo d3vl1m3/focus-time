@@ -4,8 +4,7 @@ import {
   SettingsPanelStateProvider,
   TimerStateProvider,
 } from '@contexts';
-import { SettingsFormStateProvider } from '@contexts';
-import { SettingsStateProvider } from '@contexts/settings-state/settings-state.context';
+import { SettingsFormStateProvider, SettingsStateProvider } from '@contexts';
 import { VoidFunctionComponent } from 'react';
 
 import {

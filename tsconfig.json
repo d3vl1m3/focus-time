@@ -23,10 +23,12 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "paths": {
+      "@assets/*": ["public/assets/*"],
       "@components/*": ["src/components/*"],
       "@contexts": ["src/contexts"],
       "@contexts/*": ["src/contexts/*"],
       "@data": ["src/data"],
+      "@data/*": ["src/data/*"],
       "@hooks": ["src/hooks"],
       "@mocks/*": ["__mocks__/*"],
       "@test-utils/*": ["test-utils/*"],

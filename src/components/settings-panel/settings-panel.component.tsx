@@ -29,21 +29,18 @@ export const SettingsPanel: VoidFunctionComponent = () => {
   } = useSettingsPanelStateContext();
 
   const {
-    // Interval durations settings
     focusDuration,
     focusIntervalsTarget,
     isUseFocusIntervalsTarget,
     isUseLongBreaks,
-
-    // Long break settings
+    isUseSound,
     longBreakDuration,
     longBreakGap,
     setFocusDuration,
     setFocusIntervalsTarget,
     setIsUseFocusIntervalsTarget,
     setIsUseLongBreaks,
-
-    // Focus intervals target settings
+    setIsUseSound,
     setLongBreakDuration,
     setLongBreakGap,
     setShortBreakDuration,
@@ -70,6 +67,7 @@ export const SettingsPanel: VoidFunctionComponent = () => {
         longBreakDuration,
         longBreakGap,
         shortBreakDuration,
+        isUseSound,
       } = settingsFormValues;
 
       setFocusDuration(focusDuration);
@@ -81,6 +79,8 @@ export const SettingsPanel: VoidFunctionComponent = () => {
 
       setIsUseFocusIntervalsTarget(isUseFocusIntervalsTarget);
       setFocusIntervalsTarget(focusIntervalsTarget);
+
+      setIsUseSound(isUseSound);
 
       closeSettingsModal();
     }
@@ -211,6 +211,17 @@ export const SettingsPanel: VoidFunctionComponent = () => {
                 Focus intervals target
               </NumberInput>
             </fieldset>
+
+            <div className={styles.fieldset}>
+              <Switch
+                className={styles.fieldsetTop}
+                defaultValue={isUseSound}
+                id="isUseSound"
+                onChange={(checked) => updateSettingsFormValue('isUseSound', checked)}
+              >
+                <HuiSwitch.Label className={styles.legend}>Use sounds</HuiSwitch.Label>
+              </Switch>
+            </div>
           </form>
         </main>
         <Footer formId={settingsFormId} />
