@@ -1,7 +1,9 @@
 import {
-  GameStateProvider, PomodoroStateProvider, TimerStateProvider, 
+  GameStateProvider,
+  PomodoroStateProvider,
+  TimerStateProvider,
+  SettingsStateProvider,
 } from '@contexts';
-import { SettingsStateProvider } from '@contexts/settings-state/settings-state.context';
 import { useCurrentPomodoroStateObj } from '@hooks';
 import { renderHook } from '@testing-library/react-hooks';
 

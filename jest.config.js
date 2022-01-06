@@ -13,9 +13,10 @@ module.exports = {
     '\\.css$': 'identity-obj-proxy',
     /* Handle image imports
                                 https://jestjs.io/docs/webpack#handling-static-assets */
-    '\\.(jpg|jpeg|png|gif|svg)$': '<rootDir>/__mocks__/fileMock.js',
+    '\\.(jpg|jpeg|png|gif|svg|mp3)$': '<rootDir>/__mocks__/fileMock.js',
 
     /* Jest aliases to match once in TS config */
+    "^@assets(.*)$": "<rootDir>/public/assets$1",
     "^@components(.*)$": "<rootDir>/src/components$1",
     "^@contexts(.*)$": "<rootDir>/src/contexts$1",
     "^@data(.*)$": "<rootDir>/src/data$1",

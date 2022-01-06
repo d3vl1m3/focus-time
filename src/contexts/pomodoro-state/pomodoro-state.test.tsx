@@ -1,7 +1,10 @@
 import {
-  GameStateProvider, PomodoroStateProvider, TimerStateProvider, usePomodoroStateContext,
+  GameStateProvider,
+  PomodoroStateProvider,
+  SettingsStateProvider,
+  TimerStateProvider,
+  usePomodoroStateContext,
 } from '@contexts';
-import { SettingsStateProvider } from '@contexts/settings-state/settings-state.context';
 import { renderHook } from '@testing-library/react-hooks';
 
 describe('On initial load', () => {

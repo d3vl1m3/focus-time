@@ -33,6 +33,8 @@ export interface SettingsFormInputs {
 
   isUseFocusIntervalsTarget: boolean,
   focusIntervalsTarget: number,
+
+  isUseSound: boolean
 }
 
 export const SettingsFormStateProvider: FunctionComponent = ({
@@ -51,6 +53,8 @@ export const SettingsFormStateProvider: FunctionComponent = ({
     // Focus intervals target settings
     longBreakGap,
     shortBreakDuration,
+
+    isUseSound,
   } = useSettingsStateContext();
 
   // Interval durations fieldset
@@ -59,6 +63,7 @@ export const SettingsFormStateProvider: FunctionComponent = ({
     focusIntervalsTarget,
     isUseFocusIntervalsTarget,
     isUseLongBreaks,
+    isUseSound,
     longBreakDuration,
     longBreakGap,
     shortBreakDuration,

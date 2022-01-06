@@ -1,4 +1,5 @@
 import { useSettingsStateContext } from '@contexts';
+import { useChime } from '@hooks';
 import {
   PomodoroStateType,
   SetStateType, 
@@ -32,7 +33,9 @@ export const usePomodoroStateContext = () => {
 };
 
 export const PomodoroStateProvider: FunctionComponent = ({ children }) => {
+
   const [pomodoroState, setPomodoroState] = useState<PomodoroStateType>('RESET');
+  const { playChime } = useChime();
   const {
     focusIntervalsCompleted,
     setFocusIntervalsCompleted,
@@ -83,34 +86,40 @@ export const PomodoroStateProvider: FunctionComponent = ({ children }) => {
 
     const isLongBreakGoalMet = () => isUseLongBreaks && focusIntervalsCompleted % longBreakGap === (longBreakGap - 1);
 
-    // starting a new or reset timer
-    if (isActive && isFirstInterval) {
-      setPomodoroState('FOCUS');
-      setTimeInMinutes(focusDuration);
-      setIsFirstInterval(false);
-
-    } else if (isActive) {
-      // End of a pomodoro that isn't skipped, increase the counter and reset the timer
-      if (isWorkIntervalFinished()) {
-        setFocusIntervalsCompleted((p) => p + 1);
-      }
-
-      // Contextually Update the PomodoroState
-      if (isAnyBreakFinished()) {
+    if ( isActive ) {
+      // starting a new or reset timer
+      if ( isFirstInterval ) {
         setPomodoroState('FOCUS');
         setTimeInMinutes(focusDuration);
+        setIsFirstInterval(false);
+        playChime();
+      } else {
+        // End of a pomodoro that isn't skipped, increase the counter and reset the timer
+        if (isWorkIntervalFinished()) {
+          setFocusIntervalsCompleted((p) => p + 1);
+        }
 
-      } else if (isWorkIntervalFinished() && !isLongBreakGoalMet()) {
-        setPomodoroState('SHORT_BREAK');
-        setTimeInMinutes(shortBreakDuration);
+        // Contextually Update the PomodoroState
+        if (isAnyBreakFinished()) {
+          setPomodoroState('FOCUS');
+          setTimeInMinutes(focusDuration);
+          playChime();
 
-      } else if (isWorkIntervalFinished() && isLongBreakGoalMet()) {
-        setPomodoroState('LONG_BREAK');
-        setTimeInMinutes(longBreakDuration);
-      }
+        } else if (isWorkIntervalFinished() && !isLongBreakGoalMet()) {
+          setPomodoroState('SHORT_BREAK');
+          setTimeInMinutes(shortBreakDuration);
+          playChime();
 
-      if (isSkipping) {
-        setIsSkipping(false);
+        } else if (isWorkIntervalFinished() && isLongBreakGoalMet()) {
+          setPomodoroState('LONG_BREAK');
+          setTimeInMinutes(longBreakDuration);
+          playChime();
+        }
+
+        if (isSkipping) {
+          setIsSkipping(false);
+          playChime();
+        }
       }
     }
   }, [
@@ -122,6 +131,7 @@ export const PomodoroStateProvider: FunctionComponent = ({ children }) => {
     isUseLongBreaks,
     longBreakDuration,
     longBreakGap,
+    playChime,
     pomodoroState,
     setFocusIntervalsCompleted,
     setIsFirstInterval,

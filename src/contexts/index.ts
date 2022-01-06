@@ -13,8 +13,8 @@ export type { PomodoroStateContextValues } from './pomodoro-state/pomodoro-state
 export {
   SettingsStateProvider,
   useSettingsStateContext,
-} from "./settings-state/settings-state.context";
-export type { SettingsStateContextValues } from "./settings-state/settings-state.context";
+} from "./settings-state";
+export type { SettingsStateContextValues } from "./settings-state";
 
 export {
   SettingsFormStateProvider,
