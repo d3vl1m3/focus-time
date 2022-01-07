@@ -1,9 +1,9 @@
-import { usePomodoroStateContext } from '@contexts';
-import { pomodoroStateObjectsData } from '@data';
+import { useIntervalStatusContext } from '@contexts';
+import { intervalStatusObjects } from '@data';
 import { PomodoroStateObjectType } from '@types';
 
 export const useCurrentPomodoroStateObj = (): PomodoroStateObjectType => {
-  const { pomodoroState } = usePomodoroStateContext();
+  const { intervalStatus } = useIntervalStatusContext();
 
-  return pomodoroStateObjectsData[pomodoroState];
+  return intervalStatusObjects[intervalStatus];
 };

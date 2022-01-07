@@ -1,24 +1,16 @@
-/**
- * EXAMPLE FILE. COPY AND PASTE IN TO OTHER FILES THEN MODIFY AS REQUIRED.
- * DO NOT REMOVE FROM PROJECT OR INCLUDE IN PRODUCTION BUILD
- */
 import { testStateIndicator } from '@test-utils/pomodoro-timer';
-import {
-  render,
-  screen,
-  within,
-} from '@testing-library/react';
-import { PomodoroStateType } from '@types';
+import { render } from '@testing-library/react';
+import { IntervalStatusSlugType } from '@types';
 import React from 'react';
 
-import { PomodoroStateIndicatorPresenter } from './pomodoro-state-indicator.presenter';
+import { StatusIndicatorPresenter } from './status-indicator.presenter';
 
 afterEach(() => {
   jest.clearAllMocks();
 });
 
-const renderPresenterComponent = (pomodoroState?: PomodoroStateType, isUseLongBreaks?: boolean) => {
-  render(<PomodoroStateIndicatorPresenter { ...{ isUseLongBreaks, pomodoroState } } />);
+const renderPresenterComponent = (intervalStatus?: IntervalStatusSlugType) => {
+  render(<StatusIndicatorPresenter intervalStatusSlug={intervalStatus} />);
 };
 
 describe('On initial load', () => {
@@ -26,7 +18,7 @@ describe('On initial load', () => {
     const spyError = jest.spyOn(console, 'error');
     renderPresenterComponent();
     expect(spyError).not.toHaveBeenCalled();
-    testStateIndicator();
+    testStateIndicator('RESET');
   });
 });
 
@@ -52,15 +44,7 @@ describe('When app is in a short break state', () => {
 
 describe('When app is using long breaks state', () => {
   beforeEach(() => {
-    renderPresenterComponent('LONG_BREAK', true);
-  });
-
-  test('should render the \'Long break\' status indicator', () => {
-    const { getByRole } = screen;
-
-    const statusIndicatorList = getByRole('list');
-
-    expect(within(statusIndicatorList).getByText('Long break')).toBeInTheDocument();
+    renderPresenterComponent('LONG_BREAK');
   });
 
   test('should set the status to \'Long break\' when app is in the relevant state', () => {

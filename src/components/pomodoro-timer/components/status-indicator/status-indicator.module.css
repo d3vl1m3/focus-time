@@ -1,0 +1,9 @@
+.indicator {
+    @apply
+    mt-4
+    mb-4
+    px-4
+    py-4
+    text-center
+    text-2xl
+}

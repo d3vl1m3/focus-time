@@ -29,7 +29,7 @@ describe('When looking at the page', () => {
 
   test('should see the site header', () => {
     const { queryByText } = screen;
-    expect(queryByText('pomodoro')).toBeInTheDocument();
+    expect(queryByText('Focus Time')).toBeInTheDocument();
   });
 
   test('should see the settings button', () => {

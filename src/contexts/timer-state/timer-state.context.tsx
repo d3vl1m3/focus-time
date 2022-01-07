@@ -63,6 +63,8 @@ export const TimerStateProvider: FunctionComponent = ({
     };
   }, [isActive, isPaused, isSkipping]);
 
+  const setTimeInMinutes = (minutes: number) => setTimeInMs(minutes * 60 * 1000);
+
   const values = useMemo(() => ({
     isActive,
     isPaused,
@@ -71,7 +73,7 @@ export const TimerStateProvider: FunctionComponent = ({
     setIsPaused,
     setIsSkipping,
     setTimeInMs,
-    setTimeInMinutes: (minutes: number) => setTimeInMs(minutes * 60 * 1000),
+    setTimeInMinutes,
     timeInMs,
   }), [
     isActive,

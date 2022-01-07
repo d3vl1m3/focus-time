@@ -1,5 +1,4 @@
 import { Index } from '@components/pages';
-import { pomodoroStateObjectsData } from '@data';
 import { setupIntersectionObserverMock } from '@mocks/intersection-observer.mock';
 import { triggerMockTimeSkip } from '@test-utils/jest';
 import {
@@ -15,13 +14,15 @@ import {
 import { triggerResumeTimerControl } from "@test-utils/pomodoro-timer/triggers/triggers.test-utils";
 import {
   getNumberField,
-  getSwitchToggle, setInputFieldValue, triggerSaveSettingsPanel, triggerSwitchToggle,
+  getSwitchToggle,
+  setInputFieldValue,
+  triggerSaveSettingsPanel,
+  triggerSwitchToggle,
 } from '@test-utils/settings';
 import { triggerCompletedState, triggerOpenSettingsPanel } from '@test-utils/settings/triggers/triggers.test-utils';
 import {
   render,
   screen,
-  within,
 } from '@testing-library/react';
 
 jest.mock('next/head');
@@ -46,21 +47,7 @@ describe('When looking at the initial page layout', () => {
     testPageTitle('FocusTime');
   });
 
-  test('should show the state indicators with none selected', () => {
-    const { getByRole } = screen;
-
-    const stateIndicators = within(getByRole('list')).queryAllByRole('listitem');
-
-    expect(stateIndicators.length).toBe(2);
-
-    const { FOCUS, SHORT_BREAK } = pomodoroStateObjectsData;
-
-    expect(stateIndicators.find((item) => item.textContent === FOCUS.label))
-      .toBeInTheDocument();
-
-    expect(stateIndicators.find((item) => item.textContent === SHORT_BREAK.label))
-      .toBeInTheDocument();
-
+  test('should show the default state indicator text', () => {
     testStateIndicator('RESET');
   });
 
@@ -305,12 +292,13 @@ describe('When the user completes their session', () => {
     testPageTitle('Completed');
   });
 
+  test('should have the correct status rendered', () => {
+    testStateIndicator('COMPLETED');
+  });
+
   test('should remove the timer from the page', () => {
-    const { getByRole, queryByRole } = screen;
-
+    const { queryByRole } = screen;
     expect(queryByRole('timer')).not.toBeInTheDocument();
-
-    expect(getByRole('status').textContent).toBe('Completed');
   });
 
   test('should have active expected controls only', () => {

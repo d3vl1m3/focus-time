@@ -1,6 +1,6 @@
-import { pomodoroStateObjectsData } from "@data";
+import { intervalStatusObjects } from "@data";
 import { screen, within } from "@testing-library/react";
-import { PomodoroStateType } from "@types";
+import { IntervalStatusSlugType } from "@types";
 
 type ValidControlName = 'Start' | 'Pause' | 'Resume' | 'Skip' | 'Reset';
 
@@ -31,24 +31,12 @@ export const testPageTitle = (title: string) => {
   expect(mockHead.getByText(title)).toBeInTheDocument();
 };
 
-export const testStateIndicator = (state?: PomodoroStateType) => {
-  const { queryByRole, getByRole } = screen;
+export const testStateIndicator = (state: IntervalStatusSlugType) => {
+  const { getByRole } = screen;
 
-  switch(state) {
-    case 'FOCUS':
-    case 'SHORT_BREAK':
-    case 'LONG_BREAK':
-    case 'COMPLETED':
-      const statusIndicator = getByRole('status');
-      const { label } = pomodoroStateObjectsData[state];
-
-      expect(statusIndicator).toBeInTheDocument();
-      expect(statusIndicator.textContent).toBe(label);
-      break;
-    default:
-      expect(queryByRole('status')).not.toBeInTheDocument();
-      break;
-  }
+  const statusIndicator = getByRole('status');
+  expect(statusIndicator).toBeInTheDocument();
+  expect(statusIndicator.textContent).toBe(intervalStatusObjects[state].description);
 };
 
 export const testTimer = (time: string) => {
