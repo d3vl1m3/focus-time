@@ -44,7 +44,7 @@ describe('When looking at the initial page layout', () => {
   });
 
   test('should show the default state indicator text', () => {
-    testStateIndicator('RESET');
+    testStateIndicator('INITIAL');
   });
 
   test('should see an empty timer', () => {
@@ -165,7 +165,7 @@ describe('When the users resets the timer', () => {
   });
 
   test('should update the state indicator to `Reset`', () => {
-    testStateIndicator('RESET');
+    testStateIndicator('INITIAL');
   });
 
   test('should show an inactive timer that does not update as time passes', () => {
@@ -299,11 +299,11 @@ describe('When the user completes their session', () => {
   });
 
   test('should have active expected controls only', () => {
-    testOnlySpecificTimerControlsRendered(['Reset to a new Pomodoro session']);
+    testOnlySpecificTimerControlsRendered(['Reset session']);
   });
 
   test('should reset timer when clicking control after completed', () => {
-    triggerControl('Reset to a new Pomodoro session');
+    triggerControl('Reset session');
     testPageTitle('FocusTime');
   });
 });

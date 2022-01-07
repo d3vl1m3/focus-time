@@ -2,7 +2,7 @@ import { intervalStatusObjects } from '@data';
 import { IntervalStatusSlugType } from '@types';
 import React, { VoidFunctionComponent } from 'react';
 
-import styles from './status-indicator.module.css';
+import styles from './interval-status-indicator.module.css';
 
 type PomodoroStateIndicatorPresenterProps = {
   intervalStatusSlug?: IntervalStatusSlugType
@@ -10,8 +10,8 @@ type PomodoroStateIndicatorPresenterProps = {
 
 type PomodoroStateIndicatorType = VoidFunctionComponent<PomodoroStateIndicatorPresenterProps>
 
-export const StatusIndicatorPresenter: PomodoroStateIndicatorType = ({
-  intervalStatusSlug = intervalStatusObjects['RESET'].slug,
+export const IntervalStatusIndicatorPresenter: PomodoroStateIndicatorType = ({
+  intervalStatusSlug = intervalStatusObjects['INITIAL'].slug,
 }) => {
 
   return (

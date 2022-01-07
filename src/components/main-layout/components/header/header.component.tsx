@@ -18,7 +18,7 @@ export const Header: VoidFunctionComponent<HTMLAttributes<HTMLDivElement>> = ({
     >
       <h1 className={styles.siteTitle}>Focus Time</h1>
       <button
-        className={styles.settingsButton}
+        className="btn btn-sm"
         type="button"
         onClick={openSettingsModal}
       >

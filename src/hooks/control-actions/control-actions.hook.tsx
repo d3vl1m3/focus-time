@@ -45,13 +45,13 @@ export const useControlActions = () => {
           setIsActive(true);
           setIsSkipping(true);
           break;
-        case ('RESET'):
+        case ('INITIAL'):
           setFocusIntervalsCompleted(0);
           setIsActive(false);
           setIsCompleted(false);
           setIsFirstInterval(true);
           setIsPaused(true);
-          setIntervalStatus('RESET');
+          setIntervalStatus('INITIAL');
           setTimeInMs(0);
           break;
       }

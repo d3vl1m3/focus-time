@@ -3,14 +3,14 @@ import { render } from '@testing-library/react';
 import { IntervalStatusSlugType } from '@types';
 import React from 'react';
 
-import { StatusIndicatorPresenter } from './status-indicator.presenter';
+import { IntervalStatusIndicatorPresenter } from './interval-status-indicator.presenter';
 
 afterEach(() => {
   jest.clearAllMocks();
 });
 
 const renderPresenterComponent = (intervalStatus?: IntervalStatusSlugType) => {
-  render(<StatusIndicatorPresenter intervalStatusSlug={intervalStatus} />);
+  render(<IntervalStatusIndicatorPresenter intervalStatusSlug={intervalStatus} />);
 };
 
 describe('On initial load', () => {
@@ -18,7 +18,7 @@ describe('On initial load', () => {
     const spyError = jest.spyOn(console, 'error');
     renderPresenterComponent();
     expect(spyError).not.toHaveBeenCalled();
-    testStateIndicator('RESET');
+    testStateIndicator('INITIAL');
   });
 });
 

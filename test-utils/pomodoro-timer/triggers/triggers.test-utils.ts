@@ -10,7 +10,7 @@ export type ValidControlName =
   'Skip interval' |
   'Reset Pomodoro session' |
   'Resume timer' |
-  'Reset to a new Pomodoro session';
+  'Reset session';
 
 export const triggerControl = (name: ValidControlName) => {
   const { getByRole } = screen;

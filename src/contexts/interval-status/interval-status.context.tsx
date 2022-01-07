@@ -34,7 +34,7 @@ export const useIntervalStatusContext = () => {
 
 export const IntervalStatusProvider: FunctionComponent = ({ children }) => {
 
-  const [intervalStatus, setIntervalStatus] = useState<IntervalStatusSlugType>('RESET');
+  const [intervalStatus, setIntervalStatus] = useState<IntervalStatusSlugType>('INITIAL');
   const { playChime } = useChime();
   const {
     focusIntervalsCompleted,

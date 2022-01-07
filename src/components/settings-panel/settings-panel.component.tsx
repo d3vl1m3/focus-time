@@ -118,7 +118,9 @@ export const SettingsPanel: VoidFunctionComponent = () => {
               onChange={(e) => updateSettingsFormValue('focusDuration', parseInt(e.target.value))
               }
             >
-                Focus duration
+              Focus duration
+              {' '}
+              <span className="sr-only">in minutes</span>
             </NumberInput>
 
             <NumberInput
@@ -132,7 +134,9 @@ export const SettingsPanel: VoidFunctionComponent = () => {
               onChange={(e) => updateSettingsFormValue('shortBreakDuration', parseInt(e.target.value))
               }
             >
-                Short break duration
+              Short break duration
+              {' '}
+              <span className="sr-only">in minutes</span>
             </NumberInput>
           </fieldset>
 
@@ -162,7 +166,9 @@ export const SettingsPanel: VoidFunctionComponent = () => {
                 : false
               }
             >
-                Long break duration
+              Long break duration
+              {' '}
+              <span className="sr-only">in minutes</span>
             </NumberInput>
 
             <NumberInput
@@ -178,7 +184,7 @@ export const SettingsPanel: VoidFunctionComponent = () => {
                 : false
               }
             >
-                Gap between long breaks
+                Focus intervals between long breaks
             </NumberInput>
           </fieldset>
 

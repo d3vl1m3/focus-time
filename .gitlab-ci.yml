@@ -41,7 +41,7 @@ pages:
   stage: deploy
   needs: [jest_test]
   script:
-    - npm run-script build && npm run-script export
+    - npm run-script pages
     - rm -rf public/*
     - mv out/* public
   artifacts:

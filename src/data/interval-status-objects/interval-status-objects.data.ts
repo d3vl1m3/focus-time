@@ -12,17 +12,17 @@ export const intervalStatusObjects: Record<IntervalStatusSlugType, PomodoroState
   SHORT_BREAK: {
     slug: 'SHORT_BREAK',
     label: 'Short break',
-    description: 'Phew! Good work. Let\'s take a break',
+    description: 'Phew! Good job. Let\'s take a short break',
   },
   LONG_BREAK: {
     slug: 'LONG_BREAK',
     label: 'Long break',
-    description: 'You\'ve earned this. Have some "you" time and take a longer break.',
+    description: 'Have some "you time". Take a long break.',
   },
-  RESET: {
-    slug: 'RESET',
-    label: 'Reset',
-    description: 'Press ‘start’ to begin a new timer',
+  INITIAL: {
+    slug: 'INITIAL',
+    label: 'Initial',
+    description: 'A Pomodoro timer to help you focus',
   },
   COMPLETED: {
     slug: 'COMPLETED',
