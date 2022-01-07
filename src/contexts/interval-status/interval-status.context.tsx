@@ -94,7 +94,7 @@ export const IntervalStatusProvider: FunctionComponent = ({ children }) => {
         setIsFirstInterval(false);
         playChime();
       } else {
-        // End of a pomodoro that isn't skipped, increase the counter and reset the timer
+        // Increase the counter at the end of each interval
         if (isWorkIntervalFinished()) {
           setFocusIntervalsCompleted((p) => p + 1);
         }

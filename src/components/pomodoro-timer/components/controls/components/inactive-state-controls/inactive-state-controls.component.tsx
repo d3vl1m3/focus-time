@@ -13,7 +13,7 @@ export const InactiveStateControls: VoidFunctionComponent<ActionButtonComponentP
       type="button"
       onClick={() => controlActionReducer({ type: 'START' })}
     >
-      Start
+      Start a Pomodoro session
     </button>
   );
 };

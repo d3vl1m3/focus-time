@@ -13,7 +13,7 @@ export const CompletedStateControls: VoidFunctionComponent<ActionButtonComponent
       type="button"
       onClick={() => controlActionReducer({ type: 'RESET' })}
     >
-      Reset
+      Start a new session
     </button>
   );
 };
