@@ -2,16 +2,12 @@ import { Index } from '@components/pages';
 import { setupIntersectionObserverMock } from '@mocks/intersection-observer.mock';
 import { triggerMockTimeSkip } from '@test-utils/jest';
 import {
-  triggerPauseTimerControl,
-  triggerResetTimerControl,
-  triggerSkipIntervalControl,
-  triggerStartTimerControl,
   testOnlySpecificTimerControlsRendered,
   testPageTitle,
   testStateIndicator,
   testTimer,
+  triggerControl,
 } from '@test-utils/pomodoro-timer';
-import { triggerResumeTimerControl } from "@test-utils/pomodoro-timer/triggers/triggers.test-utils";
 import {
   getNumberField,
   getSwitchToggle,
@@ -56,14 +52,14 @@ describe('When looking at the initial page layout', () => {
   });
 
   test('should see the inactive controls only', () => {
-    testOnlySpecificTimerControlsRendered(['Start']);
+    testOnlySpecificTimerControlsRendered(['Start a Pomodoro session']);
   });
 });
 
 describe('When a user stars a new timer', () => {
   beforeEach(() => {
     renderTestComponent();
-    triggerStartTimerControl();
+    triggerControl('Start a Pomodoro session');
   });
 
   test('should update the time and state in the page title', () => {
@@ -79,14 +75,14 @@ describe('When a user stars a new timer', () => {
   });
 
   test('should have the controls for an active, un-paused state only', () => {
-    testOnlySpecificTimerControlsRendered(['Pause', 'Skip', 'Reset']);
+    testOnlySpecificTimerControlsRendered(['Pause timer', 'Skip interval', 'Reset Pomodoro session']);
   });
 });
 
 describe('When a user has an active timer ', () => {
   beforeEach(() => {
     renderTestComponent();
-    triggerStartTimerControl();
+    triggerControl('Start a Pomodoro session');
     triggerMockTimeSkip(5000);
   });
 
@@ -103,16 +99,16 @@ describe('When a user has an active timer ', () => {
   });
 
   test('should have the controls for an active, un-paused state only', () => {
-    testOnlySpecificTimerControlsRendered(['Pause', 'Skip', 'Reset']);
+    testOnlySpecificTimerControlsRendered(['Pause timer', 'Skip interval', 'Reset Pomodoro session']);
   });
 });
 
 describe('When the users skips an interval', () => {
   beforeEach(() => {
     renderTestComponent();
-    triggerStartTimerControl();
+    triggerControl('Start a Pomodoro session');
 
-    triggerSkipIntervalControl();
+    triggerControl('Skip interval');
   });
 
   test('should update the time and state in the page title', () => {
@@ -128,14 +124,14 @@ describe('When the users skips an interval', () => {
   });
 
   test('should have the controls for an active, un-paused state only', () => {
-    testOnlySpecificTimerControlsRendered(['Pause', 'Skip', 'Reset']);
+    testOnlySpecificTimerControlsRendered(['Pause timer', 'Skip interval', 'Reset Pomodoro session']);
   });
 });
 
 describe('When the users finishes a break', () => {
   beforeEach(() => {
     renderTestComponent();
-    triggerStartTimerControl();
+    triggerControl('Start a Pomodoro session');
 
     triggerMockTimeSkip(30 * 60 * 1000);
   });
@@ -153,15 +149,15 @@ describe('When the users finishes a break', () => {
   });
 
   test('should have the controls for an active, un-paused state only', () => {
-    testOnlySpecificTimerControlsRendered(['Pause', 'Skip', 'Reset']);
+    testOnlySpecificTimerControlsRendered(['Pause timer', 'Skip interval', 'Reset Pomodoro session']);
   });
 });
 
 describe('When the users resets the timer', () => {
   beforeEach(() => {
     renderTestComponent();
-    triggerStartTimerControl();
-    triggerResetTimerControl();
+    triggerControl('Start a Pomodoro session');
+    triggerControl('Reset Pomodoro session');
   });
 
   test('should update the time and state in the page title', () => {
@@ -179,7 +175,7 @@ describe('When the users resets the timer', () => {
   });
 
   test('should have inactive state controls only', () => {
-    testOnlySpecificTimerControlsRendered(['Start']);
+    testOnlySpecificTimerControlsRendered(['Start a Pomodoro session']);
   });
 });
 
@@ -187,10 +183,10 @@ describe('When the user pauses the timer', () => {
   beforeEach(() => {
     renderTestComponent();
 
-    triggerStartTimerControl();
+    triggerControl('Start a Pomodoro session');
     triggerMockTimeSkip(5000);
 
-    triggerPauseTimerControl();
+    triggerControl('Pause timer');
     triggerMockTimeSkip(5000);
   });
 
@@ -207,7 +203,7 @@ describe('When the user pauses the timer', () => {
   });
 
   test('should have active, paused state controls only', () => {
-    testOnlySpecificTimerControlsRendered(['Resume', 'Skip', 'Reset']);
+    testOnlySpecificTimerControlsRendered(['Resume timer', 'Skip interval', 'Reset Pomodoro session']);
   });
 });
 
@@ -215,13 +211,13 @@ describe('When the user starts a paused timer', () => {
   beforeEach(() => {
     renderTestComponent();
 
-    triggerStartTimerControl();
+    triggerControl('Start a Pomodoro session');
     triggerMockTimeSkip(5000);
 
-    triggerPauseTimerControl();
+    triggerControl('Pause timer');
     triggerMockTimeSkip(5000);
 
-    triggerResumeTimerControl();
+    triggerControl('Resume timer');
   });
 
   test('should update timer in the page head', () => {
@@ -235,7 +231,7 @@ describe('When the user starts a paused timer', () => {
   });
 
   test('should have active, un-paused state controls only', () => {
-    testOnlySpecificTimerControlsRendered(['Pause', 'Skip', 'Reset']);
+    testOnlySpecificTimerControlsRendered(['Pause timer', 'Skip interval', 'Reset Pomodoro session']);
   });
 });
 
@@ -256,7 +252,8 @@ describe('When the user has long breaks activated', () => {
 
     triggerSaveSettingsPanel();
 
-    triggerStartTimerControl();
+    triggerControl('Start a Pomodoro session');
+
     triggerMockTimeSkip(25 * 60 * 1000);
   });
 
@@ -277,7 +274,7 @@ describe('When the user has long breaks activated', () => {
   });
 
   test('should have active expected controls only', () => {
-    testOnlySpecificTimerControlsRendered(['Pause', 'Skip', 'Reset']);
+    testOnlySpecificTimerControlsRendered(['Pause timer', 'Skip interval', 'Reset Pomodoro session']);
   });
 });
 
@@ -302,11 +299,11 @@ describe('When the user completes their session', () => {
   });
 
   test('should have active expected controls only', () => {
-    testOnlySpecificTimerControlsRendered(['Reset']);
+    testOnlySpecificTimerControlsRendered(['Reset to a new Pomodoro session']);
   });
 
   test('should reset timer when clicking control after completed', () => {
-    triggerResetTimerControl();
+    triggerControl('Reset to a new Pomodoro session');
     testPageTitle('FocusTime');
   });
 });

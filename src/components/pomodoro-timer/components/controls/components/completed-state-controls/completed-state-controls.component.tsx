@@ -13,7 +13,7 @@ export const CompletedStateControls: VoidFunctionComponent<ActionButtonComponent
       type="button"
       onClick={() => controlActionReducer({ type: 'RESET' })}
     >
-      Start a new session
+      Reset to a new Pomodoro session
     </button>
   );
 };

@@ -1,8 +1,7 @@
 import { intervalStatusObjects } from "@data";
+import { ValidControlName } from '@test-utils/pomodoro-timer';
 import { screen, within } from "@testing-library/react";
 import { IntervalStatusSlugType } from "@types";
-
-type ValidControlName = 'Start' | 'Pause' | 'Resume' | 'Skip' | 'Reset';
 
 export const testOnlySpecificTimerControlsRendered = (names: ValidControlName[]) => {
   const { getByRole } = screen;
@@ -13,14 +12,8 @@ export const testOnlySpecificTimerControlsRendered = (names: ValidControlName[])
   expect(controlContainer).toBeInTheDocument();
   expect(renderedControls.length).toBe(names.length);
 
-  const validControlNames: ValidControlName[] = ['Start', 'Pause', 'Resume', 'Skip', 'Reset'];
-
-  validControlNames.forEach((name) => {
-    if (names.includes(name)) {
-      expect(within(controlContainer).getByRole('button', { name })).toBeInTheDocument();
-    } else {
-      expect(within(controlContainer).queryByRole('button', { name })).not.toBeInTheDocument();
-    }
+  names.forEach((name) => {
+    expect(within(controlContainer).getByRole('button', { name })).toBeInTheDocument();
   });
 };
 

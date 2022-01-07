@@ -1,4 +1,4 @@
-import { triggerSkipIntervalControl, triggerStartTimerControl } from '@test-utils/pomodoro-timer';
+import { triggerControl } from '@test-utils/pomodoro-timer';
 import { setInputFieldValue } from '@test-utils/settings/setters/setters.test-utils';
 import {
   act,
@@ -19,8 +19,8 @@ export const triggerCloseSettingsPanel = () => {
 export const triggerCompletedState = () => {
   const { getByRole } = screen;
 
-  triggerStartTimerControl();
-  triggerSkipIntervalControl();
+  triggerControl('Start a Pomodoro session');
+  triggerControl('Skip interval');
   triggerOpenSettingsPanel();
 
   const focusIntervalsTargetButton = getByRole('switch', { name: 'Use a focus intervals target' });

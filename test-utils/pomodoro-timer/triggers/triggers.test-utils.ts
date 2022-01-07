@@ -4,52 +4,20 @@ import {
   screen,
 } from "@testing-library/react";
 
-export const triggerPauseTimerControl = () => {
+export type ValidControlName =
+  'Start a Pomodoro session' |
+  'Pause timer' |
+  'Skip interval' |
+  'Reset Pomodoro session' |
+  'Resume timer' |
+  'Reset to a new Pomodoro session';
+
+export const triggerControl = (name: ValidControlName) => {
   const { getByRole } = screen;
-  const resetButton = getByRole('button', { name: 'Pause' });
+  const control = getByRole('button', { name });
 
   // Reset the timer
   act(() => {
-    fireEvent.click(resetButton);
-  });
-};
-
-export const triggerStartTimerControl = () => {
-  const { getByRole } = screen;
-  const startButton = getByRole('button', { name: 'Start' });
-
-  // Start the timer
-  act(() => {
-    fireEvent.click(startButton);
-  });
-};
-
-export const triggerResumeTimerControl = () => {
-  const { getByRole } = screen;
-  const startButton = getByRole('button', { name: 'Resume' });
-
-  // Start the timer
-  act(() => {
-    fireEvent.click(startButton);
-  });
-};
-
-export const triggerSkipIntervalControl = () => {
-  const { getByRole } = screen;
-  const skipButton = getByRole('button', { name: 'Skip' });
-
-  // Skip the interval
-  act(() => {
-    fireEvent.click(skipButton);
-  });
-};
-
-export const triggerResetTimerControl = () => {
-  const { getByRole } = screen;
-  const resetButton = getByRole('button', { name: 'Reset' });
-
-  // Reset the timer
-  act(() => {
-    fireEvent.click(resetButton);
+    fireEvent.click(control);
   });
 };
