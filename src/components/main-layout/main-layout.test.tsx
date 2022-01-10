@@ -1,11 +1,13 @@
 import { Index } from '@components/pages';
 import { setupIntersectionObserverMock } from '@mocks/intersection-observer.mock';
+import { testPageTitle } from '@test-utils/pomodoro-timer';
 import { triggerSwitchToggle } from '@test-utils/settings';
 import {
   render,
   screen,
   within,
 } from '@testing-library/react';
+import '@mocks/match-media/match-media.mock';
 
 const renderTestComponent = () => render(
   <Index />,
@@ -28,8 +30,7 @@ describe('When looking at the page', () => {
   });
 
   test('should see the site header', () => {
-    const { queryByText } = screen;
-    expect(queryByText('Focus Time')).toBeInTheDocument();
+    testPageTitle('Focus Time');
   });
 
   test('should see the settings button', () => {

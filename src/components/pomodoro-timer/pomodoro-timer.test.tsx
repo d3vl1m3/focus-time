@@ -20,6 +20,7 @@ import {
   render,
   screen,
 } from '@testing-library/react';
+import '@mocks/match-media/match-media.mock';
 
 jest.mock('next/head');
 jest.useFakeTimers();
@@ -40,7 +41,7 @@ describe('When looking at the initial page layout', () => {
   });
 
   test('should be using the default page title', () => {
-    testPageTitle('FocusTime');
+    testPageTitle('Focus Time');
   });
 
   test('should show the default state indicator text', () => {
@@ -161,7 +162,7 @@ describe('When the users resets the timer', () => {
   });
 
   test('should update the time and state in the page title', () => {
-    testPageTitle('FocusTime');
+    testPageTitle('Focus Time');
   });
 
   test('should update the state indicator to `Reset`', () => {
@@ -304,6 +305,6 @@ describe('When the user completes their session', () => {
 
   test('should reset timer when clicking control after completed', () => {
     triggerControl('Reset session');
-    testPageTitle('FocusTime');
+    testPageTitle('Focus Time');
   });
 });

@@ -73,14 +73,14 @@ describe('When sound settings is active', () => {
     expect(mockedAudioPlay).toHaveBeenCalledTimes(1);
   });
 
-  test('should allow the app to play another chime after 3 seconds', () => {
+  test('should allow the app to play another chime after 1 second', () => {
     const { result } = renderTestHook();
     triggerChime(result);
     triggerChime(result);
 
     expect(mockedAudioPlay).toHaveBeenCalledTimes(1);
 
-    triggerMockTimeSkip(2999);
+    triggerMockTimeSkip(999);
     triggerChime(result);
 
     expect(mockedAudioPlay).toHaveBeenCalledTimes(1);

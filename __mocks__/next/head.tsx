@@ -2,6 +2,6 @@ import { FunctionComponent } from 'react';
 
 const Head: FunctionComponent = ({ children }) => <span data-testid="next-head-mock">
   {children}
-</span>
+</span>;
 
 export default Head;

@@ -11,7 +11,7 @@
 
 .overlay {
     @apply
-    bg-gray-900
+    bg-black
     bottom-0
     fixed
     top-0
@@ -19,21 +19,6 @@
 
     --tw-bg-opacity: 0.8;
 }
-
-.modal {
-    @apply
-    bg-gray-800
-    max-w-md
-    mx-auto
-    mb-auto
-    px-6
-    py-4
-    relative
-    rounded-lg
-    top-0
-    w-full;
-}
-
 
 .header {
     @apply
@@ -44,12 +29,7 @@
 .modalTitle {
     @apply
     text-2xl
-    font-bold;
-}
-
-.main {
-    @apply
-    mt-6;
+    font-medium;
 }
 
 .fieldset + .fieldset {
@@ -67,7 +47,7 @@
 
 .legend {
     @apply
-    font-bold
+    font-medium
     mb-2
     text-lg;
 }
@@ -105,4 +85,5 @@
         ml-4;
     }
 }
+
 

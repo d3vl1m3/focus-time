@@ -1,5 +1,6 @@
 import { SettingsPanelStateProvider } from "@contexts";
 import { render } from '@testing-library/react';
+import '@mocks/match-media/match-media.mock';
 
 import { Header } from './header.component';
 
