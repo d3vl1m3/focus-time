@@ -244,7 +244,7 @@ describe('When the user has long breaks activated', () => {
     triggerOpenSettingsPanel();
 
     const isUseLongBreaksToggle = getSwitchToggle('Use long breaks');
-    const longBreaksGapInput = getNumberField('Gap between long breaks focus intervals');
+    const longBreaksGapInput = getNumberField('Focus intervals between long breaks');
 
     triggerSwitchToggle(isUseLongBreaksToggle);
 

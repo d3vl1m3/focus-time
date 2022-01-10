@@ -5,11 +5,11 @@
     items-center
     justify-between
     mx-auto
-    py-6
+    py-6;
 }
 
 .siteTitle {
     @apply
     font-bold
-    uppercase
+    uppercase;
 }

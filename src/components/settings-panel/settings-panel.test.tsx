@@ -51,27 +51,27 @@ describe('Each form value should submit when valid', () => {
   });
 
   test('should save focusDuration value', () => {
-    const focusDurationInput = getNumberField('Focus duration minutes');
+    const focusDurationInput = getNumberField('Focus duration in minutes');
     testValidInputValueSaves(focusDurationInput, '25', 30, '30');
   });
 
   test('should save shortBreakDuration value', () => {
-    const shortBreakDurationInput = getNumberField('Short break duration minutes');
+    const shortBreakDurationInput = getNumberField('Short break duration in minutes');
     testValidInputValueSaves(shortBreakDurationInput, '5', 12, '12');
   });
 
   test('should save longBreakDuration value', () => {
-    const longBreakDurationInput = getNumberField('Long break duration minutes');
+    const longBreakDurationInput = getNumberField('Long break duration in minutes');
     testValidInputValueSaves(longBreakDurationInput, '10', 15, '15');
   });
 
   test('should save longBreakGap value', () => {
-    const longBreakGapInput = getNumberField('Gap between long breaks focus intervals');
+    const longBreakGapInput = getNumberField('Focus intervals between long breaks');
     testValidInputValueSaves(longBreakGapInput, '4', 2, '2');
   });
 
   test('should save focusIntervalsTarget value', () => {
-    const focusIntervalsTargetInput = getNumberField('Focus intervals target intervals');
+    const focusIntervalsTargetInput = getNumberField('Focus intervals target');
     testValidInputValueSaves(focusIntervalsTargetInput, '8', 4, '4');
   });
 
@@ -99,22 +99,22 @@ describe('Each form value should not save if value is invalid', () => {
   });
 
   test('should not save focusDuration value', () => {
-    testInvalidInputValueDoesNotSave('Focus duration minutes', '25', 0, '25');
+    testInvalidInputValueDoesNotSave('Focus duration in minutes', '25', 0, '25');
   });
 
   test('should not save shortBreakDuration value', () => {
-    testInvalidInputValueDoesNotSave('Short break duration minutes', '5', 1000, '5');
+    testInvalidInputValueDoesNotSave('Short break duration in minutes', '5', 1000, '5');
   });
 
   test('should not save longBreakDuration value', () => {
-    testInvalidInputValueDoesNotSave('Long break duration minutes', '10', -1, '10');
+    testInvalidInputValueDoesNotSave('Long break duration in minutes', '10', -1, '10');
   });
 
   test('should not save longBreakGap value', () => {
-    testInvalidInputValueDoesNotSave('Gap between long breaks focus intervals', '4', 1001, '4');
+    testInvalidInputValueDoesNotSave('Focus intervals between long breaks', '4', 1001, '4');
   });
 
   test('should not save focusIntervalsTarget value', () => {
-    testInvalidInputValueDoesNotSave('Focus intervals target intervals', '8', -1000, '8');
+    testInvalidInputValueDoesNotSave('Focus intervals target', '8', -1000, '8');
   });
 });

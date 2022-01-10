@@ -24,7 +24,7 @@ export const triggerCompletedState = () => {
   triggerOpenSettingsPanel();
 
   const focusIntervalsTargetButton = getByRole('switch', { name: 'Use a focus intervals target' });
-  const focusIntervalsTargetInput = getByRole('spinbutton', { name: 'Focus intervals target intervals' });
+  const focusIntervalsTargetInput = getByRole('spinbutton', { name: 'Focus intervals target' });
 
   triggerSwitchToggle(focusIntervalsTargetButton);
 

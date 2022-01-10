@@ -6,13 +6,13 @@
     items-center
     relative
     rounded-full
-    w-11
+    w-11;
 }
 
 
 .switchEnabled {
     @apply
-    bg-blue-600
+    bg-blue-600;
 }
 
 .switchToggle {
