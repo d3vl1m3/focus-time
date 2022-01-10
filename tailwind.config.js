@@ -1,6 +1,5 @@
 module.exports = {
-  purge: [ './src/**/*.{js,jsx,ts,tsx}', './styles/global.css' ],
-  darkMode: false, // or 'media' or 'class'
+  content: [ './src/**/*.{js,jsx,ts,tsx}', './styles/index.css' ],
   theme: {
     extend: {
       fontFamily: {
@@ -10,9 +9,6 @@ module.exports = {
         'xsm': '500px',
       },
     },
-  },
-  variants: {
-    extend: {},
   },
   plugins: [],
 };

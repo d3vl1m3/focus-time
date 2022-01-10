@@ -1,5 +1,5 @@
 import {
-  useGameStateContext, usePomodoroStateContext, useSettingsStateContext, useTimerStateContext,
+  useGameStateContext, useIntervalStatusContext, useSettingsStateContext, useTimerStateContext,
 } from '@contexts';
 import { useEffect } from "react";
 
@@ -14,7 +14,7 @@ export const useCompletedStateCheck = () => {
     focusIntervalsTarget,
   } = useSettingsStateContext();
 
-  const { setPomodoroState } = usePomodoroStateContext();
+  const { setIntervalStatus } = useIntervalStatusContext();
   const { setIsPaused } = useTimerStateContext();
 
   /**
@@ -22,7 +22,7 @@ export const useCompletedStateCheck = () => {
    */
   useEffect(() => {
     if (isUseFocusIntervalsTarget && focusIntervalsCompleted >= focusIntervalsTarget) {
-      setPomodoroState('COMPLETED');
+      setIntervalStatus('COMPLETED');
       setIsPaused(true);
       setIsCompleted(true);
     }
@@ -32,6 +32,6 @@ export const useCompletedStateCheck = () => {
     isUseFocusIntervalsTarget,
     setIsCompleted,
     setIsPaused,
-    setPomodoroState,
+    setIntervalStatus,
   ]);
 };

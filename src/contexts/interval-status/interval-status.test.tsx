@@ -1,22 +1,22 @@
 import {
   GameStateProvider,
-  PomodoroStateProvider,
+  IntervalStatusProvider,
   SettingsStateProvider,
   TimerStateProvider,
-  usePomodoroStateContext,
+  useIntervalStatusContext,
 } from '@contexts';
 import { renderHook } from '@testing-library/react-hooks';
 
 describe('On initial load', () => {
   test('should render without errors when configured correctly', () => {
     const spyError = jest.spyOn(console, 'error');
-    renderHook(() => usePomodoroStateContext(),{ wrapper: ({ children }) => (
+    renderHook(() => useIntervalStatusContext(),{ wrapper: ({ children }) => (
       <TimerStateProvider>
         <GameStateProvider>
           <SettingsStateProvider>
-            <PomodoroStateProvider>
+            <IntervalStatusProvider>
               {children}
-            </PomodoroStateProvider>
+            </IntervalStatusProvider>
           </SettingsStateProvider>
         </GameStateProvider>
       </TimerStateProvider>
@@ -27,7 +27,7 @@ describe('On initial load', () => {
 
   test('should render with errors when no provider supplied', () => {
     const spyError = jest.spyOn(console, 'error');
-    renderHook(() => usePomodoroStateContext());
+    renderHook(() => useIntervalStatusContext());
 
     expect(spyError).toHaveBeenCalled();
   });

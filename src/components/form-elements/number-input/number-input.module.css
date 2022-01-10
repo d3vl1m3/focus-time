@@ -1,35 +1,35 @@
 .container {
     @apply
-    mb-2
+    mb-2;
 }
 
 .label + .inputContainer {
     @apply
-    mt-1
+    mt-1;
 }
 
 .inputContainerWithUnit {
     @apply
     flex
-    rounded-l
+    rounded-l;
 }
 
 .input {
     @apply
     pl-4
     py-2
-    text-black
+    text-black;
 }
 
 .inputWithoutUnit {
     @apply
-    rounded
+    rounded;
 }
 
 
 .inputWithUnit {
     @apply
-    rounded-l
+    rounded-l;
 }
 
 .unitContainer {
@@ -40,12 +40,12 @@
     border-gray-300
     flex
     justify-center
-    rounded-r
+    rounded-r;
 }
 
 .unit {
     @apply
     my-auto
     px-2
-    text-gray-900
+    text-gray-900;
 }

@@ -15,7 +15,7 @@ export const CounterPresenter: VoidFunctionComponent<CounterPresenterProps> = ({
   <div className={styles.counter}>
     {
       isCompleted
-        ? <p role="status">Completed</p>
+        ? <p>Completed</p>
         : (
           <span role="timer">
             {msToTimer(timeInMs)}

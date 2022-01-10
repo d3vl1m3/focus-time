@@ -22,14 +22,14 @@ export const Footer: VoidFunctionComponent<FooterProps> = ({
       {...props}
     >
       <button
-        className="btn"
+        className={`btn ${styles.footerButton}`}
         type="button"
         onClick={closeSettingsModal}
       >
         Cancel
       </button>
       <button
-        className={`btn btn-success ${styles.saveButton}`}
+        className={`btn btn-success ${styles.saveButton} ${styles.footerButton}`}
         form={formId}
         type="submit"
       >

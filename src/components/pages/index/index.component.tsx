@@ -1,6 +1,6 @@
 import {
   GameStateProvider,
-  PomodoroStateProvider,
+  IntervalStatusProvider,
   SettingsPanelStateProvider,
   TimerStateProvider,
 } from '@contexts';
@@ -17,7 +17,7 @@ export const Index: VoidFunctionComponent = () => (
   <GameStateProvider>
     <TimerStateProvider>
       <SettingsStateProvider>
-        <PomodoroStateProvider>
+        <IntervalStatusProvider>
           <SettingsPanelStateProvider>
             <MainLayout>
               <PomodoroTimer/>
@@ -26,7 +26,7 @@ export const Index: VoidFunctionComponent = () => (
               <SettingsPanel/>
             </SettingsFormStateProvider>
           </SettingsPanelStateProvider>
-        </PomodoroStateProvider>
+        </IntervalStatusProvider>
       </SettingsStateProvider>
     </TimerStateProvider>
   </GameStateProvider>

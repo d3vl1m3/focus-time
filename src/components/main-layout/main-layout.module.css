@@ -3,24 +3,24 @@
     flex
     flex-col
     min-h-screen
-    mx-auto
+    mx-auto;
 }
 
 .header,
 .main,
 .footer {
     @apply
-    px-8
+    px-8;
 }
 
 .main {
     @apply
     container
     mb-6
-    mx-auto
+    mx-auto;
 }
 
 .footer {
     @apply
-    mt-auto
+    mt-auto;
 }

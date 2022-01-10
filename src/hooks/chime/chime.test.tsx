@@ -1,7 +1,9 @@
 import { SettingsStateContextValues, SettingsStateProvider } from '@contexts';
 import * as SettingsStateHookModule from '@contexts/settings-state/settings-state.hook';
 import { useChime } from '@hooks';
-import { act, renderHook } from '@testing-library/react-hooks';
+import { triggerChime } from '@test-utils/chime';
+import { triggerMockTimeSkip } from '@test-utils/jest';
+import { renderHook } from '@testing-library/react-hooks';
 
 const mockedAudioPlay = jest.fn();
 const spyAudio = jest.spyOn(window, 'Audio');
@@ -9,7 +11,6 @@ const spyAudio = jest.spyOn(window, 'Audio');
 const mockAudio = () => {
   spyAudio.mockImplementation(() => ({
     play: () => mockedAudioPlay(),
-    paused: true,
   } as HTMLAudioElement));
 };
 
@@ -20,8 +21,6 @@ jest.mock(
   () => jest.requireActual('@contexts/settings-state/settings-state.hook'),
 );
 
-mockAudio();
-
 const mockSetIsUseSound = (isUseSound = false) => {
   jest.spyOn(SettingsStateHookModule, 'useSettingsStateContext').mockImplementation(() => ({
     isUseSound,
@@ -29,6 +28,10 @@ const mockSetIsUseSound = (isUseSound = false) => {
 };
 
 const renderTestHook = () => renderHook(() => useChime(), { wrapper: SettingsStateProvider });
+
+beforeAll(() => {
+  mockAudio();
+});
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -55,28 +58,38 @@ describe('When sound settings is active', () => {
     mockSetIsUseSound(true);
   });
 
-  test('should play when triggered', () => {
+  test('should play a chime when triggered', () => {
     const { result } = renderTestHook();
-
-    act(() => {
-      result.current.playChime();
-    });
+    triggerChime(result);
 
     expect(mockedAudioPlay).toHaveBeenCalled();
   });
 
-  test('should not play when sound is already playing', () => {
+  test('should not play when chime is already playing', () => {
     const { result } = renderTestHook();
-
-    act(() => {
-      result.current.playChime();
-    });
-
-    act(() => {
-      result.current.playChime();
-    });
+    triggerChime(result);
+    triggerChime(result);
 
     expect(mockedAudioPlay).toHaveBeenCalledTimes(1);
+  });
+
+  test('should allow the app to play another chime after 3 seconds', () => {
+    const { result } = renderTestHook();
+    triggerChime(result);
+    triggerChime(result);
+
+    expect(mockedAudioPlay).toHaveBeenCalledTimes(1);
+
+    triggerMockTimeSkip(2999);
+    triggerChime(result);
+
+    expect(mockedAudioPlay).toHaveBeenCalledTimes(1);
+
+    triggerMockTimeSkip(1);
+    triggerChime(result);
+    triggerChime(result);
+
+    expect(mockedAudioPlay).toHaveBeenCalledTimes(2);
   });
 });
 
@@ -84,12 +97,9 @@ describe('When sound settings is disabled', () => {
   beforeEach(() => {
     mockSetIsUseSound();
   });
-  test('should not trigger sounds', () => {
+  test('should not trigger a chime', () => {
     const { result } = renderTestHook();
-
-    act(() => {
-      result.current.playChime();
-    });
+    triggerChime(result);
 
     expect(mockedAudioPlay).not.toHaveBeenCalled();
   });

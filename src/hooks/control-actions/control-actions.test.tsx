@@ -1,6 +1,6 @@
 import {
   GameStateProvider,
-  PomodoroStateProvider,
+  IntervalStatusProvider,
   SettingsStateProvider,
   TimerStateProvider,
 } from '@contexts';
@@ -14,9 +14,9 @@ describe('On initial load', () => {
       <TimerStateProvider>
         <GameStateProvider>
           <SettingsStateProvider>
-            <PomodoroStateProvider>
+            <IntervalStatusProvider>
               {children}
-            </PomodoroStateProvider>
+            </IntervalStatusProvider>
           </SettingsStateProvider>
         </GameStateProvider>
       </TimerStateProvider>

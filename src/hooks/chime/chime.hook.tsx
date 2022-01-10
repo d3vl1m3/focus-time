@@ -1,19 +1,28 @@
 import chime from '@assets/chime.mp3';
 import { useSettingsStateContext } from '@contexts';
 import {
-  useEffect, useMemo, useState, 
+  useEffect,
+  useMemo,
+  useState,
 } from 'react';
 
-export const useChime = () => {
+export type ChimeHookValues = () => { playChime: () => void};
+
+export const useChime: ChimeHookValues = () => {
   const { isUseSound } = useSettingsStateContext();
   const [play, setPlay] = useState(false);
 
   useEffect(() => {
     const Chime = new Audio(chime);
-    if ( play && Chime.paused && isUseSound ) {
+
+    if ( play && isUseSound ) {
       Chime.play();
+
+      setTimeout(() => {
+        setPlay(false);
+      }, 3000);
     }
-    Chime.onended = () => setPlay(false);
+
   }, [
     isUseSound,
     play,

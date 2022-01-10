@@ -1,7 +1,7 @@
 import { useSettingsStateContext } from '@contexts';
 import { useChime } from '@hooks';
 import {
-  PomodoroStateType,
+  IntervalStatusSlugType,
   SetStateType, 
 } from '@types';
 import {
@@ -16,25 +16,25 @@ import {
 import { useGameStateContext } from '../game-state/game-state.context';
 import { useTimerStateContext } from '../timer-state/timer-state.context';
 
-export type PomodoroStateContextValues = {
-  pomodoroState: PomodoroStateType,
-  setPomodoroState: SetStateType<PomodoroStateType>
+export type IntervalStatusContextValues = {
+  intervalStatus: IntervalStatusSlugType,
+  setIntervalStatus: SetStateType<IntervalStatusSlugType>
 };
 
-const PomodoroStateContext = createContext<PomodoroStateContextValues | undefined>(undefined);
+const IntervalStatusContext = createContext<IntervalStatusContextValues | undefined>(undefined);
 
-export const usePomodoroStateContext = () => {
-  const context = useContext(PomodoroStateContext);
+export const useIntervalStatusContext = () => {
+  const context = useContext(IntervalStatusContext);
   if (context === undefined) {
-    throw new Error('usePomodoroStateContext must be inside a PomodoroStateProvider');
+    throw new Error('useIntervalStatusContext must be inside a IntervalStatusProvider');
   }
 
   return context;
 };
 
-export const PomodoroStateProvider: FunctionComponent = ({ children }) => {
+export const IntervalStatusProvider: FunctionComponent = ({ children }) => {
 
-  const [pomodoroState, setPomodoroState] = useState<PomodoroStateType>('RESET');
+  const [intervalStatus, setIntervalStatus] = useState<IntervalStatusSlugType>('INITIAL');
   const { playChime } = useChime();
   const {
     focusIntervalsCompleted,
@@ -60,8 +60,8 @@ export const PomodoroStateProvider: FunctionComponent = ({ children }) => {
   } = useTimerStateContext();
 
   /**
-   * Trigger pomodoroState updates based on thew current state of the app. Specifically
-   * where the next pomodoroState will resolve differently depending on what the current
+   * Trigger intervalStatus updates based on thew current state of the app. Specifically
+   * where the next intervalStatus will resolve differently depending on what the current
    * state of the app is.
    */
   useEffect(() => {
@@ -69,8 +69,8 @@ export const PomodoroStateProvider: FunctionComponent = ({ children }) => {
      * The below `is*()` methods are excessive but worth the trade-off as they help with readability in the
      * meat of the logic
      */
-    const endOfInterval = (state: PomodoroStateType) => (
-      pomodoroState === state
+    const endOfInterval = (state: IntervalStatusSlugType) => (
+      intervalStatus === state
       && (
         timeInMs <= 0
         || isSkipping
@@ -89,29 +89,29 @@ export const PomodoroStateProvider: FunctionComponent = ({ children }) => {
     if ( isActive ) {
       // starting a new or reset timer
       if ( isFirstInterval ) {
-        setPomodoroState('FOCUS');
+        setIntervalStatus('FOCUS');
         setTimeInMinutes(focusDuration);
         setIsFirstInterval(false);
         playChime();
       } else {
-        // End of a pomodoro that isn't skipped, increase the counter and reset the timer
+        // Increase the counter at the end of each interval
         if (isWorkIntervalFinished()) {
           setFocusIntervalsCompleted((p) => p + 1);
         }
 
-        // Contextually Update the PomodoroState
+        // Contextually Update the IntervalStatus
         if (isAnyBreakFinished()) {
-          setPomodoroState('FOCUS');
+          setIntervalStatus('FOCUS');
           setTimeInMinutes(focusDuration);
           playChime();
 
         } else if (isWorkIntervalFinished() && !isLongBreakGoalMet()) {
-          setPomodoroState('SHORT_BREAK');
+          setIntervalStatus('SHORT_BREAK');
           setTimeInMinutes(shortBreakDuration);
           playChime();
 
         } else if (isWorkIntervalFinished() && isLongBreakGoalMet()) {
-          setPomodoroState('LONG_BREAK');
+          setIntervalStatus('LONG_BREAK');
           setTimeInMinutes(longBreakDuration);
           playChime();
         }
@@ -132,7 +132,7 @@ export const PomodoroStateProvider: FunctionComponent = ({ children }) => {
     longBreakDuration,
     longBreakGap,
     playChime,
-    pomodoroState,
+    intervalStatus,
     setFocusIntervalsCompleted,
     setIsFirstInterval,
     setIsSkipping,
@@ -142,13 +142,13 @@ export const PomodoroStateProvider: FunctionComponent = ({ children }) => {
   ]);
 
   const values = useMemo(() => ({
-    pomodoroState,
-    setPomodoroState,
-  }), [pomodoroState]);
+    intervalStatus,
+    setIntervalStatus,
+  }), [intervalStatus]);
 
   return (
-    <PomodoroStateContext.Provider value={values}>
+    <IntervalStatusContext.Provider value={values}>
       {children}
-    </PomodoroStateContext.Provider>
+    </IntervalStatusContext.Provider>
   );
 };

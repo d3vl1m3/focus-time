@@ -11,9 +11,9 @@ export const CompletedStateControls: VoidFunctionComponent<ActionButtonComponent
     <button
       className={`btn btn-primary ${styles.controls}`}
       type="button"
-      onClick={() => controlActionReducer({ type: 'RESET' })}
+      onClick={() => controlActionReducer({ type: 'INITIAL' })}
     >
-      Reset
+      Reset session
     </button>
   );
 };

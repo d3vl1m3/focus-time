@@ -6,7 +6,7 @@
     overflow-y-auto
     py-8
     top-0
-    w-full
+    w-full;
 }
 
 .overlay {
@@ -15,10 +15,8 @@
     bottom-0
     fixed
     top-0
-    w-full
-}
+    w-full;
 
-.overlay {
     --tw-bg-opacity: 0.8;
 }
 
@@ -33,69 +31,78 @@
     relative
     rounded-lg
     top-0
-    w-full
+    w-full;
 }
 
 
 .header {
     @apply
     flex
-    justify-between
+    justify-between;
 }
 
 .modalTitle {
     @apply
     text-2xl
-    font-bold
+    font-bold;
 }
 
 .main {
     @apply
-    mt-6
+    mt-6;
 }
 
 .fieldset + .fieldset {
     @apply
     border-t
     mt-6
-    pt-6
+    pt-6;
 }
 
 .fieldsetTop {
     @apply
     flex
-    justify-between
+    justify-between;
 }
 
 .legend {
     @apply
     font-bold
     mb-2
-    text-lg
+    text-lg;
 }
 
 
 .footer {
     @apply
     mt-8
+    flex
+    flex-col;
 }
 
 .saveButton {
     @apply
-    mt-4
+    mt-4;
 }
 
 @screen sm {
     .footer {
         @apply
-        flex
-        justify-between
+        flex-row
+        justify-between;
+    }
+
+    .footerButton {
+        @apply
+        basis-0
+        grow;
+
     }
 
     .saveButton {
         @apply
         mt-0
-        ml-4
+        ml-4;
     }
 }
 

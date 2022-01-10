@@ -1,0 +1,6 @@
+body {
+    @apply
+    bg-gray-800
+    min-h-screen
+    text-white
+}

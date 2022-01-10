@@ -1,1 +1,1 @@
-export type ControlActionsType = 'START' | 'PAUSE' | 'SKIP' | 'RESET';
+export type ControlActionsType = 'START' | 'PAUSE' | 'SKIP' | 'INITIAL';

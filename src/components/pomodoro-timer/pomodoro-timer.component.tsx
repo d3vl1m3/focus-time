@@ -16,7 +16,7 @@ import {
 import {
   Controls,
   Counter,
-  PomodoroStateIndicator,
+  IntervalStatusIndicator,
 } from './components';
 import styles from './pomodoro-timer.module.css';
 
@@ -53,7 +53,7 @@ export const PomodoroTimer: VoidFunctionComponent = () => {
         </title>
       </Head>
       <div className={styles.pomodoroTimer}>
-        <PomodoroStateIndicator/>
+        <IntervalStatusIndicator/>
         <Counter/>
         <Controls/>
       </div>

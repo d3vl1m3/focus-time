@@ -6,7 +6,6 @@ import {
 import styles from './number-input.module.css';
 
 interface NumberInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  children: HTMLInputElement['children'] | string;
   id: HTMLInputElement['id'];
   unit?: string;
 }
@@ -39,6 +38,7 @@ export const NumberInput: FunctionComponent<NumberInputProps> = ({
       {unit && (
         <div className={styles.unitContainer}>
           <label
+            aria-hidden={true}
             className={styles.unit}
             htmlFor={id}
             id={`${id}_description`}
