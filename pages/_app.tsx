@@ -1,4 +1,4 @@
-import '../styles/globals.css';
+import '../styles/index.css';
 import { VoidFunctionComponent } from 'react';
 
 interface MyAppProps {

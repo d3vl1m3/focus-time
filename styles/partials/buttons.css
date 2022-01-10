@@ -1,31 +1,83 @@
 .btn {
     @apply
+    bg-gray-800
+    block
     border-2
+    border-white
     cursor-pointer
     p-4
     rounded
-    w-full
+}
+
+.btn:hover,
+.btn:focus {
+    @apply
+    bg-gray-700
+}
+
+.btn:active {
+    @apply
+    bg-gray-600
+}
+
+.btn-sm {
+    @apply
+    py-2
 }
 
 .btn-primary {
+    @apply
+    bg-blue-800
+    border-blue-600
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
     @apply
     bg-blue-600
     border-blue-400
 }
 
-.btn-secondary {
+.btn-primary:active {
     @apply
-    border-white;
+    bg-blue-500
+    border-blue-300
 }
 
 .btn-success {
     @apply
-    bg-green-800
-    border-green-500
+    bg-emerald-800
+    border-emerald-500
+}
+
+.btn-success:hover,
+.btn-success:focus {
+    @apply
+    bg-emerald-700
+    border-emerald-400
+}
+
+.btn-success:active {
+    @apply
+    bg-emerald-600
+    border-emerald-300
 }
 
 .btn-danger {
     @apply
     bg-red-800
     border-red-500
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+    @apply
+    bg-red-700
+    border-red-400
+}
+
+.btn-danger:active {
+    @apply
+    bg-red-600
+    border-red-300
 }

@@ -1,6 +1,7 @@
-import { PomodoroStateType } from '@types';
+import { IntervalStatusSlugType } from '@types';
 
 export type PomodoroStateObjectType = {
-  state: PomodoroStateType,
-  label: string
+  slug: IntervalStatusSlugType,
+  label: string,
+  description: string,
 };

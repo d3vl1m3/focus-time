@@ -1,8 +1,7 @@
 import {
   GameStateProvider,
-  PomodoroStateProvider,
   TimerStateProvider,
-  SettingsStateProvider,
+  SettingsStateProvider, IntervalStatusProvider,
 } from '@contexts';
 import { useCurrentPomodoroStateObj } from '@hooks';
 import { renderHook } from '@testing-library/react-hooks';
@@ -14,9 +13,9 @@ describe('On initial load', () => {
       <TimerStateProvider>
         <GameStateProvider>
           <SettingsStateProvider>
-            <PomodoroStateProvider>
+            <IntervalStatusProvider>
               {children}
-            </PomodoroStateProvider>
+            </IntervalStatusProvider>
           </SettingsStateProvider>
         </GameStateProvider>
       </TimerStateProvider>

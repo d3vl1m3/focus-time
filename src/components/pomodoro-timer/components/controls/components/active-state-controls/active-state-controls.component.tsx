@@ -16,21 +16,21 @@ export const ActiveStateControls: VoidFunctionComponent<ActionButtonComponentPro
         type="button"
         onClick={() => controlActionReducer({ type: isPaused ? 'START' : 'PAUSE' })}
       >
-        {isPaused ? 'Resume' : 'Pause'}
+        {isPaused ? 'Resume timer' : 'Pause timer'}
       </button>
       <button
-        className={`btn btn-secondary ${styles.controls}`}
+        className={`btn ${styles.controls}`}
         type="button"
         onClick={() => controlActionReducer({ type: 'SKIP' })}
       >
-        Skip
+        Skip interval
       </button>
       <button
         className={`btn btn-danger ${styles.controls} ${styles.resetControl}`}
         type="button"
-        onClick={() => controlActionReducer({ type: 'RESET' })}
+        onClick={() => controlActionReducer({ type: 'INITIAL' })}
       >
-        Reset
+        Reset Pomodoro session
       </button>
     </>
   );

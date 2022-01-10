@@ -1,5 +1,5 @@
 import { useGameStateContext } from '@contexts/game-state/game-state.context';
-import { usePomodoroStateContext } from '@contexts/pomodoro-state/pomodoro-state.context';
+import { useIntervalStatusContext } from '@contexts/interval-status/interval-status.context';
 import { useTimerStateContext } from '@contexts/timer-state/timer-state.context';
 import { ControlActionsType } from '@types';
 import { useMemo } from 'react';
@@ -21,8 +21,8 @@ export const useControlActions = () => {
   } = useTimerStateContext();
 
   const {
-    setPomodoroState,
-  } = usePomodoroStateContext();
+    setIntervalStatus,
+  } = useIntervalStatusContext();
 
   const {
     setFocusIntervalsCompleted,
@@ -45,13 +45,13 @@ export const useControlActions = () => {
           setIsActive(true);
           setIsSkipping(true);
           break;
-        case ('RESET'):
+        case ('INITIAL'):
           setFocusIntervalsCompleted(0);
           setIsActive(false);
           setIsCompleted(false);
           setIsFirstInterval(true);
           setIsPaused(true);
-          setPomodoroState('RESET');
+          setIntervalStatus('INITIAL');
           setTimeInMs(0);
           break;
       }
@@ -63,7 +63,7 @@ export const useControlActions = () => {
     setIsFirstInterval,
     setIsPaused,
     setIsSkipping,
-    setPomodoroState,
+    setIntervalStatus,
     setTimeInMs,
   ]);
 };

@@ -1,6 +1,10 @@
 module.exports = {
+  assetPrefix: process.env.NODE_ENV === 'pages' ? '/focus-time' : '',
+  i18n: {
+    locales: ["en"],
+    defaultLocale: "en",
+  },
   reactStrictMode: true,
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/focus-time' : '',
   webpack(config, options) {
     const { isServer } = options;
     config.module.rules.push({

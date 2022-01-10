@@ -6,13 +6,13 @@
     items-center
     relative
     rounded-full
-    w-11
+    w-11;
 }
 
 
 .switchEnabled {
     @apply
-    bg-blue-600
+    bg-blue-600;
 }
 
 .switchToggle {
@@ -26,11 +26,21 @@
     transform
     translate-x-1
     transition-transform
-    w-4
+    w-4;
+
+    /* required due to TW bug
+    @see https://github.com/tailwindlabs/tailwindcss/issues/6342 */
+    transform: translateX(.25rem);
+
 }
 
 
 .switchToggleEnabled {
     @apply
-    translate-x-6
+    transform
+    translate-x-6;
+
+    /* required due to TW bug
+    @see https://github.com/tailwindlabs/tailwindcss/issues/6342 */
+    transform: translateX(1.5rem);
 }

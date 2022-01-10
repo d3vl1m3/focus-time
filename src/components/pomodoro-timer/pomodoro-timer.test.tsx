@@ -1,27 +1,24 @@
 import { Index } from '@components/pages';
-import { pomodoroStateObjectsData } from '@data';
 import { setupIntersectionObserverMock } from '@mocks/intersection-observer.mock';
 import { triggerMockTimeSkip } from '@test-utils/jest';
 import {
-  triggerPauseTimerControl,
-  triggerResetTimerControl,
-  triggerSkipIntervalControl,
-  triggerStartTimerControl,
   testOnlySpecificTimerControlsRendered,
   testPageTitle,
   testStateIndicator,
   testTimer,
+  triggerControl,
 } from '@test-utils/pomodoro-timer';
-import { triggerResumeTimerControl } from "@test-utils/pomodoro-timer/triggers/triggers.test-utils";
 import {
   getNumberField,
-  getSwitchToggle, setInputFieldValue, triggerSaveSettingsPanel, triggerSwitchToggle,
+  getSwitchToggle,
+  setInputFieldValue,
+  triggerSaveSettingsPanel,
+  triggerSwitchToggle,
 } from '@test-utils/settings';
 import { triggerCompletedState, triggerOpenSettingsPanel } from '@test-utils/settings/triggers/triggers.test-utils';
 import {
   render,
   screen,
-  within,
 } from '@testing-library/react';
 
 jest.mock('next/head');
@@ -46,22 +43,8 @@ describe('When looking at the initial page layout', () => {
     testPageTitle('FocusTime');
   });
 
-  test('should show the state indicators with none selected', () => {
-    const { getByRole } = screen;
-
-    const stateIndicators = within(getByRole('list')).queryAllByRole('listitem');
-
-    expect(stateIndicators.length).toBe(2);
-
-    const { FOCUS, SHORT_BREAK } = pomodoroStateObjectsData;
-
-    expect(stateIndicators.find((item) => item.textContent === FOCUS.label))
-      .toBeInTheDocument();
-
-    expect(stateIndicators.find((item) => item.textContent === SHORT_BREAK.label))
-      .toBeInTheDocument();
-
-    testStateIndicator('RESET');
+  test('should show the default state indicator text', () => {
+    testStateIndicator('INITIAL');
   });
 
   test('should see an empty timer', () => {
@@ -69,14 +52,14 @@ describe('When looking at the initial page layout', () => {
   });
 
   test('should see the inactive controls only', () => {
-    testOnlySpecificTimerControlsRendered(['Start']);
+    testOnlySpecificTimerControlsRendered(['Start a Pomodoro session']);
   });
 });
 
 describe('When a user stars a new timer', () => {
   beforeEach(() => {
     renderTestComponent();
-    triggerStartTimerControl();
+    triggerControl('Start a Pomodoro session');
   });
 
   test('should update the time and state in the page title', () => {
@@ -92,14 +75,14 @@ describe('When a user stars a new timer', () => {
   });
 
   test('should have the controls for an active, un-paused state only', () => {
-    testOnlySpecificTimerControlsRendered(['Pause', 'Skip', 'Reset']);
+    testOnlySpecificTimerControlsRendered(['Pause timer', 'Skip interval', 'Reset Pomodoro session']);
   });
 });
 
 describe('When a user has an active timer ', () => {
   beforeEach(() => {
     renderTestComponent();
-    triggerStartTimerControl();
+    triggerControl('Start a Pomodoro session');
     triggerMockTimeSkip(5000);
   });
 
@@ -116,16 +99,16 @@ describe('When a user has an active timer ', () => {
   });
 
   test('should have the controls for an active, un-paused state only', () => {
-    testOnlySpecificTimerControlsRendered(['Pause', 'Skip', 'Reset']);
+    testOnlySpecificTimerControlsRendered(['Pause timer', 'Skip interval', 'Reset Pomodoro session']);
   });
 });
 
 describe('When the users skips an interval', () => {
   beforeEach(() => {
     renderTestComponent();
-    triggerStartTimerControl();
+    triggerControl('Start a Pomodoro session');
 
-    triggerSkipIntervalControl();
+    triggerControl('Skip interval');
   });
 
   test('should update the time and state in the page title', () => {
@@ -141,14 +124,14 @@ describe('When the users skips an interval', () => {
   });
 
   test('should have the controls for an active, un-paused state only', () => {
-    testOnlySpecificTimerControlsRendered(['Pause', 'Skip', 'Reset']);
+    testOnlySpecificTimerControlsRendered(['Pause timer', 'Skip interval', 'Reset Pomodoro session']);
   });
 });
 
 describe('When the users finishes a break', () => {
   beforeEach(() => {
     renderTestComponent();
-    triggerStartTimerControl();
+    triggerControl('Start a Pomodoro session');
 
     triggerMockTimeSkip(30 * 60 * 1000);
   });
@@ -166,15 +149,15 @@ describe('When the users finishes a break', () => {
   });
 
   test('should have the controls for an active, un-paused state only', () => {
-    testOnlySpecificTimerControlsRendered(['Pause', 'Skip', 'Reset']);
+    testOnlySpecificTimerControlsRendered(['Pause timer', 'Skip interval', 'Reset Pomodoro session']);
   });
 });
 
 describe('When the users resets the timer', () => {
   beforeEach(() => {
     renderTestComponent();
-    triggerStartTimerControl();
-    triggerResetTimerControl();
+    triggerControl('Start a Pomodoro session');
+    triggerControl('Reset Pomodoro session');
   });
 
   test('should update the time and state in the page title', () => {
@@ -182,7 +165,7 @@ describe('When the users resets the timer', () => {
   });
 
   test('should update the state indicator to `Reset`', () => {
-    testStateIndicator('RESET');
+    testStateIndicator('INITIAL');
   });
 
   test('should show an inactive timer that does not update as time passes', () => {
@@ -192,7 +175,7 @@ describe('When the users resets the timer', () => {
   });
 
   test('should have inactive state controls only', () => {
-    testOnlySpecificTimerControlsRendered(['Start']);
+    testOnlySpecificTimerControlsRendered(['Start a Pomodoro session']);
   });
 });
 
@@ -200,10 +183,10 @@ describe('When the user pauses the timer', () => {
   beforeEach(() => {
     renderTestComponent();
 
-    triggerStartTimerControl();
+    triggerControl('Start a Pomodoro session');
     triggerMockTimeSkip(5000);
 
-    triggerPauseTimerControl();
+    triggerControl('Pause timer');
     triggerMockTimeSkip(5000);
   });
 
@@ -220,7 +203,7 @@ describe('When the user pauses the timer', () => {
   });
 
   test('should have active, paused state controls only', () => {
-    testOnlySpecificTimerControlsRendered(['Resume', 'Skip', 'Reset']);
+    testOnlySpecificTimerControlsRendered(['Resume timer', 'Skip interval', 'Reset Pomodoro session']);
   });
 });
 
@@ -228,13 +211,13 @@ describe('When the user starts a paused timer', () => {
   beforeEach(() => {
     renderTestComponent();
 
-    triggerStartTimerControl();
+    triggerControl('Start a Pomodoro session');
     triggerMockTimeSkip(5000);
 
-    triggerPauseTimerControl();
+    triggerControl('Pause timer');
     triggerMockTimeSkip(5000);
 
-    triggerResumeTimerControl();
+    triggerControl('Resume timer');
   });
 
   test('should update timer in the page head', () => {
@@ -248,7 +231,7 @@ describe('When the user starts a paused timer', () => {
   });
 
   test('should have active, un-paused state controls only', () => {
-    testOnlySpecificTimerControlsRendered(['Pause', 'Skip', 'Reset']);
+    testOnlySpecificTimerControlsRendered(['Pause timer', 'Skip interval', 'Reset Pomodoro session']);
   });
 });
 
@@ -261,7 +244,7 @@ describe('When the user has long breaks activated', () => {
     triggerOpenSettingsPanel();
 
     const isUseLongBreaksToggle = getSwitchToggle('Use long breaks');
-    const longBreaksGapInput = getNumberField('Gap between long breaks focus intervals');
+    const longBreaksGapInput = getNumberField('Focus intervals between long breaks');
 
     triggerSwitchToggle(isUseLongBreaksToggle);
 
@@ -269,7 +252,8 @@ describe('When the user has long breaks activated', () => {
 
     triggerSaveSettingsPanel();
 
-    triggerStartTimerControl();
+    triggerControl('Start a Pomodoro session');
+
     triggerMockTimeSkip(25 * 60 * 1000);
   });
 
@@ -290,7 +274,7 @@ describe('When the user has long breaks activated', () => {
   });
 
   test('should have active expected controls only', () => {
-    testOnlySpecificTimerControlsRendered(['Pause', 'Skip', 'Reset']);
+    testOnlySpecificTimerControlsRendered(['Pause timer', 'Skip interval', 'Reset Pomodoro session']);
   });
 });
 
@@ -305,20 +289,21 @@ describe('When the user completes their session', () => {
     testPageTitle('Completed');
   });
 
+  test('should have the correct status rendered', () => {
+    testStateIndicator('COMPLETED');
+  });
+
   test('should remove the timer from the page', () => {
-    const { getByRole, queryByRole } = screen;
-
+    const { queryByRole } = screen;
     expect(queryByRole('timer')).not.toBeInTheDocument();
-
-    expect(getByRole('status').textContent).toBe('Completed');
   });
 
   test('should have active expected controls only', () => {
-    testOnlySpecificTimerControlsRendered(['Reset']);
+    testOnlySpecificTimerControlsRendered(['Reset session']);
   });
 
   test('should reset timer when clicking control after completed', () => {
-    triggerResetTimerControl();
+    triggerControl('Reset session');
     testPageTitle('FocusTime');
   });
 });

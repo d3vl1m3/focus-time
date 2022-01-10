@@ -5,10 +5,10 @@ export {
 export type { GameStateContextValues } from './game-state/game-state.context';
 
 export {
-  PomodoroStateProvider,
-  usePomodoroStateContext,
-} from './pomodoro-state/pomodoro-state.context';
-export type { PomodoroStateContextValues } from './pomodoro-state/pomodoro-state.context';
+  IntervalStatusProvider,
+  useIntervalStatusContext,
+} from './interval-status/interval-status.context';
+export type { IntervalStatusContextValues } from './interval-status/interval-status.context';
 
 export {
   SettingsStateProvider,
