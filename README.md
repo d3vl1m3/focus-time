@@ -26,12 +26,15 @@ Tools like this are great for everyone needing some accountability for how their
 The breaks act as great stopping points to take a breather and quickly evaluate if what is being worked on is in fact what is the top priority right now.
 
 ## Roadmap
-- [ ] **(ON GOING)** add additional features required through ongoing a11y assessments
 - [x] ~~create basic Pomodoro timer~~
 - [x] ~~add sound indicators when intervals change (started, breaks, completed etc.)
 -~~
+- [x] ~~allow usder to choose a light/dark mode~~
+- [ ] add a more readily available button to turn audio cues on/off
+- [ ] add a 'how to use' section for people not familliar with Pomodoro
+- [ ] add a 'useful information' section about the session (completed focus intervals etc)
 - [ ] integrate Spotify OAuth so instead of audio cues, the interval changes play/pause the users spotify service on any device
-- [ ] allow users to select playlists for each interval type (focus, breaks)
+- [ ] allow users to select a playlist (or none) for each interval type (focus, breaks etc.)
 
 
 
