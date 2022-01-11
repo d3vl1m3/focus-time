@@ -1,5 +1,5 @@
 module.exports = {
-  assetPrefix: process.env.NODE_ENV === 'pages' ? '/focus-time' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/focus-time' : '',
   reactStrictMode: true,
   webpack(config, options) {
     const { isServer } = options;

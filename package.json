@@ -4,7 +4,7 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "pages": "set NODE_ENV=pages && npm run build && npm run export",
+    "pages": "npm run build && npm run export",
     "export": "next export",
     "lint": "next lint --fix",
     "start": "next start",
