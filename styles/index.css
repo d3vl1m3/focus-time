@@ -1,3 +1,35 @@
 @import './partials/tailwind.css';
 @import './partials/global.css';
 @import './partials/buttons.css';
+
+@tailwind components;
+
+@layer components {
+    .footer {
+        @apply
+        border
+        border-t-gray-500
+        py-6
+        text-center
+
+        dark:bg-gray-900
+        dark:border-0
+        dark:text-gray-400;
+    }
+
+    .modal {
+        @apply
+        bg-white
+        max-w-md
+        mx-auto
+        mb-auto
+        px-6
+        py-4
+        relative
+        rounded-lg
+        top-0
+        w-full
+
+        dark:bg-gray-800;
+    }
+}

@@ -38,6 +38,7 @@
     "curly": [
       "error"
     ],
+    "eol-last": "error",
     "import/export": "warn",
     "import/no-default-export": 0,
     "import/no-unresolved": "off",

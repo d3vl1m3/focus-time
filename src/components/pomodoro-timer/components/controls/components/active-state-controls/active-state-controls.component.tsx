@@ -19,7 +19,7 @@ export const ActiveStateControls: VoidFunctionComponent<ActionButtonComponentPro
         {isPaused ? 'Resume timer' : 'Pause timer'}
       </button>
       <button
-        className={`btn ${styles.controls}`}
+        className={`btn btn-secondary ${styles.controls}`}
         type="button"
         onClick={() => controlActionReducer({ type: 'SKIP' })}
       >
