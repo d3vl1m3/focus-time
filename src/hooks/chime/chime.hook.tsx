@@ -1,8 +1,9 @@
-import chime from '@assets/chime.mp3';
+import chimeMp3 from '@assets/chime.mp3';
 import { useSettingsStateContext } from '@contexts';
 import {
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 
@@ -12,18 +13,34 @@ export const useChime: ChimeHookValues = () => {
   const { isUseSound } = useSettingsStateContext();
   const [play, setPlay] = useState(false);
 
+  const { current: Chime } = useRef<HTMLAudioElement | undefined>(
+    // only for when audio is not present in test suites
+    /* istanbul ignore next */
+    typeof Audio !== "undefined"
+      ? new Audio(chimeMp3)
+      : undefined,
+  );
+
   useEffect(() => {
-    const Chime = new Audio(chime);
+    if ( Chime?.play ) {
+      Chime.muted = !isUseSound;
 
-    if ( play && isUseSound ) {
-      Chime.play();
+      if ( play ) {
+        if ( Chime.currentTime > 0 ) {
+          Chime.pause();
 
-      setTimeout(() => {
-        setPlay(false);
-      }, 3000);
+          Chime.currentTime = 0;
+        }
+
+        Chime.play();
+
+        setTimeout(() => {
+          setPlay(false);
+        }, 1000);
+      }
     }
-
   }, [
+    Chime,
     isUseSound,
     play,
   ]);

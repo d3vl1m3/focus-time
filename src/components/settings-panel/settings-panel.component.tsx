@@ -94,8 +94,7 @@ export const SettingsPanel: VoidFunctionComponent = () => {
     >
       <Dialog.Overlay className={styles.overlay}/>
 
-      <section className={styles.modal}>
-
+      <section className="modal">
         <Header/>
 
         <form

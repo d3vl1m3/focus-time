@@ -22,7 +22,7 @@ export const Footer: VoidFunctionComponent<FooterProps> = ({
       {...props}
     >
       <button
-        className={`btn ${styles.footerButton}`}
+        className={`btn btn-secondary ${styles.footerButton}`}
         type="button"
         onClick={closeSettingsModal}
       >

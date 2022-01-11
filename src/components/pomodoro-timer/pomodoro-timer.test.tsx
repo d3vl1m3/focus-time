@@ -1,5 +1,6 @@
 import { Index } from '@components/pages';
-import { setupIntersectionObserverMock } from '@mocks/intersection-observer.mock';
+import { setupMatchMediaMock } from '@mocks/match-media/match-media.mock';
+import { setupIntersectionObserverMock } from '@mocks/setup-intersection-observer/setup-intersection-observer.mock';
 import { triggerMockTimeSkip } from '@test-utils/jest';
 import {
   testOnlySpecificTimerControlsRendered,
@@ -26,6 +27,10 @@ jest.useFakeTimers();
 
 const renderTestComponent = () => render(<Index/>);
 
+beforeEach(() => {
+  setupMatchMediaMock();
+});
+
 describe('On initial load', () => {
   test('should render without errors', () => {
     const spyError = jest.spyOn(console, 'error');
@@ -40,7 +45,7 @@ describe('When looking at the initial page layout', () => {
   });
 
   test('should be using the default page title', () => {
-    testPageTitle('FocusTime');
+    testPageTitle('Focus Time');
   });
 
   test('should show the default state indicator text', () => {
@@ -161,7 +166,7 @@ describe('When the users resets the timer', () => {
   });
 
   test('should update the time and state in the page title', () => {
-    testPageTitle('FocusTime');
+    testPageTitle('Focus Time');
   });
 
   test('should update the state indicator to `Reset`', () => {
@@ -304,6 +309,6 @@ describe('When the user completes their session', () => {
 
   test('should reset timer when clicking control after completed', () => {
     triggerControl('Reset session');
-    testPageTitle('FocusTime');
+    testPageTitle('Focus Time');
   });
 });

@@ -2,6 +2,8 @@
 
 The app is a simple [pomodoro timer](https://en.wikipedia.org/wiki/Pomodoro_Technique) that lets the user set up time intervals for focusing that are followed by short breaks.
 
+[Try the app now](https://d3vl1m3.gitlab.io/focus-time/)
+
 ## System requirements
 
 - nodeJS (version 14.x.x or above recommended)

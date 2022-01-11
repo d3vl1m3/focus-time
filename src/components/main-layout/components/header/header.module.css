@@ -13,3 +13,9 @@
     font-bold
     uppercase;
 }
+
+.buttonContainer {
+    @apply
+    flex
+    gap-4;
+}

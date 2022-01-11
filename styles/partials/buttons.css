@@ -1,23 +1,11 @@
 .btn {
     @apply
-    bg-gray-800
     block
     border-2
-    border-white
     cursor-pointer
     p-4
     rounded
-}
-
-.btn:hover,
-.btn:focus {
-    @apply
-    bg-gray-700
-}
-
-.btn:active {
-    @apply
-    bg-gray-600
+    text-white;
 }
 
 .btn-sm {
@@ -29,55 +17,74 @@
     @apply
     bg-blue-800
     border-blue-600
+
+    hover:bg-blue-600
+    hover:border-blue-400
+
+    focus:bg-blue-600
+    focus:border-blue-400
+
+    active:border-blue-600
+    active:outline-blue-600
 }
 
-.btn-primary:hover,
-.btn-primary:focus {
+.btn-secondary {
     @apply
-    bg-blue-600
-    border-blue-400
-}
+    bg-white
+    border-gray-400
 
-.btn-primary:active {
-    @apply
-    bg-blue-500
-    border-blue-300
+    hover:bg-gray-50
+    hover:border-gray-300
+
+    focus:bg-gray-50
+    focus:border-gray-300
+
+    active:border-gray-400
+    active:outline-gray-400
+
+    text-gray-900
+
+    dark:bg-gray-800
+    dark:border-gray-600
+
+    dark:hover:bg-gray-700
+    dark:hover:border-gray-400
+
+    dark:focus:bg-gray-700
+    dark:focus:border-gray-400
+
+    dark:active:border-gray-600
+
+    dark:text-white;
 }
 
 .btn-success {
     @apply
-    bg-emerald-800
-    border-emerald-500
-}
-
-.btn-success:hover,
-.btn-success:focus {
-    @apply
     bg-emerald-700
-    border-emerald-400
-}
+    border-emerald-500
 
-.btn-success:active {
-    @apply
-    bg-emerald-600
-    border-emerald-300
+    hover:bg-emerald-600
+    hover:border-emerald-400
+
+    focus:bg-emerald-600
+    focus:border-emerald-400
+
+    active:border-emerald-500
+    active:outline-emerald-500
 }
 
 .btn-danger {
     @apply
-    bg-red-800
-    border-red-500
-}
-
-.btn-danger:hover,
-.btn-danger:focus {
-    @apply
-    bg-red-700
-    border-red-400
-}
-
-.btn-danger:active {
-    @apply
     bg-red-600
-    border-red-300
+    border-red-400
+
+    hover:bg-red-500
+    hover:border-red-300
+
+    focus:bg-red-500
+    focus:border-red-300
+
+    active:border-red-400
+    active:outline-red-400
+
 }

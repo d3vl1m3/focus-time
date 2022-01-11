@@ -28,7 +28,7 @@ export const PomodoroTimer: VoidFunctionComponent = () => {
   useCompletedStateCheck();
 
   const title = useMemo(() => {
-    let title = 'FocusTime';
+    let title = 'Focus Time';
 
     if ( timeInMs ) {
       title = `${msToTimer(timeInMs)} - ${label}`;
