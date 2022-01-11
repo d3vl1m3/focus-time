@@ -6,13 +6,12 @@ import { triggerMockTimeSkip } from '@test-utils/jest';
 import { renderHook } from '@testing-library/react-hooks';
 
 const mockedAudioPlay = jest.fn();
+const mockedAudioPause = jest.fn();
 const spyAudio = jest.spyOn(window, 'Audio');
 
-const mockAudio = () => {
-  spyAudio.mockImplementation(() => ({
-    play: () => mockedAudioPlay(),
-  } as HTMLAudioElement));
-};
+const mockAudio = (props?: Partial<HTMLAudioElement>) => spyAudio.mockImplementation(
+  () => ({ play: () => mockedAudioPlay(), ...props } as HTMLAudioElement),
+);
 
 jest.useFakeTimers();
 
@@ -29,33 +28,31 @@ const mockSetIsUseSound = (isUseSound = false) => {
 
 const renderTestHook = () => renderHook(() => useChime(), { wrapper: SettingsStateProvider });
 
-beforeAll(() => {
-  mockAudio();
-});
-
 afterEach(() => {
   jest.clearAllMocks();
+  jest.resetAllMocks();
 });
 
 describe('On initial load', () => {
-  test('should render without errors when configured correctly', () => {
-    const spyError = jest.spyOn(console, 'error');
-    renderTestHook();
-
-    expect(spyError).not.toHaveBeenCalled();
-  });
-
   test('should render with errors when no provider supplied', () => {
     const spyError = jest.spyOn(console, 'error');
     renderHook(() => useChime());
 
     expect(spyError).toHaveBeenCalled();
   });
+
+  test('should render without errors when configured correctly', () => {
+    const spyError = jest.spyOn(console, 'error');
+    renderTestHook();
+
+    expect(spyError).not.toHaveBeenCalled();
+  });
 });
 
 describe('When sound settings is active', () => {
   beforeEach(() => {
     mockSetIsUseSound(true);
+    mockAudio();
   });
 
   test('should play a chime when triggered', () => {
@@ -102,5 +99,42 @@ describe('When sound settings is disabled', () => {
     triggerChime(result);
 
     expect(mockedAudioPlay).not.toHaveBeenCalled();
+  });
+});
+
+describe('When sound is playing', () => {
+  beforeEach(() => {
+    mockSetIsUseSound(true);
+    mockAudio({ currentTime: 100, pause: () => mockedAudioPause() });
+  });
+  test('should reset after 1 second and play sound from beginning', () => {
+    const { result } = renderTestHook();
+    triggerChime(result);
+
+    // pause only triggers to reset the chime current time to 0
+    expect(mockedAudioPause).toHaveBeenCalledTimes(1);
+    expect(mockedAudioPlay).toHaveBeenCalledTimes(1);
+
+    triggerMockTimeSkip(1000);
+
+    triggerChime(result);
+
+    expect(mockedAudioPause).toHaveBeenCalledTimes(1);
+    expect(mockedAudioPlay).toHaveBeenCalledTimes(2);
+  });
+});
+describe('When no audio is mocked', () => {
+  beforeEach(() => {
+    mockSetIsUseSound(true);
+  });
+  test('should not try to play sound', () => {
+    const { result } = renderTestHook();
+    triggerChime(result);
+
+    triggerChime(result);
+    triggerMockTimeSkip(1000);
+
+    expect(mockedAudioPlay).not.toHaveBeenCalled();
+
   });
 });

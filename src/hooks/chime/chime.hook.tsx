@@ -14,16 +14,21 @@ export const useChime: ChimeHookValues = () => {
   const [play, setPlay] = useState(false);
 
   const { current: Chime } = useRef<HTMLAudioElement | undefined>(
-    typeof Audio !== "undefined" ? new Audio(chimeMp3) : undefined,
+    // only for when audio is not present in test suites
+    /* istanbul ignore next */
+    typeof Audio !== "undefined"
+      ? new Audio(chimeMp3)
+      : undefined,
   );
 
   useEffect(() => {
-    if ( Chime ) {
+    if ( Chime?.play ) {
       Chime.muted = !isUseSound;
 
       if ( play ) {
         if ( Chime.currentTime > 0 ) {
           Chime.pause();
+
           Chime.currentTime = 0;
         }
 
@@ -34,7 +39,6 @@ export const useChime: ChimeHookValues = () => {
         }, 1000);
       }
     }
-
   }, [
     Chime,
     isUseSound,

@@ -1,5 +1,6 @@
 import { Index } from '@components/pages';
-import { setupIntersectionObserverMock } from '@mocks/intersection-observer.mock';
+import { setupMatchMediaMock } from '@mocks/match-media/match-media.mock';
+import { setupIntersectionObserverMock } from '@mocks/setup-intersection-observer/setup-intersection-observer.mock';
 import { triggerMockTimeSkip } from '@test-utils/jest';
 import {
   testOnlySpecificTimerControlsRendered,
@@ -20,12 +21,15 @@ import {
   render,
   screen,
 } from '@testing-library/react';
-import '@mocks/match-media/match-media.mock';
 
 jest.mock('next/head');
 jest.useFakeTimers();
 
 const renderTestComponent = () => render(<Index/>);
+
+beforeEach(() => {
+  setupMatchMediaMock();
+});
 
 describe('On initial load', () => {
   test('should render without errors', () => {

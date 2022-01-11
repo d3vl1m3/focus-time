@@ -1,13 +1,11 @@
 import { Index } from '@components/pages';
-import { setupIntersectionObserverMock } from '@mocks/intersection-observer.mock';
+import { setupMatchMediaMock } from '@mocks/match-media/match-media.mock';
 import { testPageTitle } from '@test-utils/pomodoro-timer';
-import { triggerSwitchToggle } from '@test-utils/settings';
 import {
   render,
   screen,
   within,
 } from '@testing-library/react';
-import '@mocks/match-media/match-media.mock';
 
 const renderTestComponent = () => render(
   <Index />,
@@ -26,6 +24,7 @@ describe('On initial load', () => {
 
 describe('When looking at the page', () => {
   beforeEach(() => {
+    setupMatchMediaMock();
     renderTestComponent();
   });
 
@@ -43,28 +42,5 @@ describe('When looking at the page', () => {
   test('should see the footer text', () => {
     const { queryByText } = screen;
     expect(queryByText('A D3VL1M3 project')).toBeInTheDocument();
-  });
-});
-
-describe('When I click the settings button', () => {
-  beforeEach(() => {
-    renderTestComponent();
-    let portalRoot = document.getElementById("portal");
-    if (!portalRoot) {
-      portalRoot = document.createElement('div');
-      portalRoot.setAttribute('id', 'headlessui-portal-root');
-      document.body.appendChild(portalRoot);
-    }
-    setupIntersectionObserverMock();
-  });
-  test('the modal should open', () => {
-    const { getByRole, queryByRole } = screen;
-    const settingsButton = getByRole('button', { name: 'Settings' });
-
-    expect(queryByRole('dialog')).not.toBeInTheDocument();
-
-    triggerSwitchToggle(settingsButton);
-
-    expect(getByRole('dialog')).toBeInTheDocument();
   });
 });

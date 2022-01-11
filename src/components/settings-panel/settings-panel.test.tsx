@@ -1,4 +1,5 @@
 import { Index } from '@components/pages';
+import { setupMatchMediaMock } from '@mocks/match-media/match-media.mock';
 import { setupIntersectionObserverMock } from '@mocks/setup-intersection-observer/setup-intersection-observer.mock';
 import {
   getNumberField, getSwitchToggle, testValidInputValueSaves,
@@ -6,11 +7,11 @@ import {
 } from '@test-utils/settings';
 import { triggerOpenSettingsPanel } from '@test-utils/settings/triggers/triggers.test-utils';
 import { render } from '@testing-library/react';
-import '@mocks/match-media/match-media.mock';
 
 const renderTestComponent = () => render(<Index />);
 
 beforeEach(() => {
+  setupMatchMediaMock();
   setupIntersectionObserverMock();
 });
 

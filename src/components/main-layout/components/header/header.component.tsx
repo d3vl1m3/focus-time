@@ -34,7 +34,9 @@ export const Header: VoidFunctionComponent<HTMLAttributes<HTMLDivElement>> = ({
             defaultValue={!isDarkMode}
             id="darkModeSwitch"
             onChange={() => setIsDarkMode(!isDarkMode)}
-          />
+          >
+            <span className="sr-only">Dark mode</span>
+          </Switch>
           <DarkMode />
         </div>
 
