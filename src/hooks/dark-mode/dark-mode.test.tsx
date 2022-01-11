@@ -1,7 +1,3 @@
-/**
- * EXAMPLE FILE. COPY AND PASTE IN TO OTHER FILES THEN MODIFY AS REQUIRED.
- * DO NOT REMOVE FROM PROJECT OR INCLUDE IN PRODUCTION BUILD
- */
 import { setupMatchMediaMock } from '@mocks/match-media/match-media.mock';
 import { act, renderHook } from '@testing-library/react-hooks';
 

@@ -18,8 +18,8 @@ export const Header: VoidFunctionComponent<HTMLAttributes<HTMLDivElement>> = ({
   ...props
 }) => {
   const { openSettingsModal, isSettingsOpen } = useSettingsPanelStateContext();
-
   const { isDarkMode, setIsDarkMode } = useDarkMode();
+
   return (
     <header
       className={`${styles.header} ${className}`}
@@ -30,6 +30,7 @@ export const Header: VoidFunctionComponent<HTMLAttributes<HTMLDivElement>> = ({
       <div className={styles.buttonContainer}>
         <div className="flex gap-1.5 justify-center items-center">
           <LightMode />
+
           <Switch
             defaultValue={!isDarkMode}
             id="darkModeSwitch"
@@ -37,6 +38,7 @@ export const Header: VoidFunctionComponent<HTMLAttributes<HTMLDivElement>> = ({
           >
             <span className="sr-only">Dark mode</span>
           </Switch>
+
           <DarkMode />
         </div>
 
