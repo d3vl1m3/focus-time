@@ -1,6 +1,7 @@
 import { SettingsStateContextValues, SettingsStateProvider } from '@contexts';
-import * as SettingsStateHookModule from '@contexts/settings-state/settings-state.hook';
+import * as SettingsStateContextModule from '@contexts/settings-state/settings-state.context';
 import { useChime } from '@hooks';
+import { setupMatchMediaMock } from "@mocks/match-media/match-media.mock";
 import { triggerChime } from '@test-utils/chime';
 import { triggerMockTimeSkip } from '@test-utils/jest';
 import { renderHook } from '@testing-library/react-hooks';
@@ -16,17 +17,21 @@ const mockAudio = (props?: Partial<HTMLAudioElement>) => spyAudio.mockImplementa
 jest.useFakeTimers();
 
 jest.mock(
-  '@contexts/settings-state/settings-state.hook',
-  () => jest.requireActual('@contexts/settings-state/settings-state.hook'),
+  '@contexts/settings-state/settings-state.context',
+  () => jest.requireActual('@contexts/settings-state/settings-state.context'),
 );
 
 const mockSetIsUseSound = (isUseSound = false) => {
-  jest.spyOn(SettingsStateHookModule, 'useSettingsStateContext').mockImplementation(() => ({
+  jest.spyOn(SettingsStateContextModule, 'useSettingsStateContext').mockImplementation(() => ({
     isUseSound,
   } as SettingsStateContextValues));
 };
 
 const renderTestHook = () => renderHook(() => useChime(), { wrapper: SettingsStateProvider });
+
+beforeEach(() => {
+  setupMatchMediaMock();
+});
 
 afterEach(() => {
   jest.clearAllMocks();

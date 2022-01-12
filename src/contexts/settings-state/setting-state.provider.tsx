@@ -1,6 +1,6 @@
 import { defaultSettingValues } from '@data';
 import {
-  FunctionComponent, useMemo, useState, 
+  FunctionComponent, useEffect, useMemo, useState,
 } from 'react';
 
 import { SettingsStateContext } from './settings-state.context';
@@ -21,9 +21,29 @@ export const SettingsStateProvider: FunctionComponent = ({ children }) => {
 
   const [isUseSound, setIsUseSound] = useState(defaultSettingValues.isUseSound);
 
+  const [isUseDarkMode, setIsUseDarkMode] = useState<boolean|null>(null);
+
+  // Runs once on mounted
+  useEffect(() => {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setIsUseDarkMode(true);
+    } else {
+      setIsUseDarkMode(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isUseDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isUseDarkMode]);
+
   const values = useMemo(() => ({
     focusDuration,
     focusIntervalsTarget,
+    isUseDarkMode,
     isUseFocusIntervalsTarget,
     isUseLongBreaks,
     isUseSound,
@@ -31,6 +51,7 @@ export const SettingsStateProvider: FunctionComponent = ({ children }) => {
     longBreakGap,
     setFocusDuration,
     setFocusIntervalsTarget,
+    setIsUseDarkMode,
     setIsUseFocusIntervalsTarget,
     setIsUseLongBreaks,
     setIsUseSound,
@@ -41,6 +62,7 @@ export const SettingsStateProvider: FunctionComponent = ({ children }) => {
   }), [
     focusDuration,
     focusIntervalsTarget,
+    isUseDarkMode,
     isUseFocusIntervalsTarget,
     isUseLongBreaks,
     isUseSound,

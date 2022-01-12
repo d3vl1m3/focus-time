@@ -5,7 +5,16 @@ import {
   TimerStateProvider,
   useIntervalStatusContext,
 } from '@contexts';
+import { setupMatchMediaMock } from "@mocks/match-media/match-media.mock";
 import { renderHook } from '@testing-library/react-hooks';
+
+beforeEach(() => {
+  setupMatchMediaMock();
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
 
 describe('On initial load', () => {
   test('should render without errors when configured correctly', () => {
