@@ -7,12 +7,10 @@ import {
 
 import styles from './switch.module.css';
 
-export interface SwitchProps {
+export interface SwitchProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange' | 'defaultValue'> {
   as?: keyof JSX.IntrinsicElements,
-  className?: string,
   defaultValue?: boolean,
   id: string,
-  labelProps?: HTMLAttributes<HTMLLabelElement>
   onChange?: (checked: boolean) => void
 }
 
@@ -22,26 +20,21 @@ export const Switch: FunctionComponent<SwitchProps> = ({
   className = '',
   defaultValue = false,
   id,
-  labelProps,
-  onChange = null,
+  onChange,
 }) => {
-  const [enabled, setEnabled] = useState(defaultValue);
+  const [enabled, setIsEnabled] = useState( defaultValue );
 
-  /**
-     * Need to update the value locally but may need to be updated elsewhere too (form submission etc.)
-     * @param checked
-     */
   const updateValue = (checked: boolean) => {
-    setEnabled(checked);
+    setIsEnabled(checked);
 
-    if (onChange !== null) {
+    if ( onChange ) {
       onChange(checked);
     }
   };
 
   return (
     <HuiSwitch.Group{...{ as, className, id }}>
-      <HuiSwitch.Label {...labelProps}>
+      <HuiSwitch.Label>
         {children}
       </HuiSwitch.Label>
 

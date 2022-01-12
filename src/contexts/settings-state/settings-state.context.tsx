@@ -1,5 +1,5 @@
 import { SetStateType } from '@types';
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 
 export type SettingsStateContextValues = {
   // Focus
@@ -25,6 +25,19 @@ export type SettingsStateContextValues = {
   // Sound
   isUseSound: boolean
   setIsUseSound: SetStateType<boolean>
+
+  // DarkMode
+  isUseDarkMode: boolean|null
+  setIsUseDarkMode: SetStateType<boolean|null>
 };
 
 export const SettingsStateContext = createContext<SettingsStateContextValues | undefined>(undefined);
+
+export const useSettingsStateContext = () => {
+  const context = useContext(SettingsStateContext);
+  if (context === undefined) {
+    throw new Error('useSettingsStateContext must be inside a SettingsStateProvider');
+  }
+
+  return context;
+};

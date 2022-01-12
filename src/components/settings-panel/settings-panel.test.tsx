@@ -87,11 +87,6 @@ describe('Each form value should submit when valid', () => {
     const switchButton = getSwitchToggle( 'Use a focus intervals target');
     testSwitchSettingSaves(switchButton);
   });
-
-  test('should save isUseSound value', () => {
-    const switchButton = getSwitchToggle( 'Use sounds');
-    testSwitchSettingSaves(switchButton);
-  });
 });
 
 describe('Each form value should not save if value is invalid', () => {

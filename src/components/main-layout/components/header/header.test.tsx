@@ -16,22 +16,22 @@ import { Header } from './header.component';
 
 const renderTestComponent = () => render(
   <SettingsPanelStateProvider>
-    <Header/>
     <SettingsStateProvider>
       <SettingsFormStateProvider>
         <SettingsPanel/>
       </SettingsFormStateProvider>
+      <Header/>
     </SettingsStateProvider>
   </SettingsPanelStateProvider>,
 );
 
 beforeEach(() => {
   setupIntersectionObserverMock();
-  setupMatchMediaMock();
 });
 
 describe('On initial load', () => {
   test('should render without errors', () => {
+    setupMatchMediaMock();
     const spyError = jest.spyOn(console, 'error');
     renderTestComponent();
     expect(spyError).not.toHaveBeenCalled();
@@ -40,6 +40,7 @@ describe('On initial load', () => {
 
 describe('When the user see the header', () => {
   beforeEach(() => {
+    setupMatchMediaMock();
     renderTestComponent();
   });
 
@@ -50,8 +51,13 @@ describe('When the user see the header', () => {
   });
 
   test('should see the dark mode button', () => {
-    const darkModeToggle = getSwitchToggle('Dark mode');
+    const darkModeToggle = getSwitchToggle('Use dark mode');
     expect(darkModeToggle).toBeInTheDocument();
+  });
+
+  test('should see the sound toggle button', () => {
+    const useSoundToggle = getSwitchToggle('Use sound');
+    expect(useSoundToggle).toBeInTheDocument();
   });
 
   test('should see the settings button', () => {
@@ -60,26 +66,48 @@ describe('When the user see the header', () => {
 
     expect(settingsButton).toBeInTheDocument();
   });
+
 });
 
-describe('When the users presses the dark mode button', () => {
+describe('When the users presses the dark mode toggle', () => {
   beforeEach(() => {
+    setupMatchMediaMock();
     renderTestComponent();
   });
   test('should toggle the dark mode state', () => {
-    const DarkModeToggle = getSwitchToggle('Dark mode');
+    const DarkModeToggle = getSwitchToggle('Use dark mode');
     triggerSwitchToggle(DarkModeToggle);
 
+    expect(DarkModeToggle).toBeChecked();
     expect(document.getElementsByTagName('html')[0].classList).toContain('dark');
 
     triggerSwitchToggle(DarkModeToggle);
+    expect(DarkModeToggle).not.toBeChecked();
 
     expect(document.getElementsByTagName('html')[0].classList).not.toContain('dark');
   });
 });
 
+describe('When the users presses the sound toggle', () => {
+  beforeEach(() => {
+    setupMatchMediaMock();
+    renderTestComponent();
+  });
+  test('should toggle the sound state', () => {
+    const useSoundToggle = getSwitchToggle('Use sound');
+    triggerSwitchToggle(useSoundToggle);
+
+    expect(useSoundToggle).toBeChecked();
+
+    triggerSwitchToggle(useSoundToggle);
+
+    expect(useSoundToggle).not.toBeChecked();
+  });
+});
+
 describe('When the users presses the settings button', () => {
   beforeEach(() => {
+    setupMatchMediaMock();
     renderTestComponent();
 
     const { queryByRole } = screen;
