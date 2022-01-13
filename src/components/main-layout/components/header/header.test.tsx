@@ -1,25 +1,17 @@
-import { SettingsPanel } from '@components/settings-panel';
-import {
-  SettingsFormStateProvider, SettingsPanelStateProvider, SettingsStateProvider, 
-} from '@contexts';
+import { SettingsPanelStateProvider, SettingsStateProvider } from '@contexts';
 import { setupMatchMediaMock } from '@mocks/match-media/match-media.mock';
 import { setupIntersectionObserverMock } from '@mocks/setup-intersection-observer/setup-intersection-observer.mock';
-import { getSwitchToggle, triggerSwitchToggle } from '@test-utils/settings';
+import { triggerClick } from '@test-utils/jest';
 import {
-  fireEvent,
   render,
   screen,
 } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
 
 import { Header } from './header.component';
 
 const renderTestComponent = () => render(
   <SettingsPanelStateProvider>
     <SettingsStateProvider>
-      <SettingsFormStateProvider>
-        <SettingsPanel/>
-      </SettingsFormStateProvider>
       <Header/>
     </SettingsStateProvider>
   </SettingsPanelStateProvider>,
@@ -27,11 +19,11 @@ const renderTestComponent = () => render(
 
 beforeEach(() => {
   setupIntersectionObserverMock();
+  setupMatchMediaMock();
 });
 
 describe('On initial load', () => {
   test('should render without errors', () => {
-    setupMatchMediaMock();
     const spyError = jest.spyOn(console, 'error');
     renderTestComponent();
     expect(spyError).not.toHaveBeenCalled();
@@ -40,7 +32,6 @@ describe('On initial load', () => {
 
 describe('When the user see the header', () => {
   beforeEach(() => {
-    setupMatchMediaMock();
     renderTestComponent();
   });
 
@@ -50,82 +41,27 @@ describe('When the user see the header', () => {
     expect(siteHeading).toBeInTheDocument();
   });
 
-  test('should see the dark mode button', () => {
-    const darkModeToggle = getSwitchToggle('Use dark mode');
-    expect(darkModeToggle).toBeInTheDocument();
-  });
-
-  test('should see the sound toggle button', () => {
-    const useSoundToggle = getSwitchToggle('Use sound');
-    expect(useSoundToggle).toBeInTheDocument();
-  });
-
-  test('should see the settings button', () => {
+  test('should render mobile menu toggle button', () => {
     const { getByRole } = screen;
-    const settingsButton = getByRole('button', { name: 'Settings' });
+    const mobileButton = getByRole('tab', { name: 'App config menu' });
 
-    expect(settingsButton).toBeInTheDocument();
-  });
-
-});
-
-describe('When the users presses the dark mode toggle', () => {
-  beforeEach(() => {
-    setupMatchMediaMock();
-    renderTestComponent();
-  });
-  test('should toggle the dark mode state', () => {
-    const DarkModeToggle = getSwitchToggle('Use dark mode');
-    triggerSwitchToggle(DarkModeToggle);
-
-    expect(DarkModeToggle).toBeChecked();
-    expect(document.getElementsByTagName('html')[0].classList).toContain('dark');
-
-    triggerSwitchToggle(DarkModeToggle);
-    expect(DarkModeToggle).not.toBeChecked();
-
-    expect(document.getElementsByTagName('html')[0].classList).not.toContain('dark');
+    expect(mobileButton).toBeInTheDocument();
   });
 });
 
-describe('When the users presses the sound toggle', () => {
+describe('When the users presses the mobile panel button', () => {
   beforeEach(() => {
-    setupMatchMediaMock();
     renderTestComponent();
   });
-  test('should toggle the sound state', () => {
-    const useSoundToggle = getSwitchToggle('Use sound');
-    triggerSwitchToggle(useSoundToggle);
 
-    expect(useSoundToggle).toBeChecked();
-
-    triggerSwitchToggle(useSoundToggle);
-
-    expect(useSoundToggle).not.toBeChecked();
-  });
-});
-
-describe('When the users presses the settings button', () => {
-  beforeEach(() => {
-    setupMatchMediaMock();
-    renderTestComponent();
-
-    const { queryByRole } = screen;
-    const modal = queryByRole('dialog');
-
-    expect(modal).not.toBeInTheDocument();
-  });
-
-  test('should open the modal', () => {
+  test('should trigger function to display actions', () => {
     const { getByRole } = screen;
-    const settingsButton = getByRole('button', { name: 'Settings' });
+    const mobileButton = getByRole('tab', { name: 'App config menu' } );
 
-    act(() => {
-      fireEvent.click(settingsButton);
-    });
+    expect(mobileButton).toHaveAttribute('aria-selected', "false");
 
-    const modal = getByRole('dialog');
+    triggerClick(mobileButton);
 
-    expect(modal).toBeInTheDocument();
+    expect(mobileButton).toHaveAttribute('aria-selected', "true");
   });
 });

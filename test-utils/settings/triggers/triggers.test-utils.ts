@@ -1,3 +1,4 @@
+import { triggerClick } from '@test-utils/jest';
 import { triggerControl } from '@test-utils/pomodoro-timer';
 import { setInputFieldValue } from '@test-utils/settings/setters/setters.test-utils';
 import {
@@ -26,7 +27,7 @@ export const triggerCompletedState = () => {
   const focusIntervalsTargetButton = getByRole('switch', { name: 'Use a focus intervals target' });
   const focusIntervalsTargetInput = getByRole('spinbutton', { name: 'Focus intervals target' });
 
-  triggerSwitchToggle(focusIntervalsTargetButton);
+  triggerClick(focusIntervalsTargetButton);
 
   setInputFieldValue(focusIntervalsTargetInput, 1);
 
@@ -53,11 +54,5 @@ export const triggerSaveSettingsPanel = () => {
 
   act(() => {
     fireEvent.click(saveSettingsButton);
-  });
-};
-
-export const triggerSwitchToggle = (element: HTMLElement) => {
-  act(() => {
-    fireEvent.click(element);
   });
 };

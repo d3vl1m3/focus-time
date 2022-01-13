@@ -11,7 +11,7 @@ export interface SwitchProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'on
   as?: keyof JSX.IntrinsicElements,
   defaultValue?: boolean,
   id: string,
-  onChange?: (checked: boolean) => void
+  onChange?: (checked: boolean) => void,
 }
 
 export const Switch: FunctionComponent<SwitchProps> = ({
@@ -21,6 +21,7 @@ export const Switch: FunctionComponent<SwitchProps> = ({
   defaultValue = false,
   id,
   onChange,
+  ...props
 }) => {
   const [enabled, setIsEnabled] = useState( defaultValue );
 
@@ -39,6 +40,7 @@ export const Switch: FunctionComponent<SwitchProps> = ({
       </HuiSwitch.Label>
 
       <HuiSwitch
+        {...props}
         checked={enabled}
         className={`${styles.switch} ${enabled ? styles.switchEnabled : ''}`}
         onChange={updateValue}

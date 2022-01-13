@@ -1,4 +1,5 @@
-import { getSwitchToggle, triggerSwitchToggle } from "@test-utils/settings";
+import { triggerClick } from '@test-utils/jest';
+import { getSwitchToggle } from "@test-utils/settings";
 import {
   render,
   screen,
@@ -55,12 +56,12 @@ describe('When the user toggles the switch', () => {
     });
     const SwitchToggle = getSwitchToggle('Foo');
 
-    triggerSwitchToggle(SwitchToggle);
+    triggerClick(SwitchToggle);
 
     expect(mockOnChange).toHaveBeenCalledTimes(1);
     expect(mockOnChange).toHaveBeenCalledWith(true);
 
-    triggerSwitchToggle(SwitchToggle);
+    triggerClick(SwitchToggle);
 
     expect(mockOnChange).toHaveBeenCalledTimes(2);
     expect(mockOnChange).toHaveBeenCalledWith(false);
@@ -77,19 +78,19 @@ describe('When the user toggles the switch', () => {
     expect(getByRole('switch')).not.toBeChecked();
 
     // toggle on
-    triggerSwitchToggle(SwitchToggle);
+    triggerClick(SwitchToggle);
     expect(getByRole('switch')).toBeChecked();
 
     // toggle off
-    triggerSwitchToggle(SwitchToggle);
+    triggerClick(SwitchToggle);
     expect(getByRole('switch')).not.toBeChecked();
 
     // toggle on
-    triggerSwitchToggle(SwitchToggle);
+    triggerClick(SwitchToggle);
     expect(getByRole('switch')).toBeChecked();
 
     // toggle off
-    triggerSwitchToggle(SwitchToggle);
+    triggerClick(SwitchToggle);
     expect(getByRole('switch')).not.toBeChecked();
   });
 });
