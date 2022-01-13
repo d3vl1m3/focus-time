@@ -1,29 +1,22 @@
-import { SwitchWithIcons } from "@components/form-elements/switch-with-icons/switch-with-icons.component";
-import { useSettingsPanelStateContext, useSettingsStateContext } from '@contexts';
-import {
-  DarkMode,
-  LightMode,
-  VolumeOff,
-  VolumeUp,
-} from '@mui/icons-material';
+import { useSettingsStateContext } from '@contexts';
+import { Menu } from '@mui/icons-material';
 import {
   HTMLAttributes,
   VoidFunctionComponent,
+  useState,
 } from 'react';
 
+import { HeaderActions } from './components/header-actions/header-actions.component';
 import styles from './header.module.css';
 
 export const Header: VoidFunctionComponent<HTMLAttributes<HTMLDivElement>> = ({
   className = '',
   ...props
 }) => {
-  const { openSettingsModal, isSettingsOpen } = useSettingsPanelStateContext();
   const {
-    isUseDarkMode,
-    isUseSound,
-    setIsUseDarkMode,
-    setIsUseSound,
   } = useSettingsStateContext();
+
+  const [isMobileDrawVisible, setIsMobileDrawVisible] = useState(false);
 
   return (
     <header
@@ -32,40 +25,29 @@ export const Header: VoidFunctionComponent<HTMLAttributes<HTMLDivElement>> = ({
     >
       <h1 className={styles.siteTitle}>Focus Time</h1>
 
-      <div className={styles.buttonContainer}>
-
-        {isUseDarkMode !== null && (
-          <SwitchWithIcons
-            OffIcon={LightMode}
-            OnIcon={DarkMode}
-            defaultValue={isUseDarkMode}
-            id="isUseDarkMode"
-            onChange={(checked:boolean) => setIsUseDarkMode(checked)}
-          >
-            <span className="sr-only">Use dark mode</span>
-          </SwitchWithIcons>
-        )}
-
-        <SwitchWithIcons
-          OffIcon={VolumeOff}
-          OnIcon={VolumeUp}
-          defaultValue={isUseSound}
-          id="isUseSound"
-          onChange={(checked) => setIsUseSound(checked)}
-        >
-          <span className="sr-only">Use sound</span>
-        </SwitchWithIcons>
-
+      <div role="tablist">
         <button
-          aria-pressed={isSettingsOpen}
-          className="btn btn-secondary btn-sm"
-          title="Settings"
+          aria-controls="mobile-actions-panel"
+          aria-selected={isMobileDrawVisible}
+          className={`btn btn-secondary btn-sm ${styles.mobileDrawerButton} `}
+          id="mobile-actions-panel-toggle"
+          role="tab"
           type="button"
-          onClick={openSettingsModal}
+          onClick={() => setIsMobileDrawVisible(!isMobileDrawVisible)}
         >
-          Settings
+          <Menu />
+          <span className="sr-only">App config menu</span>
         </button>
       </div>
+
+      <HeaderActions
+        aria-labelledby="mobile-actions-panel-toggle"
+        className={
+          `${styles.actionsContainer} ${isMobileDrawVisible ? styles.buttonContainerVisible : ''}`
+        }
+        id="mobile-actions-panel"
+        role="tabpanel"
+      />
     </header>
   );
 };
