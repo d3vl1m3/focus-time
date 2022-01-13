@@ -17,12 +17,10 @@ const renderTestComponent = (props?: Partial<SwitchProps>) => render(
 );
 
 describe('On initial load', () => {
-  describe('On initial load', () => {
-    test('should render without errors', () => {
-      const spyError = jest.spyOn(console, 'error');
-      renderTestComponent();
-      expect(spyError).not.toHaveBeenCalled();
-    });
+  test('should render without errors', () => {
+    const spyError = jest.spyOn(console, 'error');
+    renderTestComponent();
+    expect(spyError).not.toHaveBeenCalled();
   });
 
   it('should allow checked by default', () => {

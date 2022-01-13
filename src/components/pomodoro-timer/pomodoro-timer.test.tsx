@@ -1,7 +1,17 @@
-import { Index } from '@components/pages';
+import { PomodoroTimer } from '@components/pomodoro-timer/pomodoro-timer.component';
+import {
+  GameStateProvider,
+  IntervalStatusProvider,
+  SettingsPanelStateProvider,
+  SettingsStateProvider,
+  TimerStateProvider,
+} from '@contexts';
+import type { DefaultSettingsValue } from '@data/default-settings-values/default-settings-values.data';
+import { defaultValues } from '@data/default-settings-values/default-settings-values.data';
+import * as DefaultSettingValuesModule from '@data/default-settings-values/default-settings-values.data';
 import { setupMatchMediaMock } from '@mocks/match-media/match-media.mock';
 import { setupIntersectionObserverMock } from '@mocks/setup-intersection-observer/setup-intersection-observer.mock';
-import { triggerClick, triggerMockTimeSkip } from '@test-utils/jest';
+import { triggerMockTimeSkip } from '@test-utils/jest';
 import {
   testOnlySpecificTimerControlsRendered,
   testPageTitle,
@@ -10,21 +20,43 @@ import {
   triggerControl,
 } from '@test-utils/pomodoro-timer';
 import {
-  getNumberField,
-  getSwitchToggle,
-  setInputFieldValue,
-  triggerSaveSettingsPanel,
-} from '@test-utils/settings';
-import { triggerCompletedState, triggerOpenSettingsPanel } from '@test-utils/settings/triggers/triggers.test-utils';
-import {
   render,
   screen,
 } from '@testing-library/react';
 
+const spyDefaultSettingValues = jest.spyOn(DefaultSettingValuesModule, 'useDefaultSettingsValues');
+
+const mockDefaultSettingValues = (overrideDefaultValues?: Partial<DefaultSettingsValue>) => spyDefaultSettingValues
+  .mockImplementation(() => ({ ...defaultValues, ...overrideDefaultValues }));
+
+// use to set all the durations to 1 second and minimise the required time to skip intervals
+const shortDurationsDefault: Partial<DefaultSettingsValue> = {
+  focusDuration: 1 / 60,
+  shortBreakDuration: 1 / 60,
+};
+
+mockDefaultSettingValues();
+
 jest.mock('next/head');
 jest.useFakeTimers();
 
-const renderTestComponent = () => render(<Index/>);
+afterEach(() => {
+  mockDefaultSettingValues().mockClear();
+});
+
+const renderTestComponent = () => render(
+  <GameStateProvider>
+    <TimerStateProvider>
+      <SettingsStateProvider>
+        <IntervalStatusProvider>
+          <SettingsPanelStateProvider>
+            <PomodoroTimer />
+          </SettingsPanelStateProvider>
+        </IntervalStatusProvider>
+      </SettingsStateProvider>
+    </TimerStateProvider>
+  </GameStateProvider>,
+);
 
 beforeEach(() => {
   setupMatchMediaMock();
@@ -134,14 +166,20 @@ describe('When the users skips an interval', () => {
 
 describe('When the users finishes a break', () => {
   beforeEach(() => {
+    setupIntersectionObserverMock();
+    mockDefaultSettingValues(shortDurationsDefault);
+
     renderTestComponent();
     triggerControl('Start a Pomodoro session');
 
-    triggerMockTimeSkip(30 * 60 * 1000);
+    triggerMockTimeSkip({ seconds: 1 });
+    testStateIndicator('SHORT_BREAK');
+
+    triggerMockTimeSkip({ seconds: 1 });
   });
 
   test('should update the time and state in the page title', () => {
-    testPageTitle('25:00 - Focus');
+    testPageTitle('00:01 - Focus');
   });
 
   test('should update the state indicator to `Focus`', () => {
@@ -149,7 +187,7 @@ describe('When the users finishes a break', () => {
   });
 
   test('should start the timer', () => {
-    testTimer('25:00');
+    testTimer('00:01');
   });
 
   test('should have the controls for an active, un-paused state only', () => {
@@ -242,23 +280,16 @@ describe('When the user starts a paused timer', () => {
 describe('When the user has long breaks activated', () => {
   beforeEach(() => {
     setupIntersectionObserverMock();
+    mockDefaultSettingValues({
+      ...shortDurationsDefault,
+      longBreakGap: 1,
+      isUseLongBreaks: true,
+    });
 
     renderTestComponent();
 
-    triggerOpenSettingsPanel();
-
-    const isUseLongBreaksToggle = getSwitchToggle('Use long breaks');
-    const longBreaksGapInput = getNumberField('Focus intervals between long breaks');
-
-    triggerClick(isUseLongBreaksToggle);
-
-    setInputFieldValue(longBreaksGapInput, 1);
-
-    triggerSaveSettingsPanel();
-
     triggerControl('Start a Pomodoro session');
-
-    triggerMockTimeSkip(25 * 60 * 1000);
+    triggerMockTimeSkip({ seconds: 1 });
   });
 
   test('should contain additional indicator for long breaks', () => {
@@ -285,8 +316,16 @@ describe('When the user has long breaks activated', () => {
 describe('When the user completes their session', () => {
   beforeEach(() => {
     setupIntersectionObserverMock();
+
+    mockDefaultSettingValues({
+      isUseFocusIntervalsTarget: true,
+      focusIntervalsTarget: 1,
+    });
+
     renderTestComponent();
-    triggerCompletedState();
+
+    triggerControl('Start a Pomodoro session');
+    triggerControl('Skip interval');
   });
 
   test('should update timer in the page head', () => {

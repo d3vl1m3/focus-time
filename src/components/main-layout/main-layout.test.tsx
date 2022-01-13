@@ -1,6 +1,6 @@
-import { Index } from '@components/pages';
+import { MainLayout } from '@components/main-layout/main-layout.component';
+import { SettingsPanelStateProvider, SettingsStateProvider } from '@contexts';
 import { setupMatchMediaMock } from '@mocks/match-media/match-media.mock';
-import { testPageTitle } from '@test-utils/pomodoro-timer';
 import {
   render,
   screen,
@@ -8,7 +8,11 @@ import {
 } from '@testing-library/react';
 
 const renderTestComponent = () => render(
-  <Index />,
+  <SettingsPanelStateProvider>
+    <SettingsStateProvider>
+      <MainLayout />
+    </SettingsStateProvider>
+  </SettingsPanelStateProvider>,
 );
 
 afterEach(() => {
@@ -26,10 +30,6 @@ describe('When looking at the page', () => {
   beforeEach(() => {
     setupMatchMediaMock();
     renderTestComponent();
-  });
-
-  test('should see the site header', () => {
-    testPageTitle('Focus Time');
   });
 
   test('should see the settings button', () => {
