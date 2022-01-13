@@ -1,7 +1,7 @@
 import { Index } from '@components/pages';
 import { setupMatchMediaMock } from '@mocks/match-media/match-media.mock';
 import { setupIntersectionObserverMock } from '@mocks/setup-intersection-observer/setup-intersection-observer.mock';
-import { triggerMockTimeSkip } from '@test-utils/jest';
+import { triggerClick, triggerMockTimeSkip } from '@test-utils/jest';
 import {
   testOnlySpecificTimerControlsRendered,
   testPageTitle,
@@ -14,7 +14,6 @@ import {
   getSwitchToggle,
   setInputFieldValue,
   triggerSaveSettingsPanel,
-  triggerSwitchToggle,
 } from '@test-utils/settings';
 import { triggerCompletedState, triggerOpenSettingsPanel } from '@test-utils/settings/triggers/triggers.test-utils';
 import {
@@ -251,7 +250,7 @@ describe('When the user has long breaks activated', () => {
     const isUseLongBreaksToggle = getSwitchToggle('Use long breaks');
     const longBreaksGapInput = getNumberField('Focus intervals between long breaks');
 
-    triggerSwitchToggle(isUseLongBreaksToggle);
+    triggerClick(isUseLongBreaksToggle);
 
     setInputFieldValue(longBreaksGapInput, 1);
 

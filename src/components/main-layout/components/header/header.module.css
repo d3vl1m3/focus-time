@@ -2,6 +2,8 @@
     @apply
     container
     flex
+    flex-wrap
+    md:flex-nowrap
     items-center
     justify-between
     mx-auto
@@ -14,8 +16,14 @@
     uppercase;
 }
 
-.buttonContainer {
+.mobileDrawerButton {
+    @apply
+    sm:hidden
+}
+
+.buttonContainerVisible {
     @apply
     flex
-    gap-4;
+    flex-col
+    sm:flex-row;
 }

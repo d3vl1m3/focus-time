@@ -1,0 +1,17 @@
+.actionsList {
+    @apply
+    gap-6
+    sm:gap-4
+    hidden
+    sm:flex
+    mt-6
+    sm:mt-0
+    w-full
+    sm:w-auto;
+}
+
+.actionListItem {
+    @apply
+    flex
+    justify-center;
+}
