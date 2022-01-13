@@ -1,6 +1,3 @@
-import { triggerClick } from '@test-utils/jest';
-import { triggerControl } from '@test-utils/pomodoro-timer';
-import { setInputFieldValue } from '@test-utils/settings/setters/setters.test-utils';
 import {
   act,
   fireEvent,
@@ -15,26 +12,6 @@ export const triggerCloseSettingsPanel = () => {
   act(() => {
     fireEvent.click(closeModalButton);
   });
-};
-
-export const triggerCompletedState = () => {
-  const { getByRole } = screen;
-
-  triggerControl('Start a Pomodoro session');
-  triggerControl('Skip interval');
-  triggerOpenSettingsPanel();
-
-  const focusIntervalsTargetButton = getByRole('switch', { name: 'Use a focus intervals target' });
-  const focusIntervalsTargetInput = getByRole('spinbutton', { name: 'Focus intervals target' });
-
-  triggerClick(focusIntervalsTargetButton);
-
-  setInputFieldValue(focusIntervalsTargetInput, 1);
-
-  expect(focusIntervalsTargetButton).toBeChecked();
-  expect(focusIntervalsTargetInput).toHaveValue(1);
-
-  triggerSaveSettingsPanel();
 };
 
 export const triggerOpenSettingsPanel = () => {
@@ -54,5 +31,11 @@ export const triggerSaveSettingsPanel = () => {
 
   act(() => {
     fireEvent.click(saveSettingsButton);
+  });
+};
+
+export const triggerSwitchToggle = (element: HTMLElement) => {
+  act(() => {
+    fireEvent.click(element);
   });
 };

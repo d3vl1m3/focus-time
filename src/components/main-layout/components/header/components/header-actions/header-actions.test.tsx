@@ -7,9 +7,11 @@ import { setupIntersectionObserverMock } from '@mocks/setup-intersection-observe
 import { getButtonByName, triggerClick } from '@test-utils/jest';
 import { getSwitchToggle } from '@test-utils/settings';
 import {
-  fireEvent, render, screen, 
+  act,
+  fireEvent,
+  render,
+  screen,
 } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
 
 import { HeaderActions } from './header-actions.component';
 

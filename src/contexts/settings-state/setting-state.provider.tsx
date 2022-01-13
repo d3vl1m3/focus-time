@@ -1,4 +1,4 @@
-import { defaultSettingValues } from '@data';
+import { useDefaultSettingsValues } from '@data';
 import {
   FunctionComponent, useEffect, useMemo, useState,
 } from 'react';
@@ -6,20 +6,32 @@ import {
 import { SettingsStateContext } from './settings-state.context';
 
 export const SettingsStateProvider: FunctionComponent = ({ children }) => {
-  const [focusDuration, setFocusDuration] = useState(defaultSettingValues.focusDuration);
-  const [shortBreakDuration, setShortBreakDuration] = useState(defaultSettingValues.shortBreakDuration);
 
-  const [isUseLongBreaks, setIsUseLongBreaks] = useState(defaultSettingValues.isUseLongBreaks);
-  const [longBreakDuration, setLongBreakDuration] = useState(defaultSettingValues.longBreakDuration);
-  const [longBreakGap, setLongBreakGap] = useState(defaultSettingValues.longBreakGap);
+  const {
+    focusDuration: focusDurationDefault,
+    shortBreakDuration: shortBreakDurationDefault,
+    isUseLongBreaks: isUseLongBreaksDefault,
+    longBreakDuration: longBreakDurationDefault,
+    longBreakGap: longBreakGapDefault,
+    isUseFocusIntervalsTarget: isUseFocusIntervalsTargetDefault,
+    focusIntervalsTarget: focusIntervalsTargetDefault,
+    isUseSound: isUseSoundDefault,
+  } = useDefaultSettingsValues();
+
+  const [focusDuration, setFocusDuration] = useState(focusDurationDefault);
+  const [shortBreakDuration, setShortBreakDuration] = useState(shortBreakDurationDefault);
+
+  const [isUseLongBreaks, setIsUseLongBreaks] = useState(isUseLongBreaksDefault);
+  const [longBreakDuration, setLongBreakDuration] = useState(longBreakDurationDefault);
+  const [longBreakGap, setLongBreakGap] = useState(longBreakGapDefault);
 
   const [
     isUseFocusIntervalsTarget,
     setIsUseFocusIntervalsTarget,
-  ] = useState(defaultSettingValues.isUseFocusIntervalsTarget);
-  const [focusIntervalsTarget, setFocusIntervalsTarget] = useState(defaultSettingValues.focusIntervalsTarget);
+  ] = useState(isUseFocusIntervalsTargetDefault);
+  const [focusIntervalsTarget, setFocusIntervalsTarget] = useState(focusIntervalsTargetDefault);
 
-  const [isUseSound, setIsUseSound] = useState(defaultSettingValues.isUseSound);
+  const [isUseSound, setIsUseSound] = useState(isUseSoundDefault);
 
   const [isUseDarkMode, setIsUseDarkMode] = useState<boolean|null>(null);
 

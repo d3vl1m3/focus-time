@@ -1,4 +1,7 @@
-import { Index } from '@components/pages';
+import { SettingsPanel } from '@components/settings-panel/settings-panel.component';
+import {
+  SettingsFormStateProvider, SettingsPanelStateProvider, SettingsStateProvider, useSettingsPanelStateContext,
+} from '@contexts';
 import { setupMatchMediaMock } from '@mocks/match-media/match-media.mock';
 import { setupIntersectionObserverMock } from '@mocks/setup-intersection-observer/setup-intersection-observer.mock';
 import {
@@ -8,7 +11,28 @@ import {
 import { triggerOpenSettingsPanel } from '@test-utils/settings/triggers/triggers.test-utils';
 import { render } from '@testing-library/react';
 
-const renderTestComponent = () => render(<Index />);
+const OpenModalButton = () => {
+  const { setIsSettingsOpen } = useSettingsPanelStateContext();
+  return (
+    <button
+      type="button"
+      onClick={() => setIsSettingsOpen((open) => !open)}
+    >
+      Settings
+    </button>
+  );
+};
+
+const renderTestComponent = () => render(
+  <SettingsStateProvider>
+    <SettingsPanelStateProvider>
+      <OpenModalButton />
+      <SettingsFormStateProvider>
+        <SettingsPanel />
+      </SettingsFormStateProvider>
+    </SettingsPanelStateProvider>
+  </SettingsStateProvider>,
+);
 
 beforeEach(() => {
   setupMatchMediaMock();
@@ -26,6 +50,7 @@ describe('On initial load', () => {
     testSettingsPanelIsClosed();
     expect(spyError).not.toHaveBeenCalled();
   });
+
   test('should open modal without errors', () => {
     const spyError = jest.spyOn(console, 'error');
     renderTestComponent();
