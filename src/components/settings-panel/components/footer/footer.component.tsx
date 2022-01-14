@@ -18,7 +18,7 @@ export const Footer: VoidFunctionComponent<FooterProps> = ({
 
   return (
     <footer
-      className={`${styles.footer}`}
+      className={`${styles.footer} modal-footer`}
       {...props}
     >
       <button

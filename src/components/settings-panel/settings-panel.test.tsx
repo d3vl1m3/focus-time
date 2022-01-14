@@ -10,6 +10,11 @@ import {
 } from '@test-utils/settings';
 import { triggerOpenSettingsPanel } from '@test-utils/settings/triggers/triggers.test-utils';
 import { render } from '@testing-library/react';
+import * as nextAuthClient from 'next-auth/client';
+
+jest.mock('next-auth/client');
+jest.spyOn(nextAuthClient, 'useSession').mockReturnValue([{}, false]);
+jest.spyOn(nextAuthClient, 'signIn').mockReturnValue(() => null);
 
 const OpenModalButton = () => {
   const { setIsSettingsOpen } = useSettingsPanelStateContext();
@@ -37,6 +42,8 @@ const renderTestComponent = () => render(
 beforeEach(() => {
   setupMatchMediaMock();
   setupIntersectionObserverMock();
+  jest.spyOn(nextAuthClient, 'signIn').mockReturnValue({});
+
 });
 
 afterEach(() => {
