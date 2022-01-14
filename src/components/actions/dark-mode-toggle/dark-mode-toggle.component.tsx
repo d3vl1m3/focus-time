@@ -5,16 +5,15 @@ import { VoidFunctionComponent } from 'react';
 
 export const DarkModeToggle: VoidFunctionComponent = () => {
   const { isUseDarkMode, setIsUseDarkMode } = useSettingsStateContext();
-  return isUseDarkMode !== null ? (
+  return (
     <SwitchWithIcons
       OffIcon={LightMode}
       OnIcon={DarkMode}
-      defaultValue={isUseDarkMode}
       id="isUseDarkMode"
       stateValue={isUseDarkMode}
       onChange={(checked:boolean) => setIsUseDarkMode(checked)}
     >
       <span className="sr-only">Use dark mode</span>
     </SwitchWithIcons>
-  ) : null;
+  );
 };

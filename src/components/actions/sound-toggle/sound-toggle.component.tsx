@@ -10,7 +10,6 @@ export const SoundToggle:VoidFunctionComponent = () => {
     OnIcon={VolumeUp}
     defaultValue={isUseSound}
     id="isUseSound"
-    stateValue={isUseSound}
     onChange={(checked) => setIsUseSound(checked)}
   >
     <span className="sr-only">Use sound</span>

@@ -19,7 +19,7 @@ const SettingsPanelStateContext = createContext<SettingsPanelStateContextValues 
 export const useSettingsPanelStateContext = () => {
   const context = useContext(SettingsPanelStateContext);
   if (context === undefined) {
-    throw new Error('useSettingsPanelContext must be inside a SettingsPanelProvider');
+    throw new Error('useSettingsPanelStateContext must be inside a SettingsPanelProvider');
   }
 
   return context;

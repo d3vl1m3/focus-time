@@ -1,18 +1,20 @@
 import { MainLayout } from '@components/main-layout/main-layout.component';
-import { SettingsPanelStateProvider, SettingsStateProvider } from '@contexts';
 import { setupMatchMediaMock } from '@mocks/match-media/match-media.mock';
-import {
-  render,
-  screen,
-} from '@testing-library/react';
+import { render } from '@testing-library/react';
 
-const renderTestComponent = () => render(
-  <SettingsPanelStateProvider>
-    <SettingsStateProvider>
-      <MainLayout />
-    </SettingsStateProvider>
-  </SettingsPanelStateProvider>,
-);
+import * as ChildComponentsModule from './components';
+
+jest.mock('./components');
+const mockHeader = jest.spyOn(ChildComponentsModule, 'Header')
+  .mockImplementation(jest.fn(() => null));
+const mockFooter = jest.spyOn(ChildComponentsModule, 'Footer')
+  .mockImplementation(jest.fn(() => null));
+
+const renderTestComponent = () => render(<MainLayout />);
+
+beforeEach(() => {
+  setupMatchMediaMock();
+});
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -21,26 +23,15 @@ afterEach(() => {
 describe('On initial load', () => {
   test('should render without errors', () => {
     const spyError = jest.spyOn(console, 'error');
+    renderTestComponent();
     expect(spyError).not.toHaveBeenCalled();
   });
-});
-
-describe('When looking at the page', () => {
-  beforeEach(() => {
-    setupMatchMediaMock();
+  test('should render header child', () => {
     renderTestComponent();
+    expect(mockHeader).toHaveBeenCalled();
   });
-
-  test('should see the settings button', () => {
-    const { getAllByRole } = screen;
-    const settingsButton = getAllByRole('button', { name: 'Settings' });
-
-    // one for desktop, one for mobile
-    expect(settingsButton.length).toBe(2);
-  });
-
-  test('should see the footer text', () => {
-    const { queryByText } = screen;
-    expect(queryByText('A D3VL1M3 project')).toBeInTheDocument();
+  test('should render header child', () => {
+    renderTestComponent();
+    expect(mockFooter).toHaveBeenCalled();
   });
 });

@@ -10,8 +10,17 @@ import styles from './switch.module.css';
 
 export interface SwitchProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange' | 'defaultValue'> {
   as?: keyof JSX.IntrinsicElements,
+  /**
+   * Used only in the initial render value.Updating this will not update
+   * the state of the toggle
+   */
   defaultValue?: boolean,
   id: string,
+  /**
+   * Updates the state of the toggle when the stateValue is updated. Good for
+   * when the default value updates after render or a toggle is cloned and
+   * used elsewhere
+   */
   stateValue?: boolean
   onChange?: (checked: boolean) => void,
 }
@@ -37,7 +46,7 @@ export const Switch: FunctionComponent<SwitchProps> = ({
   };
 
   useEffect(() => {
-    if ( stateValue !== undefined ) {
+    if ( typeof stateValue === "boolean" ) {
       setIsEnabled(stateValue);
     }
   }, [stateValue]);

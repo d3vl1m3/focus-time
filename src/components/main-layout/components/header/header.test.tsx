@@ -1,4 +1,4 @@
-import { SettingsPanelStateProvider, SettingsStateProvider } from '@contexts';
+import { SettingsPanelStateProvider, SettingsStateProvider } from "@contexts";
 import { setupMatchMediaMock } from '@mocks/match-media/match-media.mock';
 import { setupIntersectionObserverMock } from '@mocks/setup-intersection-observer/setup-intersection-observer.mock';
 import { triggerClick } from '@test-utils/jest';
@@ -30,7 +30,7 @@ describe('On initial load', () => {
   });
 });
 
-describe('When the user see the header', () => {
+describe('When the user sees the header', () => {
   beforeEach(() => {
     renderTestComponent();
   });
@@ -46,6 +46,14 @@ describe('When the user see the header', () => {
     const mobileButton = getByRole('button', { name: 'Quick settings' });
 
     expect(mobileButton).toBeInTheDocument();
+  });
+
+  test('should render two settings buttons', () => {
+    const { getAllByRole } = screen;
+    const settingsButton = getAllByRole('button', { name: 'Settings' });
+
+    // one for desktop, one for mobile
+    expect(settingsButton.length).toBe(2);
   });
 });
 
