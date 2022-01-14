@@ -38,7 +38,7 @@ jest_test:
     - npm run test-w-coverage
   artifacts:
     reports:
-      cobertura: coverage/coverage-final.json
+      cobertura: coverage/cobertura-coverage.xml
 
 pages:
   stage: deploy
