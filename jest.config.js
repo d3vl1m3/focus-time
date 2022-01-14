@@ -3,10 +3,6 @@ module.exports = {
     '<rootDir>/src/**/*.{ts,tsx}',
   ],
   coverageDirectory: 'coverage',
-  coverageReporters: [
-    'html',
-    'text-summary',
-  ],
   moduleNameMapper: {
     /* Handle CSS imports (with CSS modules)\
                                 https://jestjs.io/docs/webpack#mocking-css-modules */
