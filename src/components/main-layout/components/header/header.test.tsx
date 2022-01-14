@@ -43,7 +43,7 @@ describe('When the user see the header', () => {
 
   test('should render mobile menu toggle button', () => {
     const { getByRole } = screen;
-    const mobileButton = getByRole('tab', { name: 'App config menu' });
+    const mobileButton = getByRole('button', { name: 'Quick settings' });
 
     expect(mobileButton).toBeInTheDocument();
   });
@@ -56,12 +56,12 @@ describe('When the users presses the mobile panel button', () => {
 
   test('should trigger function to display actions', () => {
     const { getByRole } = screen;
-    const mobileButton = getByRole('tab', { name: 'App config menu' } );
+    const mobileButton = getByRole('button', { name: 'Quick settings' } );
 
-    expect(mobileButton).toHaveAttribute('aria-selected', "false");
+    expect(mobileButton).toHaveAttribute('aria-expanded', "false");
 
     triggerClick(mobileButton);
 
-    expect(mobileButton).toHaveAttribute('aria-selected', "true");
+    expect(mobileButton).toHaveAttribute('aria-expanded', "true");
   });
 });

@@ -1,0 +1,12 @@
+.menu {
+    @apply
+    sm:flex
+    sm:gap-4
+    hidden;
+}
+
+.menu > li {
+    @apply
+    flex
+    justify-center;
+}

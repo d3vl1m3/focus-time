@@ -12,13 +12,18 @@ import {
   render,
   screen,
 } from '@testing-library/react';
+import * as nextAuthClient from 'next-auth/client';
 
-import { HeaderActions } from './header-actions.component';
+import { DesktopMenu } from './desktop-menu.component';
+
+jest.mock('next-auth/client');
+jest.spyOn(nextAuthClient, 'useSession').mockReturnValue([{}, false]);
+jest.spyOn(nextAuthClient, 'signIn').mockReturnValue(() => null);
 
 const renderTestComponent = () => render(
   <SettingsStateProvider>
     <SettingsPanelStateProvider>
-      <HeaderActions/>
+      <DesktopMenu/>
       <SettingsFormStateProvider>
         <SettingsPanel />
       </SettingsFormStateProvider>

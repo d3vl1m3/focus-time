@@ -4,7 +4,6 @@ import { setupMatchMediaMock } from '@mocks/match-media/match-media.mock';
 import {
   render,
   screen,
-  within,
 } from '@testing-library/react';
 
 const renderTestComponent = () => render(
@@ -33,10 +32,11 @@ describe('When looking at the page', () => {
   });
 
   test('should see the settings button', () => {
-    const { getByRole } = screen;
-    const settingsButton = getByRole('button', { name: 'Settings' });
+    const { getAllByRole } = screen;
+    const settingsButton = getAllByRole('button', { name: 'Settings' });
 
-    expect(within(settingsButton).getByText('Settings')).toBeInTheDocument();
+    // one for desktop, one for mobile
+    expect(settingsButton.length).toBe(2);
   });
 
   test('should see the footer text', () => {

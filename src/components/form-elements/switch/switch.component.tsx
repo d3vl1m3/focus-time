@@ -2,6 +2,7 @@ import { Switch as HuiSwitch } from '@headlessui/react';
 import {
   FunctionComponent,
   HTMLAttributes,
+  useEffect,
   useState,
 } from 'react';
 
@@ -11,6 +12,7 @@ export interface SwitchProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'on
   as?: keyof JSX.IntrinsicElements,
   defaultValue?: boolean,
   id: string,
+  stateValue?: boolean
   onChange?: (checked: boolean) => void,
 }
 
@@ -20,6 +22,7 @@ export const Switch: FunctionComponent<SwitchProps> = ({
   className = '',
   defaultValue = false,
   id,
+  stateValue,
   onChange,
   ...props
 }) => {
@@ -32,6 +35,12 @@ export const Switch: FunctionComponent<SwitchProps> = ({
       onChange(checked);
     }
   };
+
+  useEffect(() => {
+    if ( stateValue !== undefined ) {
+      setIsEnabled(stateValue);
+    }
+  }, [stateValue]);
 
   return (
     <HuiSwitch.Group{...{ as, className, id }}>

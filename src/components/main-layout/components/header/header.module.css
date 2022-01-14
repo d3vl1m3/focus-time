@@ -15,15 +15,3 @@
     font-bold
     uppercase;
 }
-
-.mobileDrawerButton {
-    @apply
-    sm:hidden
-}
-
-.buttonContainerVisible {
-    @apply
-    flex
-    flex-col
-    sm:flex-row;
-}
