@@ -1,4 +1,4 @@
-import { SettingsPanelStateProvider, SettingsStateProvider } from '@contexts';
+import { SettingsPanelStateProvider, SettingsStateProvider } from "@contexts";
 import { setupMatchMediaMock } from '@mocks/match-media/match-media.mock';
 import { setupIntersectionObserverMock } from '@mocks/setup-intersection-observer/setup-intersection-observer.mock';
 import { triggerClick } from '@test-utils/jest';
@@ -30,7 +30,7 @@ describe('On initial load', () => {
   });
 });
 
-describe('When the user see the header', () => {
+describe('When the user sees the header', () => {
   beforeEach(() => {
     renderTestComponent();
   });
@@ -43,9 +43,17 @@ describe('When the user see the header', () => {
 
   test('should render mobile menu toggle button', () => {
     const { getByRole } = screen;
-    const mobileButton = getByRole('tab', { name: 'App config menu' });
+    const mobileButton = getByRole('button', { name: 'Quick settings' });
 
     expect(mobileButton).toBeInTheDocument();
+  });
+
+  test('should render two settings buttons', () => {
+    const { getAllByRole } = screen;
+    const settingsButton = getAllByRole('button', { name: 'Settings' });
+
+    // one for desktop, one for mobile
+    expect(settingsButton.length).toBe(2);
   });
 });
 
@@ -56,12 +64,12 @@ describe('When the users presses the mobile panel button', () => {
 
   test('should trigger function to display actions', () => {
     const { getByRole } = screen;
-    const mobileButton = getByRole('tab', { name: 'App config menu' } );
+    const mobileButton = getByRole('button', { name: 'Quick settings' } );
 
-    expect(mobileButton).toHaveAttribute('aria-selected', "false");
+    expect(mobileButton).toHaveAttribute('aria-expanded', "false");
 
     triggerClick(mobileButton);
 
-    expect(mobileButton).toHaveAttribute('aria-selected', "true");
+    expect(mobileButton).toHaveAttribute('aria-expanded', "true");
   });
 });

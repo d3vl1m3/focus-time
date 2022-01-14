@@ -1,0 +1,29 @@
+.menuContainer {
+    @apply
+    flex
+    gap-2
+    sm:hidden;
+}
+
+.popoverContainer {
+    @apply
+    relative;
+}
+
+.dropdown {
+    @apply
+    absolute
+    left-0
+    mt-2
+    origin-top
+    px-6
+    py-4
+    rounded-md
+    shadow-lg
+    w-32
+}
+
+.menu > li:not(:last-of-type) {
+    @apply
+    mb-6;
+}

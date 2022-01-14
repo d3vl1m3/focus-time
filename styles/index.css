@@ -32,4 +32,19 @@
 
         dark:bg-gray-800;
     }
+
+    .modal-footer {
+        @apply
+        border-t
+        border-t-gray-400
+        dark:bg-gray-700;
+    }
+
+    .popover {
+        @apply
+        bg-white
+        border
+        border-gray-500
+        dark:bg-gray-700
+    }
 }
