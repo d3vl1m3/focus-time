@@ -1,7 +1,3 @@
-/**
- * EXAMPLE FILE. COPY AND PASTE IN TO OTHER FILES THEN MODIFY AS REQUIRED.
- * DO NOT REMOVE FROM PROJECT OR INCLUDE IN PRODUCTION BUILD
- */
 import { SpotifyLogin } from '@components/actions';
 import { triggerClick } from '@test-utils/jest';
 import { render, screen } from '@testing-library/react';
