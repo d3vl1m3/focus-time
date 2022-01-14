@@ -6,7 +6,6 @@ import {
 import { SettingsStateContext } from './settings-state.context';
 
 export const SettingsStateProvider: FunctionComponent = ({ children }) => {
-
   const {
     focusDuration: focusDurationDefault,
     shortBreakDuration: shortBreakDurationDefault,
@@ -33,7 +32,7 @@ export const SettingsStateProvider: FunctionComponent = ({ children }) => {
 
   const [isUseSound, setIsUseSound] = useState(isUseSoundDefault);
 
-  const [isUseDarkMode, setIsUseDarkMode] = useState<boolean|null>(null);
+  const [isUseDarkMode, setIsUseDarkMode] = useState<boolean>();
 
   // Runs once on mounted
   useEffect(() => {

@@ -27,8 +27,8 @@ export type SettingsStateContextValues = {
   setIsUseSound: SetStateType<boolean>
 
   // DarkMode
-  isUseDarkMode: boolean|null
-  setIsUseDarkMode: SetStateType<boolean|null>
+  isUseDarkMode: boolean|undefined
+  setIsUseDarkMode: SetStateType<boolean|undefined>
 };
 
 export const SettingsStateContext = createContext<SettingsStateContextValues | undefined>(undefined);

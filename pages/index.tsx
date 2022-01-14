@@ -1,5 +1,5 @@
-import { Index } from '@components/pages';
+import { PomodoroTimer } from "@components/pomodoro-timer";
 
-export const IndexPage = () => <Index/>;
+export const IndexPage = () => <PomodoroTimer/>;
 
 export default IndexPage;
