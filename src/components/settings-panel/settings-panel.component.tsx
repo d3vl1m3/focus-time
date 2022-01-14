@@ -1,3 +1,4 @@
+import { SpotifyLogin } from '@components/actions/spotify-login/spotify-login.component';
 import { NumberInput } from '@components/form-elements/number-input/number-input.component';
 import { Switch } from '@components/form-elements/switch/switch.component';
 import {
@@ -214,6 +215,9 @@ export const SettingsPanel: VoidFunctionComponent = () => {
                 Focus intervals target
             </NumberInput>
           </fieldset>
+          <div className={styles.fieldset}>
+            <SpotifyLogin />
+          </div>
         </form>
         
         <Footer formId={settingsFormId} />

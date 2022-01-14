@@ -20,6 +20,10 @@ jest.mock('next-auth/client');
 jest.spyOn(nextAuthClient, 'useSession').mockReturnValue([{}, false]);
 jest.spyOn(nextAuthClient, 'signIn').mockReturnValue(() => null);
 
+jest.mock('next-auth/client');
+jest.spyOn(nextAuthClient, 'useSession').mockReturnValue([{}, false]);
+jest.spyOn(nextAuthClient, 'signIn').mockReturnValue(() => null);
+
 const renderTestComponent = () => render(
   <SettingsStateProvider>
     <SettingsPanelStateProvider>
