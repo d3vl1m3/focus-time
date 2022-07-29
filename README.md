@@ -56,7 +56,7 @@ The breaks act as great stopping points to take a breather and quickly evaluate 
 - [x] ~~add sound indicators when intervals change (started, breaks, completed etc.)
 -~~
 - [x] ~~allow user to choose a light/dark mode~~
-- [ ] add a more readily available button to turn audio cues on/off
+- [x] ~~add a more readily available button to turn audio cues on/off~~
 - [ ] add a 'how to use' section for people not familiar with Pomodoro
 - [ ] add a 'useful information' section about the session (completed focus intervals etc.)
 - [ ] integrate Spotify OAuth so instead of audio cues, the interval changes play/pause the users spotify service on any device
